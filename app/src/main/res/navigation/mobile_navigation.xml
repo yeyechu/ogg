@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_myactivity">
+
+    <fragment
+        android:id="@+id/navigation_myactivity"
+        android:name="com.swu.ogg.ui.myactivity.MyActivityFragment"
+        android:label="@string/title_myactivity"
+        tools:layout="@layout/fragment_myactivity" />
+
+    <fragment
+        android:id="@+id/navigation_env"
+        android:name="com.swu.ogg.ui.env.EnvFragment"
+        android:label="@string/title_env"
+        tools:layout="@layout/fragment_env" />
+
+    <fragment
+        android:id="@+id/navigation_indicators"
+        android:name="com.swu.ogg.ui.indicators.IndicatorsFragment"
+        android:label="@string/title_indicators"
+        tools:layout="@layout/fragment_indicators" />
+    <fragment
+        android:id="@+id/navigation_feed"
+        android:name="com.swu.ogg.ui.feed.FeedFragment"
+        android:label="fragment_feed"
+        tools:layout="@layout/fragment_feed" />
+</navigation>

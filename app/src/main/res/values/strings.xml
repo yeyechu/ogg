@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ogg</string>
+    <string name="title_env">Env</string>
+    <string name="title_myactivity">MyAct</string>
+    <string name="title_indicators">Indicators</string>
+    <string name="title_feed">Feed</string>
+</resources>
