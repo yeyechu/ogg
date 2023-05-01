@@ -25,6 +25,11 @@
     <fragment
         android:id="@+id/navigation_feed"
         android:name="com.swu.ogg.ui.feed.FeedFragment"
-        android:label="fragment_feed"
+        android:label="@string/title_feed"
         tools:layout="@layout/fragment_feed" />
+    <fragment
+        android:id="@+id/navigation_memberPassword"
+        android:name="com.swu.ogg.member.MemberPasswordFragment"
+        android:label="@string/title_member_password"
+        tools:layout="@layout/fragment_member_password" />
 </navigation>

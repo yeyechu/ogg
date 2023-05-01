@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class IndicatorsViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "통계페이지"
+        value = "통계페이지(구현 안함)"
     }
     val text: LiveData<String> = _text
 }

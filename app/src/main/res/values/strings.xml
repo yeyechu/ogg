@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">ogg</string>
+
+    <!-- 페이지 제목 -->
     <string name="title_env">Env</string>
     <string name="title_myactivity">MyAct</string>
     <string name="title_indicators">Indicators</string>
     <string name="title_feed">Feed</string>
+    <string name="title_member_password">Member password</string>
 </resources>
