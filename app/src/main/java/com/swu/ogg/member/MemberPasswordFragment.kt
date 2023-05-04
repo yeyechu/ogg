@@ -20,8 +20,6 @@ class MemberPasswordFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val envViewModel =
-            ViewModelProvider(this).get(MemberPasswordViewModel::class.java)
 
         _binding = FragmentMemberPasswordBinding.inflate(inflater, container, false)
         val root: View = binding.root
