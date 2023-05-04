@@ -1,13 +1,13 @@
-package com.swu.ogg.ui.env
+package com.swu.ogg.member
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class EnvViewModel : ViewModel() {
+class MemberPasswordViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "나의 환경(구현할 곳)"
+        value = ""
     }
     val text: LiveData<String> = _text
 }
