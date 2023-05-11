@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.swu.ogg.databinding.FragmentMyactivityBinding
 
+// 나의 활동 전체 레이아웃 구현부
+
 class MyActivityFragment : Fragment() {
 
     private var _binding: FragmentMyactivityBinding? = null

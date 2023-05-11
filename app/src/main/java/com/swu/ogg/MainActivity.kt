@@ -10,6 +10,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.swu.ogg.databinding.ActivityMainBinding
 import com.swu.ogg.member.MemberPasswordFragment
 
@@ -35,6 +37,16 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        // ─────────────────────────────────── 플로팅 버튼 ───────────────────────────────────
+
+        navView.background = null
+        navView.menu.getItem(2).isEnabled = false
+
+        val fab : FloatingActionButton = binding.fab
+        fab.setOnClickListener { view ->
+            Snackbar.make(view, "~~", Snackbar.LENGTH_SHORT).setAction("Action", null).show()
+        }
     }
 
     // ─────────────────────────────────── 툴바 함수 ───────────────────────────────────
@@ -57,4 +69,5 @@ class MainActivity : AppCompatActivity() {
 //        }
         return super.onOptionsItemSelected(item)
     }
+
 }

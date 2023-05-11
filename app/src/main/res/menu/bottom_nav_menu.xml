@@ -12,6 +12,10 @@
         android:title="@string/title_env" />
 
     <item
+        android:id="@+id/placeholder"
+        android:title="" />
+
+    <item
         android:id="@+id/navigation_indicators"
         android:icon="@drawable/ic_baseline_insert_chart_outlined_24"
         android:title="@string/title_indicators" />
