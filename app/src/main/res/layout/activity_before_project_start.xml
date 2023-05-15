@@ -40,7 +40,7 @@
             android:layout_height="250dp"
             android:background="@drawable/background_radius"
             android:layout_marginTop="60dp"
-            android:layout_gravity="top||center">
+            android:layout_gravity="top|center">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -50,7 +50,7 @@
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:src="@drawable/baseline_face_24"
-                    android:layout_gravity="top||center"
+                    android:layout_gravity="top|center"
                     android:layout_marginTop="20dp"/>
                 <TextView
                     android:layout_width="wrap_content"

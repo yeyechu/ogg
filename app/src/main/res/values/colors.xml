@@ -9,4 +9,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#6A6A6A</color>
     <color name="lightgray">#F5F5F5</color>
+
+    <!-- DB test -->
+
+    <color name="colorPrimary">#FFFFFFFF</color>
+    <color name="colorPrimaryDark">#1f2021</color>
+    <color name="colorAccent">#cf0c3d</color>
+    <color name="buttonLabel">#FFFFFF</color>
 </resources>

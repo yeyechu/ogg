@@ -9,4 +9,11 @@
     <string name="title_member_password">Member password</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- db test용 -->
+    <string name="add_string">추가</string>
+    <string name="hint_string">내용</string>
+    <string name="button_save">저장</string>
+    <string name="empty_not_saved">비어있어서 안 저장</string>
+
 </resources>
