@@ -7,4 +7,6 @@
     <string name="title_indicators">Indicators</string>
     <string name="title_feed">Feed</string>
     <string name="title_member_password">Member password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
