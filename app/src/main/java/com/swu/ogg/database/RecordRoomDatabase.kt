@@ -26,26 +26,33 @@ public abstract class RecordRoomDatabase : RoomDatabase() {
             super.onCreate(db)
             INSTANCE?.let { database ->
                 scope.launch {
-                    var recordDao = database.recordDao()
-
-                    recordDao.deleteAll()
-
-                    var record = Record("1")
-                    recordDao.insert(record)
+                    populateDatabase(database.recordDao())
                 }
             }
         }
+
+        suspend fun populateDatabase(recordDao : RecordDao) {
+
+            recordDao.deleteAll()
+
+            var record = Record("1")
+            recordDao.insert(record)
+        }
+
+
     }
     companion object {
         // 여러 인스턴스가 동시에 열리는 것을 막기 위해 WordRoomDatabase를 Singleton로 정의
         @Volatile
         private var INSTANCE : RecordRoomDatabase? = null
 
-        fun getDatabase(context : Context,
-                        scope : CoroutineScope
+        fun getDatabase(
+            context : Context,
+            scope : CoroutineScope
         ) : RecordRoomDatabase {
 
             return INSTANCE ?: synchronized(this) {
+
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     RecordRoomDatabase::class.java,
@@ -53,6 +60,7 @@ public abstract class RecordRoomDatabase : RoomDatabase() {
                 )
                     .addCallback(RecordDatabasesCallback(scope))
                     .build()
+
                 INSTANCE = instance
                 instance
             }

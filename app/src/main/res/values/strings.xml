@@ -16,4 +16,8 @@
     <string name="button_save">저장</string>
     <string name="empty_not_saved">비어있어서 안 저장</string>
 
+    <!-- 나의 활동 -->
+    <string name="tab_label1">전체</string>
+    <string name="tab_label2">오늘</string>
+
 </resources>

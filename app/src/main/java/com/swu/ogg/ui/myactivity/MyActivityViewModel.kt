@@ -2,6 +2,7 @@ package com.swu.ogg.ui.myactivity
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 
 
@@ -13,8 +14,12 @@ import androidx.lifecycle.ViewModel
 //  ㄴ LiveData 통해 데이터 노출 ▶ 그걸 관찰하고 있는 한 새로운 상태가 다른 Fragment로 푸시
 class MyActivityViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "나의 활동(구현할 곳)"
+    private val _index = MutableLiveData<Int>()
+    val text : LiveData<String> = Transformations.map(_index) {
+        "$it"
     }
-    val text: LiveData<String> = _text
+
+    fun setIndex(index : Int) {
+        _index.value = index
+    }
 }

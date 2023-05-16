@@ -22,4 +22,12 @@
         <item name="android:background">@android:color/holo_orange_light</item>
         <item name="android:textAppearance">@android:style/TextAppearance</item>
     </style>
+
+    <style name="Theme.Ogg.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Ogg.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.Ogg.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
