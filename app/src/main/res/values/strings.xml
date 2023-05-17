@@ -19,5 +19,8 @@
     <!-- 나의 활동 -->
     <string name="tab_label1">전체</string>
     <string name="tab_label2">오늘</string>
+    <string name="button_project">21일 프로젝트 시작하기</string>
+    <string name="title_layout_myactivity_first">프로젝트 시작 전</string>
+    <string name="title_layout_myactivity_second">오늘의 활동</string>
 
 </resources>
