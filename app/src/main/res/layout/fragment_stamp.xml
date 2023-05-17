@@ -39,8 +39,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Hello"
-                android:textSize="20sp"
+                android:text="아직 21일 프로젝트를 시작하지 않았어요"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toTopOf="@+id/img_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
