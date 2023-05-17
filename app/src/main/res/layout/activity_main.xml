@@ -16,7 +16,6 @@
         android:theme="?attr/actionBarTheme"
         app:menu="@menu/top_action_menu">
 
-
     </androidx.appcompat.widget.Toolbar>
 
     <fragment
