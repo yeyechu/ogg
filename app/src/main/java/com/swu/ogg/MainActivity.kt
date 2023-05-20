@@ -5,10 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.*
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -77,21 +80,12 @@ class MainActivity : AppCompatActivity() {
     // ─────────────────────────────────── 툴바 함수 ───────────────────────────────────
     // 툴바 초기화
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.top_action_menu, menu)
+        //menuInflater.inflate(R.menu.top_action_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     // 툴바 클릭 이벤트 정의
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-//        return when (item?.itemId) {
-//            R.id.action_settings -> {
-//                val intent = Intent(this, 멤버::class.java)
-//                startActivity(intent)
-//                return true
-//            }
-//            else -> super.onOptionsItemSelected(item)
-//        }
         return super.onOptionsItemSelected(item)
     }
 

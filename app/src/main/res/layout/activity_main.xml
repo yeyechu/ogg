@@ -11,10 +11,9 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="@android:color/transparent"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:menu="@menu/top_action_menu">
+        android:theme="?attr/actionBarTheme">
 
     </androidx.appcompat.widget.Toolbar>
 
