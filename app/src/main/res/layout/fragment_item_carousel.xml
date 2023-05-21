@@ -1,0 +1,60 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:elevation="8dp">
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="415dp"
+        android:layout_height="731dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:id="@+id/button"
+            android:layout_width="84dp"
+            android:layout_height="136dp"
+
+            android:background="@drawable/stamp_rounded_rectangle"
+            android:backgroundTint="#6C6C6C"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/todo" />
+
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="84dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:padding="20dp"
+            android:text="@string/number_21"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/button"
+            app:layout_constraintEnd_toEndOf="@id/button"
+            app:layout_constraintStart_toStartOf="@id/button"
+            app:layout_constraintTop_toTopOf="@id/button" />
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/stamp_circle"
+            android:backgroundTint="#FFFFFF"
+
+
+            android:contentDescription="@string/todo_" />
+
+    </FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+

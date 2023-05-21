@@ -24,5 +24,8 @@
     <string name="button_project">21일 프로젝트 시작하기</string>
     <string name="title_layout_myactivity_first">프로젝트 시작 전</string>
     <string name="title_layout_myactivity_second">오늘의 활동</string>
+    <string name="todo">TODO</string>
+    <string name="number_21">숫자</string>
+    <string name="todo_">TODO</string>
 
 </resources>

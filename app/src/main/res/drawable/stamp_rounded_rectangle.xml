@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="200dp" /> <!-- 각의 크기를 조정할 수 있는 radius 값 설정 -->
+    <solid android:color="#808080" /> <!-- 직사각형의 색상 설정 -->
+</shape>

@@ -78,4 +78,6 @@ dependencies {
     // ────────────────────────────────────────────────────────────────────
 
     implementation "com.github.skydoves:expandablelayout:1.0.7"
+//stamp
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
 }
