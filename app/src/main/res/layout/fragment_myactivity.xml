@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@color/lightgray"
     tools:context=".ui.myactivity.MyActivityFragment">
 
     <!-- 데이터 바인딩 구현하기 : https://developer.android.com/codelabs/android-databinding#2
@@ -24,5 +24,126 @@
         <variable name="title" type="String" />
     </data>
     -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/myact_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/white">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:contentScrim="?attr/colorPrimary"
+                app:expandedTitleMarginBottom="50dp"
+                app:expandedTitleMarginStart="48dp"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:title="@string/app_name">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:baselineAligned="true">
+
+                    <TextView
+                        android:id="@+id/text_name_myactivity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="30sp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginLeft="@dimen/big_padding"
+                        android:text="ogg" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="bottom"
+                        android:textSize="20sp"
+                        android:layout_marginTop="30dp"
+                        android:text="님은" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="21sp"
+                    android:layout_marginTop="75dp"
+                    android:layout_marginLeft="@dimen/big_padding"
+                    android:text="오늘도 지구를 지킨다" />
+
+                <include layout="@layout/gage_item" />
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/text_title_myactivity_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_marginLeft="@dimen/big_padding"
+                android:layout_marginTop="10dp"
+                android:layout_weight="2"
+                android:text="오늘의 활동" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="bottom"
+                android:layout_gravity="bottom"
+                android:layout_marginRight="@dimen/big_padding"
+                android:textSize="13sp"
+                android:text="수정하기>" />
+
+        </LinearLayout>
+
+        <include layout="@layout/myactivity_card_item" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/text_title_myactivity_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_marginLeft="@dimen/big_padding"
+                android:layout_marginTop="10dp"
+                android:text="일회성 활동 " />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxHeight="15sp"
+                android:minHeight="15dp"
+                android:src="@drawable/baseline_help_outline_24"
+                android:layout_gravity="center|bottom"
+                android:contentDescription="한 번 등록하면 매일 일정 탄소량이 자동 등록됩니다"/>
+
+        </LinearLayout>
+
+        <include layout="@layout/myactivity_card_item" />
+
+
+    </LinearLayout>
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

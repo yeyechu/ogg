@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModel
 class MyActivityViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "프로젝트 시작 전"
+        value = "오늘의 활동"
     }
     val text: LiveData<String> = _text
 

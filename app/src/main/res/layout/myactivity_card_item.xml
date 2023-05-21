@@ -7,43 +7,30 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
-        android:layout_width="200dp"
-        android:layout_height="220dp"
-        app:cardCornerRadius="5dp"
+        android:layout_width="160dp"
+        android:layout_height="180dp"
+        app:cardCornerRadius="8dp"
         android:layout_gravity="center"
-        android:padding="@dimen/big_padding">
+        android:layout_margin="@dimen/small_padding">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/big_padding">
-
-            <TextView
-                android:id="@+id/tv_code"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="fill_horizontal"
-                android:gravity="center"
-                android:textSize="15sp"
-                android:text="#에너지"
-                app:layout_constraintBottom_toTopOf="@id/img_view"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="vertical"
+            android:padding="@dimen/small_padding">
 
             <ImageView
                 android:id="@+id/img_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxHeight="70dp"
+                android:maxHeight="60dp"
                 android:adjustViewBounds="true"
                 android:layout_gravity="fill_horizontal"
                 android:gravity="center"
                 android:src="@drawable/baseline_add_photo_alternate_24"
-                android:layout_marginBottom="@dimen/big_padding"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/tv_title"/>
+                android:contentDescription="@string/app_name"
+                android:layout_marginTop="@dimen/small_padding"
+                android:layout_marginBottom="@dimen/small_padding" />
 
             <TextView
                 android:id="@+id/tv_title"
@@ -51,14 +38,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_horizontal"
                 android:gravity="center"
-                android:textSize="15sp"
+                android:textSize="17sp"
                 android:textStyle="bold"
-                android:text="냉장고 적정온도 지키기"
-                android:layout_marginTop="@dimen/big_padding"
-                android:layout_marginBottom="@dimen/big_padding"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/tv_co2"/>
+                android:maxLines="1"
+                android:text="냉장고 관리"
+                android:layout_marginTop="@dimen/small_padding"
+                android:layout_marginBottom="@dimen/small_padding" />
 
 
             <TextView
@@ -66,11 +51,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_horizontal"
+                android:layout_marginBottom="@dimen/small_padding"
                 android:gravity="center"
-                android:textSize="15sp"
-                android:text="0.05kg"
-                app:layout_constraintBottom_toBottomOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:textSize="12sp"
+                android:text="0.05kg" />
+
+            <Button
+                android:id="@+id/btn"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="인증하기"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
