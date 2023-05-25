@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,27 +7,11 @@
     android:background="@color/lightgray"
     tools:context=".ui.myactivity.MyActivityFragment">
 
-    <!-- 데이터 바인딩 구현하기 : https://developer.android.com/codelabs/android-databinding#2
-     1. xml파일에서 데이터 바인딩 레이아웃으로 변환
-      -> 레이아웃을 태그로 <layout> 래핑
-      -> 레이아웃 변수 추가 : <data> </data>
-      -> 레이아웃 표현식 추가 : @{ }
-        (예시)
-       * android:text="@{String.valueOf(index+1)}"
-       * android:visibility="@{age < 13 ? View.GONE : View.VISIBLE}"
-       * android:transitionName='@{"image_" + id}'
-       * android:text="@{viewmodel.name}"
-       * android:="@{viewmodel.nameVisible}"
-       * android:="@{viewmldel.onLike()}"
-
-       <data>
-        <variable name="title" type="String" />
-    </data>
-    -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="60dp">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/myact_appbar"
@@ -56,7 +40,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textSize="30sp"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="25dp"
                         android:layout_marginLeft="@dimen/big_padding"
                         android:text="ogg" />
 
@@ -74,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="21sp"
-                    android:layout_marginTop="75dp"
+                    android:layout_marginTop="70dp"
                     android:layout_marginLeft="@dimen/big_padding"
                     android:text="오늘도 지구를 지킨다" />
 
@@ -128,14 +112,14 @@
                 android:layout_marginTop="10dp"
                 android:text="일회성 활동 " />
 
-            <ImageView
+            <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxHeight="15sp"
                 android:minHeight="15dp"
                 android:src="@drawable/baseline_help_outline_24"
                 android:layout_gravity="center|bottom"
-                android:contentDescription="한 번 등록하면 매일 일정 탄소량이 자동 등록됩니다"/>
+                android:tooltipText="한 번 등록하면 매일 일정 탄소량이 자동 등록됩니다"/>
 
         </LinearLayout>
 
@@ -144,6 +128,4 @@
 
     </LinearLayout>
 
-
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</ScrollView>

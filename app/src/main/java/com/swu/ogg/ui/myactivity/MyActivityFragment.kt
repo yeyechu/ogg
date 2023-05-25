@@ -1,10 +1,13 @@
 package com.swu.ogg.ui.myactivity
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
@@ -18,6 +21,7 @@ class MyActivityFragment : Fragment() {
     private var _binding: FragmentMyactivityBinding? = null
     private val binding get() = _binding!!
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,6 +40,9 @@ class MyActivityFragment : Fragment() {
 
         return root
     }
+
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

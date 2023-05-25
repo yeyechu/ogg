@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/postLayout">
+
+    <!-- 데이터 바인딩 구현하기 : https://developer.android.com/codelabs/android-databinding#2
+         1. xml파일에서 데이터 바인딩 레이아웃으로 변환
+          -> 레이아웃을 태그로 <layout> 래핑
+          -> 레이아웃 변수 추가 : <data> </data>
+          -> 레이아웃 표현식 추가 : @{ }
+            (예시)
+           * android:text="@{String.valueOf(index+1)}"
+           * android:visibility="@{age < 13 ? View.GONE : View.VISIBLE}"
+           * android:transitionName='@{"image_" + id}'
+           * android:text="@{viewmodel.name}"
+           * android:="@{viewmodel.nameVisible}"
+           * android:="@{viewmldel.onLike()}"
+
+           <data>
+            <variable name="title" type="String" />
+        </data>
+        -->
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="550dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="@dimen/small_padding"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text=""
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_co2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            android:layout_marginBottom="@dimen/small_padding"
+            android:gravity="center"
+            android:text=""
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/img_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            android:layout_marginTop="@dimen/small_padding"
+            android:layout_marginBottom="@dimen/small_padding"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:gravity="center"
+            android:maxHeight="150dp"
+            android:src="@drawable/baseline_add_photo_alternate_24" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            android:layout_marginTop="@dimen/small_padding"
+            android:layout_marginBottom="@dimen/small_padding"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="인증 가능 횟수"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_content_freq"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            android:layout_marginBottom="@dimen/small_padding"
+            android:gravity="center"
+            android:text=""
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            android:layout_marginTop="@dimen/small_padding"
+            android:layout_marginBottom="@dimen/small_padding"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="인증 방법"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_content_guide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            android:layout_marginBottom="@dimen/small_padding"
+            android:gravity="center"
+            android:text=""
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/big_padding"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/baseline_camera_alt_24"
+                android:text="카메라 촬영"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_album"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/big_padding"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/baseline_photo_album_24"
+                android:text="앨범 업로드"
+                android:textStyle="bold"
+                android:enabled="false" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
