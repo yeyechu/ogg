@@ -95,7 +95,12 @@
 
         </LinearLayout>
 
-        <include layout="@layout/myactivity_card_item" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/today_card_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -123,7 +128,12 @@
 
         </LinearLayout>
 
-        <include layout="@layout/myactivity_card_item" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/only_card_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
     </LinearLayout>

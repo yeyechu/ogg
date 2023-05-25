@@ -19,4 +19,11 @@ class MyActivityViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
 
+    private var _list = MutableLiveData<ArrayList<CardItem>>().apply {
+        value = arrayListOf<CardItem>()
+    }
+
+    var tolist : LiveData<ArrayList<CardItem>> = _list
+    var onlist : LiveData<ArrayList<CardItem>> = _list
+
 }
