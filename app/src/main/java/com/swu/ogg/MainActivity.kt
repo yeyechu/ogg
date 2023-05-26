@@ -1,7 +1,10 @@
 package com.swu.ogg
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.res.AssetManager
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -23,6 +26,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.swu.ogg.database.*
 import com.swu.ogg.databinding.ActivityMainBinding
 import com.swu.ogg.member.MemberPasswordFragment
+import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,6 +39,9 @@ class MainActivity : AppCompatActivity() {
     private val recordViewModel : RecordViewModel by viewModels {
         RecordViewModelFactory((application as RecordsApplication).repository)
     }
+
+    val filePath : String = "/data/user/0/com.swu.ogg/databases/"
+    lateinit var  sqlDB : SQLiteDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +76,7 @@ class MainActivity : AppCompatActivity() {
         // ─────────────────────────────────── DB 리사이클러뷰 ───────────────────────────────────
         val recyclerView = binding.recyclerview
         val adapter = RecordListAdapter()
+
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -75,6 +85,19 @@ class MainActivity : AppCompatActivity() {
         recordViewModel.allRecords.observe(this, Observer { records ->
             records.let { adapter.submitList(it) }
         })
+
+        // ─────────────────────────────────── DB 불러오기 ───────────────────────────────────
+
+        var checkDB : File = File(filePath + "oggDB.db")
+        if(checkDB.exists()){
+
+        } else {
+            setDB(this)
+            val oggHelper : dbHelper = dbHelper(this, "oggDB.db")
+            sqlDB = oggHelper.readableDatabase
+
+            // sqlDB.close()
+        }
     }
 
     // ─────────────────────────────────── 툴바 함수 ───────────────────────────────────
@@ -105,6 +128,49 @@ class MainActivity : AppCompatActivity() {
                 "비어있어서 안 저장",
                 Toast.LENGTH_SHORT
             ).show()
+        }
+    }
+
+    // ─────────────────────────────────── 기존 DB 불러오기 ───────────────────────────────────
+
+    private fun setDB(ctx: Context) {
+
+        var folder: File = File(filePath)
+
+        if (folder.exists()) {
+
+        } else {
+            folder.mkdirs();
+        }
+
+        var assetManager: AssetManager = ctx.resources.assets
+        var outfile: File = File(filePath + "oggDB.db")
+
+        var IStr: InputStream? = null
+        var fo: FileOutputStream? = null
+        var filesize: Int = 0
+
+        try {
+            IStr = assetManager.open("oggDB.db", AssetManager.ACCESS_BUFFER)
+            filesize = IStr.available()
+
+            if (outfile.length() <= 0) {
+
+                val buffer = ByteArray(filesize)
+
+                IStr.read(buffer)
+                IStr.close()
+                outfile.createNewFile()
+
+                fo = FileOutputStream(outfile)
+                fo.write(buffer)
+                fo.close()
+
+            } else {
+
+            }
+        } finally {
+
         }
     }
 }

@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:id="@+id/gage_layout"
-    android:layout_marginTop="120dp">
+    android:layout_marginTop="110dp">
 
     <TextView
         android:layout_width="wrap_content"

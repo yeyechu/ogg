@@ -15,7 +15,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="191dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="@dimen/small_padding">
 
@@ -23,27 +23,27 @@
                 android:id="@+id/img_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="fill_horizontal"
-                android:layout_marginTop="@dimen/small_padding"
-                android:layout_marginBottom="@dimen/small_padding"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/app_name"
-                android:gravity="center"
                 android:maxHeight="60dp"
-                android:src="@drawable/baseline_add_photo_alternate_24" />
+                android:adjustViewBounds="true"
+                android:layout_gravity="fill_horizontal"
+                android:gravity="center"
+                android:src="@drawable/baseline_add_photo_alternate_24"
+                android:contentDescription="@string/app_name"
+                android:layout_marginTop="@dimen/small_padding"
+                android:layout_marginBottom="@dimen/small_padding" />
 
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_horizontal"
-                android:layout_marginTop="@dimen/small_padding"
-                android:layout_marginBottom="@dimen/small_padding"
                 android:gravity="center"
+                android:textSize="17sp"
+                android:textStyle="bold"
                 android:maxLines="1"
-                android:text="냉장고 관리하기"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:text="냉장고 관리"
+                android:layout_marginTop="@dimen/small_padding"
+                android:layout_marginBottom="@dimen/small_padding" />
 
 
             <TextView
@@ -53,20 +53,18 @@
                 android:layout_gravity="fill_horizontal"
                 android:layout_marginBottom="@dimen/small_padding"
                 android:gravity="center"
-                android:text="탄소 감축량 0.05kg"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:text="0.05kg" />
 
-            <android.widget.Button
+            <Button
                 android:id="@+id/btn"
-                android:layout_width="118dp"
-                android:layout_height="34dp"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
                 android:layout_gravity="center"
-                android:background="@drawable/button_skyblue"
-
-                android:text="인증하기"
-                android:textColor="@color/white"
-                android:textSize="10sp"
                 android:gravity="center"
+                android:textColor="@color/white"
+                android:text="인증하기"
+                android:textSize="11sp"
                 android:textStyle="bold" />
 
         </LinearLayout>

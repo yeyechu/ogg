@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import java.io.File
 
 // SQLiteOpenHelper에서 하던 처리를 담당
 // Room Query가 Flow를 반환해주면 자동으로 백그라운드 스레드에서 비동기식 실행
@@ -35,14 +36,14 @@ public abstract class RecordRoomDatabase : RoomDatabase() {
 
             recordDao.deleteAll()
 
-            var record = Record("1")
+            val record = Record("1")
             recordDao.insert(record)
         }
 
 
     }
     companion object {
-        // 여러 인스턴스가 동시에 열리는 것을 막기 위해 WordRoomDatabase를 Singleton로 정의
+        // 여러 인스턴스가 동시에 열리는 것을 막기 위해 RecordRoomDatabase를 Singleton로 정의
         @Volatile
         private var INSTANCE : RecordRoomDatabase? = null
 
