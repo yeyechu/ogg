@@ -6,21 +6,53 @@
     android:id="@+id/gage_layout"
     android:layout_marginTop="110dp">
 
+    <!--말풍선-->
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:layout_height="40dp"
+        android:layout_margin="0dp"
+        >
+        <FrameLayout
+            android:id="@+id/textbox"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+            >
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:textStyle="bold"
+        android:textSize="10sp"
+        android:textColor="@color/white"
         android:text="0.74kg 남았어요"
-        android:background="@color/lightgray"
+        android:background="@drawable/box_orange"
         android:padding="@dimen/small_padding"
-        android:layout_marginLeft="@dimen/big_padding"
-        android:layout_marginBottom="@dimen/small_padding"/>
+        android:layout_marginBottom="@dimen/small_padding"
+        android:fontFamily="@font/nanumsquare_b" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="5dp"
+                android:rotation="315"
+                android:src="@drawable/orange_tail" />
 
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+    <!--그래프-->
     <ProgressBar
         android:id="@+id/determinateBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="8dp"
         android:layout_marginLeft="@dimen/big_padding"
         android:layout_marginRight="@dimen/big_padding"
         style="@android:style/Widget.ProgressBar.Horizontal"

@@ -1,0 +1,13 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <solid android:color="@color/Secondary_orange" /> <!-- 배경색 지정 -->
+    <corners android:radius="23dp" /> <!-- 모서리 둥글게 설정 -->
+    <padding
+        android:left="16dp"
+        android:top="8dp"
+        android:right="16dp"
+        android:bottom="8dp" /> <!-- 패딩 지정 -->
+
+
+</shape>
