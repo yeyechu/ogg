@@ -16,12 +16,13 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/myact_appbar"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="230dp"
             android:background="@color/white">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:layout_marginTop="30dp"
                 app:contentScrim="?attr/colorPrimary"
                 app:expandedTitleMarginBottom="50dp"
                 app:expandedTitleMarginStart="48dp"
@@ -30,70 +31,87 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:baselineAligned="true">
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="16dp"
+                    android:baselineAligned="true"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/text_name_myactivity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textSize="75px"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginLeft="@dimen/big_padding"
+                        android:fontFamily="@font/nanumsquare_eb"
+                        android:text="김하루"
 
-
-                        android:text="ogg" />
+                        android:textSize="23sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/nanumsquare_b"
                         android:gravity="bottom"
-                        android:textSize="20sp"
-                        android:layout_marginTop="30dp"
-                        android:text="님은" />
+                        android:text="님"
+
+                        android:textSize="23sp" />
+
 
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="21sp"
-                    android:layout_marginTop="70dp"
-                    android:layout_marginLeft="@dimen/big_padding"
-                    android:text="오늘도 지구를 지킨다" />
 
-                <include layout="@layout/gage_item" />
+                    android:layout_marginLeft="16dp"
+
+                    android:layout_marginTop="28dp"
+                    android:fontFamily="@font/nanumsquare_b"
+
+                    android:text="오늘도 함께 지구를 지켜볼까요?"
+                    android:textSize="16sp" />
+
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
+        <TextView
+            android:id="@+id/text_title_myactivity_co"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsquare_b"
+            android:textSize="16sp"
+            android:layout_marginLeft="@dimen/big_padding"
+            android:layout_marginTop="26dp"
 
+            android:text="오늘 줄인 탄소량" />
+
+
+        <include layout="@layout/gage_item" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="26dp"
+            android:layout_marginLeft="@dimen/big_padding"
+            >
 
             <TextView
                 android:id="@+id/text_title_myactivity_one"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:layout_marginLeft="@dimen/big_padding"
-                android:layout_marginTop="10dp"
-                android:layout_weight="2"
+                android:fontFamily="@font/nanumsquare_b"
+                android:textSize="16sp"
+                android:layout_gravity="center"
+
                 android:text="오늘의 활동" />
 
-            <Button
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:layout_marginStart="10dp"
+                android:layout_width="25dp"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:gravity="bottom"
-                android:layout_gravity="bottom"
-                android:layout_marginRight="@dimen/big_padding"
-                android:textSize="13sp"
-                android:text="수정하기>" />
+
+                android:src="@drawable/baseline_help_outline_24"
+
+
+                 />
 
         </LinearLayout>
 
@@ -107,23 +125,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="26dp"
+            android:layout_marginLeft="@dimen/big_padding"
+            >
 
             <TextView
                 android:id="@+id/text_title_myactivity_two"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:layout_marginLeft="@dimen/big_padding"
-                android:layout_marginTop="10dp"
-                android:text="일회성 활동 " />
+                android:fontFamily="@font/nanumsquare_b"
+                android:textSize="16sp"
+
+                android:layout_gravity="center"
+                android:text="일회성 활동" />
 
             <ImageButton
-                android:layout_width="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_width="25dp"
                 android:layout_height="wrap_content"
-                android:maxHeight="15sp"
-                android:minHeight="15dp"
+
                 android:src="@drawable/baseline_help_outline_24"
                 android:layout_gravity="center|bottom"
                 android:tooltipText="한 번 등록하면 매일 일정 탄소량이 자동 등록됩니다"/>
