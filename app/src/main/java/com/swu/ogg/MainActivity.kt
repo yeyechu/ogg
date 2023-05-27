@@ -8,8 +8,6 @@ import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.ViewGroup
-import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -23,11 +21,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.swu.ogg.database.*
 import com.swu.ogg.databinding.ActivityMainBinding
-import com.swu.ogg.member.MemberPasswordFragment
-import com.swu.ogg.ui.myactivity.post.PostFragment
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -35,7 +30,6 @@ import java.io.InputStream
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    var isLargeLayout = true
 
     // DB에 현재 콘텐츠 표시를 위해 ViewModel에서 LiveData를 관찰하는 관찰자 추가
     private val newRecordActivityRequestCode = 1
@@ -62,8 +56,6 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        isLargeLayout = resources.getBoolean(R.bool.large_layout)
 
         // ─────────────────────────────────── 플로팅 버튼 ───────────────────────────────────
 
@@ -175,22 +167,5 @@ class MainActivity : AppCompatActivity() {
         } finally {
 
         }
-    }
-
-    // ─────────────────────────────────── 다이얼로그 생성 ───────────────────────────────────
-    fun showDialog() {
-        val fragmentManager = supportFragmentManager
-        val newFragment = PostFragment()
-        if(isLargeLayout) {
-            newFragment.show(fragmentManager, "dialog")
-        } else {
-            val transaction = fragmentManager.beginTransaction()
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            transaction
-                .add(android.R.id.list_container, newFragment)
-                .addToBackStack(null)
-                .commit()
-        }
-
     }
 }

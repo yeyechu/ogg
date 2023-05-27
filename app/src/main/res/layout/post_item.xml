@@ -32,6 +32,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageButton
+            android:id="@+id/btn_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:adjustViewBounds="true"
+            android:maxHeight="20dp"
+            android:layout_gravity="right"
+            android:src="@drawable/baseline_close_24"/>
+
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="match_parent"

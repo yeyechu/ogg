@@ -84,7 +84,7 @@ class MyActivityFragment : Fragment() {
             Image = cursor_only.getBlob(cursor_only.getColumnIndexOrThrow("aImg"))
             val bitmap : Bitmap = BitmapFactory.decodeByteArray(Image, 0, Image.size)
             var title = cursor_only.getString((cursor_only.getColumnIndexOrThrow("aTitle"))).toString()
-            var co2 = "매일" + cursor_only.getString((cursor_only.getColumnIndexOrThrow("cReduce"))).toString() + "kg"
+            var co2 = cursor_only.getString((cursor_only.getColumnIndexOrThrow("cReduce"))).toString() + "kg"
 
             onlyList.add(CardItem(bitmap, title, co2))
         }

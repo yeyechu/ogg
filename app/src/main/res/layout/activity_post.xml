@@ -35,6 +35,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <ImageButton
+                android:id="@+id/btn_exit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:adjustViewBounds="true"
+                android:maxHeight="30dp"
+                android:minHeight="20dp"
+                android:layout_gravity="right"
+                android:src="@drawable/baseline_close_24"/>
+
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
@@ -58,18 +69,42 @@
                 android:text=""
                 android:textSize="20sp" />
 
-            <ImageView
-                android:id="@+id/img_view"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="fill_horizontal"
-                android:layout_marginTop="@dimen/small_padding"
-                android:layout_marginBottom="@dimen/small_padding"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/app_name"
-                android:gravity="center"
-                android:maxHeight="150dp"
-                android:src="@drawable/baseline_add_photo_alternate_24" />
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btn_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_arrow_back_ios_24"
+                    android:background="@android:color/transparent"
+                    android:layout_gravity="center"/>
+
+                <ImageView
+                    android:id="@+id/img_view"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/small_padding"
+                    android:layout_marginBottom="@dimen/small_padding"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/app_name"
+                    android:gravity="center"
+                    android:maxHeight="150dp"
+                    android:src="@drawable/baseline_add_photo_alternate_24" />
+
+                <ImageButton
+                    android:id="@+id/btn_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_arrow_forward_ios_24"
+                    android:background="@android:color/transparent"
+                    android:layout_gravity="center"/>
+
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
