@@ -1,7 +1,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <solid android:color="@color/Secondary_orange" /> <!-- 배경색 지정 -->
+    <solid android:color="@color/Primary_blue" /> <!-- 배경색 지정 -->
     <corners android:radius="23dp" /> <!-- 모서리 둥글게 설정 -->
     <padding
         android:left="16dp"
