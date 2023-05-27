@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModel
 class EnvViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "나의 환경(구현할 곳)"
+        value = "21일 중 11일 째"
     }
     val text: LiveData<String> = _text
 }

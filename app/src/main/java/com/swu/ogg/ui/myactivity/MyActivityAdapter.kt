@@ -64,9 +64,6 @@ class MyActivityAdapter (val context : Context, val toList : ArrayList<CardItem>
 
     interface  OnItemClickListener {
         fun onClick(v: View, position: Int){
-//            val postFragment : PostFragment = PostFragment()
-//            postFragment.layoutInflater.inflate(R.layout.post_item, postFragment? ,false)
-
         }
 
     }

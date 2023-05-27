@@ -11,9 +11,9 @@
         android:icon="@drawable/ic_baseline_library_add_check_24"
         android:title="@string/title_myactivity" />
 
-    <item
-        android:id="@+id/placeholder"
-        android:title="" />
+<!--    <item-->
+<!--        android:id="@+id/placeholder"-->
+<!--        android:title="" />-->
 
     <item
         android:id="@+id/navigation_indicators"

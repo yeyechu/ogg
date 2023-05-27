@@ -59,8 +59,8 @@ class MainActivity : AppCompatActivity() {
 
         // ─────────────────────────────────── 플로팅 버튼 ───────────────────────────────────
 
-        navView.background = null
-        navView.menu.getItem(2).isEnabled = false
+        //navView.background = null
+        //navView.menu.getItem(2).isEnabled = false
 
         val fab : FloatingActionButton = binding.fab
         fab.setOnClickListener {
@@ -69,17 +69,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         // ─────────────────────────────────── DB 리사이클러뷰 ───────────────────────────────────
-        val recyclerView = binding.recyclerview
-        val adapter = RecordListAdapter()
-
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        // 관찰자 추가 -> getAlphabetizedWords가 반환하는 LiveData에 대한
-        // onChanged() : 관찰된 데이터가 변경되고 Activity가 foreground에 있을 때만 실행
-        recordViewModel.allRecords.observe(this, Observer { records ->
-            records.let { adapter.submitList(it) }
-        })
+//        val recyclerView = binding.recyclerview
+//        val adapter = RecordListAdapter()
+//
+//        recyclerView.adapter = adapter
+//        recyclerView.layoutManager = LinearLayoutManager(this)
+//
+//        // 관찰자 추가 -> getAlphabetizedWords가 반환하는 LiveData에 대한
+//        // onChanged() : 관찰된 데이터가 변경되고 Activity가 foreground에 있을 때만 실행
+//        recordViewModel.allRecords.observe(this, Observer { records ->
+//            records.let { adapter.submitList(it) }
+//        })
 
         // ─────────────────────────────────── DB 불러오기 ───────────────────────────────────
 
