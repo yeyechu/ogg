@@ -33,4 +33,13 @@
 
     <style name="Theme.Ogg.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.Ogg.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Transparent" parent="Theme.Ogg">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
 </resources>

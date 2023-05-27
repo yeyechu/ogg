@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
+import com.swu.ogg.MainActivity
 import com.swu.ogg.database.RecordListAdapter
 import com.swu.ogg.databinding.FragmentMyactivityBinding
 import com.swu.ogg.dbHelper

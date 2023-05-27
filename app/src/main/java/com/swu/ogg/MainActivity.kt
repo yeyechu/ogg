@@ -15,6 +15,7 @@ import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.*
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -26,6 +27,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.swu.ogg.database.*
 import com.swu.ogg.databinding.ActivityMainBinding
 import com.swu.ogg.member.MemberPasswordFragment
+import com.swu.ogg.ui.myactivity.post.PostFragment
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -33,6 +35,7 @@ import java.io.InputStream
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    var isLargeLayout = true
 
     // DB에 현재 콘텐츠 표시를 위해 ViewModel에서 LiveData를 관찰하는 관찰자 추가
     private val newRecordActivityRequestCode = 1
@@ -51,9 +54,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         val navView: BottomNavigationView = binding.navView
-
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_env, R.id.navigation_myactivity, R.id.navigation_indicators, R.id.navigation_feed
@@ -61,6 +62,8 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        isLargeLayout = resources.getBoolean(R.bool.large_layout)
 
         // ─────────────────────────────────── 플로팅 버튼 ───────────────────────────────────
 
@@ -172,5 +175,22 @@ class MainActivity : AppCompatActivity() {
         } finally {
 
         }
+    }
+
+    // ─────────────────────────────────── 다이얼로그 생성 ───────────────────────────────────
+    fun showDialog() {
+        val fragmentManager = supportFragmentManager
+        val newFragment = PostFragment()
+        if(isLargeLayout) {
+            newFragment.show(fragmentManager, "dialog")
+        } else {
+            val transaction = fragmentManager.beginTransaction()
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            transaction
+                .add(android.R.id.list_container, newFragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
     }
 }

@@ -8,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.swu.ogg.MainActivity
 import com.swu.ogg.R
 import com.swu.ogg.database.NewRecordActivity
+import com.swu.ogg.ui.myactivity.post.PostActivity
 
 data class CardItem(
     val image : Bitmap,
@@ -55,14 +55,20 @@ class MyActivityAdapter (val context : Context, val toList : ArrayList<CardItem>
 
         holder.apply {
             bind(cardItem, context, View.OnClickListener {
-                var intent : Intent = Intent(context, NewRecordActivity::class.java)
+                var intent : Intent = Intent(context, PostActivity::class.java)
+                intent.putExtra("titleActivity", cardItem.title)
                 context.startActivity(intent)
             })
         }
     }
 
     interface  OnItemClickListener {
-        fun onClick(v: View, position: Int)
+        fun onClick(v: View, position: Int){
+//            val postFragment : PostFragment = PostFragment()
+//            postFragment.layoutInflater.inflate(R.layout.post_item, postFragment? ,false)
+
+        }
+
     }
 
     private lateinit var itemClickListener : OnItemClickListener
