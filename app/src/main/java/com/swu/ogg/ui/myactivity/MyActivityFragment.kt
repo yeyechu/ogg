@@ -99,7 +99,7 @@ class MyActivityFragment : Fragment() {
         myActivityViewModel.onlist.observe(viewLifecycleOwner) {
 
             val onlist : ArrayList<CardItem> = onlyList
-            val onAdapter = MyActivityAdapter(requireContext(), onlist)
+            val onAdapter = MyActivity2Adapter(requireContext(), onlist)
             recyclerViewOnly.adapter = onAdapter
 
         }

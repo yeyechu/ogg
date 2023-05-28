@@ -91,8 +91,7 @@
             android:layout_height="40dp"
             android:orientation="horizontal"
             android:layout_marginTop="26dp"
-            android:layout_marginLeft="@dimen/big_padding"
-            >
+            android:layout_marginLeft="@dimen/big_padding">
 
             <TextView
                 android:id="@+id/text_title_myactivity_one"
@@ -108,11 +107,8 @@
                 android:layout_marginStart="10dp"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
-
                 android:src="@drawable/baseline_help_outline_24"
-
-
-                 />
+                android:tooltipText="오늘의 활동"/>
 
         </LinearLayout>
 
@@ -138,7 +134,7 @@
                 android:textSize="16sp"
 
                 android:layout_gravity="center"
-                android:text="일회성 활동" />
+                android:text="지속성 활동" />
 
             <ImageButton
                 android:layout_marginStart="10dp"

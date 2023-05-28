@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -54,7 +55,7 @@ class CameraActivity : AppCompatActivity() {
         val textCo2 : TextView = binding.tvCo2
 
         textTitle.text = extraTitle
-        textCo2.text = extraCo2
+        textCo2.text = extraCo2 + "kg"
 
         // ─────────────────────────────────── 버튼 정의 ───────────────────────────────────
 
@@ -149,15 +150,14 @@ class CameraActivity : AppCompatActivity() {
 
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     val msg = "사진 찍기 성공 : ${outputFileResults.savedUri}"
-                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                     Log.e(TAG, msg)
 
                     bitmap = MediaStore.Images.Media.getBitmap(contentResolver, outputFileResults.savedUri)
-                    binding.imagePreview.setImageBitmap(bitmap)
+                    binding.imagePreview.setImageBitmap(rotateBitmap(bitmap))
                 }
             }
         )
-
     }
 
     // 미리보기 화면
@@ -215,6 +215,23 @@ class CameraActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT).show()
             finish()
         }
+    }
+
+    // 이미지 돌리기
+    private fun rotateBitmap(bitmap : Bitmap? ) : Bitmap? {
+
+        val matrix = Matrix()
+        var bitmapImage : Bitmap? = null
+
+        matrix.setRotate(90F)
+
+        bitmapImage = try {
+            bitmap?.let{ Bitmap.createBitmap(it, 0, 0, bitmap.width, bitmap.height, matrix, true)}
+        } catch (e : Exception) {
+            e.printStackTrace()
+            null
+        }
+        return bitmapImage
     }
 
     override fun onDestroy() {

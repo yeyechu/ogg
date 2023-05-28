@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         RecordViewModelFactory((application as RecordsApplication).repository)
     }
 
-    val filePath : String = "/data/user/0/com.swu.ogg/databases/"
+    val filePath : String = "/data/data/com.swu.ogg/databases/"
     lateinit var  sqlDB : SQLiteDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
