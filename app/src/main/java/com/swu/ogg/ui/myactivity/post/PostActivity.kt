@@ -51,6 +51,7 @@ class PostActivity : AppCompatActivity() {
         var cursor: Cursor
         cursor = sqlitedb.rawQuery("SELECT aID, aImg FROM activityTBL WHERE aTitle = '" + extraTitle + "' ;", null)
         var activityNum : String = ""
+        var activityCo2 : String = ""
 
         while(cursor.moveToNext()){
             Image = cursor.getBlob(cursor.getColumnIndexOrThrow("aImg"))
@@ -71,6 +72,12 @@ class PostActivity : AppCompatActivity() {
         val leftButton : ImageButton = binding.btnLeft
         val rightButton : ImageButton = binding.btnRight
 
+        leftButton.isEnabled = false
+        rightButton.isEnabled = false
+
+        // leftButton : 보여줄 사진 있을 때만 isEnabled = true 처리
+        // rightButton : 보여줄 사진 있을 때만 isEnabled = true 처리
+
         leftButton.setOnClickListener {
             cursor_img++
             if(cursor_img > size - 1) {
@@ -90,10 +97,12 @@ class PostActivity : AppCompatActivity() {
 
         var cursor_c: Cursor
         cursor_c = sqlitedb.rawQuery("SELECT * FROM co2TBL WHERE aID = '" + activityNum + "' ;", null)
+
         while(cursor_c.moveToNext()) {
             var co2 = cursor_c.getString(cursor_c.getColumnIndexOrThrow("cReduce")).toString() + "kg"
             var freq = cursor_c.getString(cursor_c.getColumnIndexOrThrow("cFreq")).toString()
             var limit = cursor_c.getString(cursor_c.getColumnIndexOrThrow("cLimit")).toString()
+            activityCo2 = cursor_c.getString(cursor_c.getColumnIndexOrThrow("cReduce")).toString()
 
             val co2Text : TextView = binding.tvCo2
             val freqText : TextView = binding.tvContentFreq
@@ -117,15 +126,21 @@ class PostActivity : AppCompatActivity() {
         val buttonCamera : Button = binding.btnCamera
         buttonCamera.setOnClickListener{
 
-            val replyIntent = Intent()
-            if(true) {
-                setResult(Activity.RESULT_CANCELED, replyIntent)
-            } else {
-                val record = " "
-                replyIntent.putExtra(EXTRA_REPLY, record)
-                setResult(Activity.RESULT_OK, replyIntent)
-            }
+            var intent : Intent = Intent(this, CameraActivity::class.java)
+            intent.putExtra("titleActivity", extraTitle)
+            intent.putExtra("co2Activity", activityCo2)
+            this.startActivity(intent)
             finish()
+
+//            val replyIntent = Intent()
+//            if(true) {
+//                setResult(Activity.RESULT_CANCELED, replyIntent)
+//            } else {
+//                val record = " "
+//                replyIntent.putExtra(EXTRA_REPLY, record)
+//                setResult(Activity.RESULT_OK, replyIntent)
+//            }
+//            finish()
 
         }
 

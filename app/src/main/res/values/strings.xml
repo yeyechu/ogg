@@ -28,4 +28,9 @@
     <string name="number_21">숫자</string>
     <string name="todo_">TODO</string>
 
+    <!-- CameraX -->
+    <string name="take_photo">사진 찍기</string>
+    <string name="retake_photo">다시 찍기</string>
+    <string name="use_photo">등록 하기</string>
+
 </resources>
