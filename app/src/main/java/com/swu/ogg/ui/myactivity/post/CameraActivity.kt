@@ -1,26 +1,31 @@
 package com.swu.ogg.ui.myactivity.post
 
 import android.Manifest
+import android.app.Activity
 import android.content.ContentValues
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.Preview
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.swu.ogg.databinding.ActivityCameraBinding
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.Executor
@@ -54,10 +59,40 @@ class CameraActivity : AppCompatActivity() {
         // ─────────────────────────────────── 버튼 정의 ───────────────────────────────────
 
         val exitButton : ImageButton = binding.btnExit
-        val cameraButton : Button = binding.btnCamera
+        val cameraButton : ImageButton = binding.btnCamera
+
+        val preview  = binding.previewLayout
+        val retakeButton : Button = binding.btnRetake
         val postButton : Button = binding.btnPost
 
         exitButton.setOnClickListener {
+            finish()
+        }
+
+        retakeButton.setOnClickListener {
+            preview.visibility = View.GONE
+        }
+        postButton.setOnClickListener {
+
+            // db 처리
+            // 인증 등록 사진 db 저장 후
+
+            // LiveData observe 구현 필요
+            // -> 오늘 게이지
+            // -> 전체 게이지
+            // -> 활동탭 리스트
+            // -> 환경
+            // -> 환경탭 스티커
+            // -> 피드(2학기)
+
+            val replyIntent = Intent()
+            if(true) {
+                setResult(Activity.RESULT_CANCELED, replyIntent)
+            } else {
+                val record = " "
+                replyIntent.putExtra(EXTRA_REPLY, record)
+                setResult(Activity.RESULT_OK, replyIntent)
+            }
             finish()
         }
 
@@ -72,7 +107,7 @@ class CameraActivity : AppCompatActivity() {
         }
         cameraButton.setOnClickListener {
             takePhoto()
-            cameraButton.text = "다시 찍기"
+            preview.visibility = View.VISIBLE
         }
         cameraExecutor = Executors.newSingleThreadExecutor()
 
@@ -83,6 +118,8 @@ class CameraActivity : AppCompatActivity() {
 
         // imageCapture 사용 사례에 대한 참조 불러오기 -> null이면 함수 종료
         val imageCapture = imageCapture ?: return
+
+        var bitmap : Bitmap? = null
 
         val name = SimpleDateFormat(FILENAME_FORMAT, Locale.KOREA).format(System.currentTimeMillis())
 
@@ -114,9 +151,13 @@ class CameraActivity : AppCompatActivity() {
                     val msg = "사진 찍기 성공 : ${outputFileResults.savedUri}"
                     Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                     Log.e(TAG, msg)
+
+                    bitmap = MediaStore.Images.Media.getBitmap(contentResolver, outputFileResults.savedUri)
+                    binding.imagePreview.setImageBitmap(bitmap)
                 }
             }
         )
+
     }
 
     // 미리보기 화면
@@ -183,6 +224,8 @@ class CameraActivity : AppCompatActivity() {
 
     companion object {
 
+        const val EXTRA_REPLY = "com.swu.ogg.recordlistsql.REPLY"
+
         private const val TAG = "Camera"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
         private const val REQUEST_CODE_PERMISSIONS = 10
@@ -192,6 +235,7 @@ class CameraActivity : AppCompatActivity() {
                 ).apply {
                     if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
                         add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        add(Manifest.permission.READ_EXTERNAL_STORAGE)
                     }
                 }.toTypedArray()
                 )

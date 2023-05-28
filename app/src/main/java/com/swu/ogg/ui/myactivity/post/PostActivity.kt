@@ -132,16 +132,6 @@ class PostActivity : AppCompatActivity() {
             this.startActivity(intent)
             finish()
 
-//            val replyIntent = Intent()
-//            if(true) {
-//                setResult(Activity.RESULT_CANCELED, replyIntent)
-//            } else {
-//                val record = " "
-//                replyIntent.putExtra(EXTRA_REPLY, record)
-//                setResult(Activity.RESULT_OK, replyIntent)
-//            }
-//            finish()
-
         }
 
         // ─────────────────────────────────── 갤러리 버튼 ───────────────────────────────────
@@ -162,9 +152,5 @@ class PostActivity : AppCompatActivity() {
             }
         }
         cursor_b.close()
-    }
-
-    companion object {
-        const val EXTRA_REPLY = "com.swu.ogg.recordlistsql.REPLY"
     }
 }
