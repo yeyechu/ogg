@@ -1,9 +1,6 @@
 package com.swu.ogg.database
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
 // 데이터 액세스 객체 DAO에서 SQL 쿼리를 지정하여 매서드 호출과 연결
@@ -22,3 +19,37 @@ interface RecordDao {
     @Query("DELETE FROM record_table")
     suspend fun deleteAll()
 }
+
+/*@Dao
+interface ActivityTBLDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(activity : ActivityTBL)
+
+    @Update
+    suspend fun update(activity : ActivityTBL)
+
+    @Delete
+    suspend fun delete(activity : ActivityTBL)
+
+    @Query("SELECT * FROM ActivityTBL")
+    suspend fun getAll() : List<ActivityTBL>
+
+    @Query("DELETE FROM ActivityTBL ")
+    suspend fun deleteAll()
+}*/
+/*interface BadgeTBL {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(badge : BadgeTBL)
+
+    @Update
+    suspend fun update(badge : BadgeTBL)
+
+    @Delete
+    suspend fun delete(badge : BadgeTBL)
+
+    @Query("SELECT * FROM BadgeTBL")
+    suspend fun getAll() : List<BadgeTBL>
+
+    @Query("DELETE FROM BadgeTBL ")
+    suspend fun deleteAll()
+}*/
