@@ -8,84 +8,69 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.swu.ogg.R
+
+
 import java.io.IOException
 
 class AlbumActivity : AppCompatActivity() {
 
-    private val REQUEST_CODE_ALBUM = 1001
-    private val REQUEST_CODE_PERMISSION = 1002
-    private var isAlbumButtonClicked = false
+    private val REQUEST_IMAGE_CODE = 1001
+    private val REQUEST_EXTERNAL_STORAGE_PERMISSION = 1002
+    private lateinit var image_Preview: ImageView
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_album)
 
+        image_Preview = findViewById(R.id.image_preview)
 
-    // 앨범 접근 권한 확인
-    private fun checkAlbumPermission() {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                android.Manifest.permission.READ_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            openAlbum()
-        } else {
-            // 권한이 없는 경우 권한 요청
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
-                REQUEST_CODE_PERMISSION
-            )
-        }
-    }
-
-    // 권한 요청 결과 처리
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_CODE_PERMISSION) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                if (isAlbumButtonClicked) {
-                    openAlbum()
-                }
+        // 권한 확인 및 요청
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                // 권한 설명을 보여줄 필요가 있는 경우
             } else {
-                // 권한이 거부된 경우 처리
-                Toast.makeText(this, "앨범 접근 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                    REQUEST_EXTERNAL_STORAGE_PERMISSION
+                )
             }
-            isAlbumButtonClicked = false
-        }
-    }
-    val setResultIntent = Intent()
-
-    // 앨범 열기
-    val albumLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
-        if (result != null) {
-            val selectedImageUri: Uri = result
-            setResultIntent.data = selectedImageUri
-            setResult(Activity.RESULT_OK, setResultIntent)
-            finish()
+        } else {
+            // 권한이 이미 허용된 경우
         }
     }
 
-    private fun openAlbum() {
-        isAlbumButtonClicked = true
-        // 앨범 접근 권한 확인
-        checkAlbumPermission()
-        if (isAlbumButtonClicked) {
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
-            intent.type = "image/*"
-            albumLauncher.launch(intent.data.toString())
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_IMAGE_CODE && resultCode == Activity.RESULT_OK) {
+            val image: Uri? = data?.data
+            try {
+                val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(contentResolver, image)
+                image_Preview.setImageBitmap(bitmap)
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
         }
     }
 
-
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
+
+    //선택후 가져오기
+
+
+
+
+}
