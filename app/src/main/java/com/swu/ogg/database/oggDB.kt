@@ -6,11 +6,6 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import java.sql.Blob
 
-@Entity(tableName = "record_table")
-data class Record (
-    @PrimaryKey
-    @ColumnInfo(name = "record") val record: String
-)
 
 @Entity(tableName = "activityTBL")
 class ActivityTBL(@PrimaryKey(autoGenerate = true) @ColumnInfo var aID: Int,
@@ -91,11 +86,11 @@ class OneoffTBL(@PrimaryKey(autoGenerate = true) var oID: Int,
 
 @Entity(tableName = "particulTBL")
 class ParticulTBL(@PrimaryKey(autoGenerate = true) var pID: Int,
-                 @ColumnInfo(name = "pTitle") var pTitle: String,
-                 @ColumnInfo(name = "pImg") var pImg: Blob?,
-                 @ColumnInfo(name = "pCo2") var pCo2: Float?,
-                 @ColumnInfo(name = "pGuide") var pGuide: String?,
-                 @ColumnInfo(name = "pDetail") var pDetail: String?
+                  @ColumnInfo(name = "pTitle") var pTitle: String,
+                  @ColumnInfo(name = "pImg") var pImg: Blob?,
+                  @ColumnInfo(name = "pCo2") var pCo2: Float?,
+                  @ColumnInfo(name = "pGuide") var pGuide: String?,
+                  @ColumnInfo(name = "pDetail") var pDetail: String?
 )
 
 @Entity(tableName = "stickerTBL")

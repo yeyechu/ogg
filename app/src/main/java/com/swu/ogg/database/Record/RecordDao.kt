@@ -1,4 +1,4 @@
-package com.swu.ogg.database
+package com.swu.ogg.database.Record
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow

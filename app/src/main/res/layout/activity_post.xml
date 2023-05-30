@@ -205,7 +205,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
 
-                    android:background="@drawable/box_orange"
+                    android:background="@drawable/box_mainblue"
                     android:paddingTop="12dp"
                     android:paddingBottom="12dp"
 
@@ -241,4 +241,64 @@
             </LinearLayout>
 
         </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/previewLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="310dp"
+            android:layout_height="410dp"
+            android:layout_marginTop="50dp"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/image_preview"
+                android:layout_width="250dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp" />
+
+            <LinearLayout
+                android:layout_width="310dp"
+                android:layout_height="70dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_retake"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_skyblue"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginRight="@dimen/big_padding"
+                    android:text="@string/retake_photo"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/nanumsquare_b" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_post"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/box_lineblue"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:layout_gravity="bottom"
+                    android:text="@string/use_photo"
+                    android:fontFamily="@font/nanumsquare_b"
+                    android:textColor="@color/Primary_blue" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

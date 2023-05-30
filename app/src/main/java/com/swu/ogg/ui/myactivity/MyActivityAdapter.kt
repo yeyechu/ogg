@@ -10,9 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.swu.ogg.MainActivity
 import com.swu.ogg.R
-import com.swu.ogg.database.NewRecordActivity
 import com.swu.ogg.ui.myactivity.post.PostActivity
 
 // 오늘의 활동에 대한 어댑터

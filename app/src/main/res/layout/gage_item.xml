@@ -31,7 +31,7 @@
         android:textSize="10sp"
         android:textColor="@color/white"
         android:text="0.74kg 남았어요!"
-        android:background="@drawable/box_orange"
+        android:background="@drawable/box_mainblue"
         android:paddingTop="3.3dp"
         android:paddingBottom="3.3dp"
         android:paddingLeft="10dp"

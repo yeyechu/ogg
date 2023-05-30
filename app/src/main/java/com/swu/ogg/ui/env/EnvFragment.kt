@@ -1,6 +1,6 @@
 package com.swu.ogg.ui.env
 
-import android.graphics.Bitmap
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.Button

@@ -1,4 +1,4 @@
-package com.swu.ogg.database
+package com.swu.ogg.database.Record
 
 import android.app.Activity
 import android.content.Intent
@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
-import com.swu.ogg.R
 import com.swu.ogg.databinding.ActivityNewRecordBinding
 
 class NewRecordActivity : AppCompatActivity() {

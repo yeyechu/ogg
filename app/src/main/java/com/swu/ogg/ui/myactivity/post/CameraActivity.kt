@@ -219,7 +219,7 @@ class CameraActivity : AppCompatActivity() {
     }
 
     // 이미지 돌리기
-    private fun rotateBitmap(bitmap : Bitmap? ) : Bitmap? {
+    fun rotateBitmap(bitmap : Bitmap? ) : Bitmap? {
 
         val matrix = Matrix()
         var bitmapImage : Bitmap? = null

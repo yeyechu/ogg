@@ -33,7 +33,7 @@ class AlbumActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_album)
 
-        image_Preview = findViewById(R.id.image_preview)
+        //image_Preview = findViewById(R.id.image_preview)
 
         // 권한 확인 및 요청
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -53,14 +53,17 @@ class AlbumActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_IMAGE_CODE && resultCode == Activity.RESULT_OK) {
+        if (requestCode == RESULT_OK) {
             val image: Uri? = data?.data
+            var bitmap : Bitmap? = null
+
             try {
-                val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(contentResolver, image)
-                image_Preview.setImageBitmap(bitmap)
+                bitmap = MediaStore.Images.Media.getBitmap(contentResolver, image)
             } catch (e: IOException) {
                 e.printStackTrace()
             }
+
+            image_Preview.setImageBitmap(bitmap)
         }
     }
 
