@@ -9,6 +9,9 @@
         android:maxSdkVersion="28"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <!--앨범 권한 추가-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:name=".database.RecordsApplication"
         android:allowBackup="true"
