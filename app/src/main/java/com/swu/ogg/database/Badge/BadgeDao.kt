@@ -2,6 +2,7 @@ package com.swu.ogg.database.Badge
 
 import androidx.room.*
 import com.swu.ogg.database.BadgeTBL
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BadgeDao {
@@ -14,6 +15,9 @@ interface BadgeDao {
     @Delete
     fun deleteBadge(bID: BadgeTBL)
 
-    @Query("SELECT * FROM BadgeTBL")
+    @Query("SELECT * FROM badgeTBL")
     fun getAllBadge() : List<BadgeTBL>
+
+    @Query("SELECT * FROM badgeTBL ORDER BY bID ASC")
+    fun getAlphabetizedBadge(): Flow<List<BadgeTBL>>
 }

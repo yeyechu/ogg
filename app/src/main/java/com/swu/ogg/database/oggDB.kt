@@ -1,16 +1,16 @@
 package com.swu.ogg.database
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import androidx.room.*
+import java.io.ByteArrayOutputStream
 import java.sql.Blob
 
 
 @Entity(tableName = "activityTBL")
 class ActivityTBL(@PrimaryKey(autoGenerate = true) @ColumnInfo var aID: Int,
                   @ColumnInfo(name = "aTitle") var aTitle: String,
-                  @ColumnInfo(name = "aImg") var aImg: Blob?,
+                  @ColumnInfo(name = "aImg") var aImg: Bitmap? = null,
                   @ColumnInfo(name = "aCo2") var aCo2: Float,
                   @ColumnInfo(name = "aCode") var aCode: Int,
                   @ColumnInfo(name = "aNum") var aNum: Int,
@@ -24,7 +24,7 @@ class BadgeTBL(@PrimaryKey(autoGenerate = true) var bID: Int,
                @ColumnInfo(name = "bCode") var bCode: String?,
                @ColumnInfo(name = "bTitle") var bTitle: String,
                @ColumnInfo(name = "bRequire") var bRequire: String?,
-               @ColumnInfo(name = "bImg") var bImg: Blob?
+               @ColumnInfo(name = "bImg") var bImg: Bitmap? = null,
 )
 
 @Entity(tableName = "explanTBL",  foreignKeys = [
@@ -57,7 +57,7 @@ class ExplanTBL(@PrimaryKey(autoGenerate = true) var eID: Int,
 ])
 class GuideTBL(@PrimaryKey(autoGenerate = true) var gID: Int,
                @ColumnInfo(name = "gGuide") var gGallery: String,
-               @ColumnInfo(name = "gImg") var gImg: Blob?
+               @ColumnInfo(name = "gImg") var gImg: Bitmap? = null,
 )
 
 @Entity(tableName = "levelTBL")
@@ -77,7 +77,7 @@ class MemberTBL(@PrimaryKey(autoGenerate = true) var mID: Int,
 @Entity(tableName = "oneoffTBL")
 class OneoffTBL(@PrimaryKey(autoGenerate = true) var oID: Int,
                 @ColumnInfo(name = "oTitle") var oTitle: String,
-                @ColumnInfo(name = "oImg") var oImg: Blob?,
+                @ColumnInfo(name = "oImg") var oImg: Bitmap? = null,
                 @ColumnInfo(name = "oCo2") var oCo2: Float,
                 @ColumnInfo(name = "oCode") var oCode: String,
                 @ColumnInfo(name = "oGuide") var oGuide: String?,
@@ -87,7 +87,7 @@ class OneoffTBL(@PrimaryKey(autoGenerate = true) var oID: Int,
 @Entity(tableName = "particulTBL")
 class ParticulTBL(@PrimaryKey(autoGenerate = true) var pID: Int,
                   @ColumnInfo(name = "pTitle") var pTitle: String,
-                  @ColumnInfo(name = "pImg") var pImg: Blob?,
+                  @ColumnInfo(name = "pImg") var pImg: Bitmap? = null,
                   @ColumnInfo(name = "pCo2") var pCo2: Float?,
                   @ColumnInfo(name = "pGuide") var pGuide: String?,
                   @ColumnInfo(name = "pDetail") var pDetail: String?
@@ -97,5 +97,7 @@ class ParticulTBL(@PrimaryKey(autoGenerate = true) var pID: Int,
 class StickerTBL(@PrimaryKey(autoGenerate = true) var sID: Int,
                  @ColumnInfo(name = "sTitle") var sTitle: String,
                  @ColumnInfo(name = "sDetail") var pDetail: String?,
-                 @ColumnInfo(name = "sImg") var pImg: Blob?
+                 @ColumnInfo(name = "sImg") var pImg: Bitmap? = null,
 )
+
+

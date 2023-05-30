@@ -18,6 +18,6 @@ interface ActivityDao {
     @Query("SELECT * FROM activityTBL")
     fun getAllActivity() : List<ActivityTBL>
 
-    @Query("SELECT * FROM activityTBL ORDER BY word ASC")
+    @Query("SELECT * FROM activityTBL ORDER BY aID ASC")
     fun getAlphabetizedActivity(): Flow<List<ActivityTBL>>
 }

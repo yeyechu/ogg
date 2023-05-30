@@ -1,7 +1,9 @@
 package com.swu.ogg.database.Explane
 
 import androidx.room.*
+import com.swu.ogg.database.BadgeTBL
 import com.swu.ogg.database.ExplanTBL
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ExplanDao {
@@ -14,6 +16,9 @@ interface ExplanDao {
     @Delete
     fun deleteExplan(eID: ExplanTBL)
 
-    @Query("SELECT * FROM ExplanTBL")
+    @Query("SELECT * FROM explanTBL")
     fun getAllExplan() : List<ExplanTBL>
+
+    @Query("SELECT * FROM explanTBL ORDER BY eID ASC")
+    fun getAlphabetizedExplan(): Flow<List<ExplanTBL>>
 }

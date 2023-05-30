@@ -1,7 +1,9 @@
 package com.swu.ogg.database.Guide
 
 import androidx.room.*
+import com.swu.ogg.database.ExplanTBL
 import com.swu.ogg.database.GuideTBL
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface GuideDao {
@@ -16,4 +18,7 @@ interface GuideDao {
 
     @Query("SELECT * FROM GuideTBL")
     fun getAllGuide() : List<GuideTBL>
+
+    @Query("SELECT * FROM guideTBL ORDER BY gID ASC")
+    fun getAlphabetizedGuide(): Flow<List<GuideTBL>>
 }
