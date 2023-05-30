@@ -10,20 +10,20 @@
     <!--말풍선-->
 
     <LinearLayout
+        android:id="@+id/alarm_box_layout"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_height="27dp"
-        >
+        android:visibility="visible">
+
         <FrameLayout
             android:id="@+id/textbox"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="2dp"
-
-            >
+            android:layout_marginBottom="2dp">
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,12 +32,10 @@
         android:textColor="@color/white"
         android:text="0.74kg 남았어요!"
         android:background="@drawable/box_orange"
-
         android:paddingTop="3.3dp"
         android:paddingBottom="3.3dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-
         android:fontFamily="@font/nanumsquare_eb" />
 
             <ImageView
@@ -48,7 +46,6 @@
                 android:layout_marginBottom="5dp"
                 android:rotation="315"
                 android:src="@drawable/orange_tail" />
-
 
         </FrameLayout>
 
@@ -78,8 +75,7 @@
             android:layout_weight="2"
             android:text="0kg"
             android:textSize="12sp"
-            android:fontFamily="@font/nanumsquare_r"
-            />
+            android:fontFamily="@font/nanumsquare_r" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -88,9 +84,7 @@
             android:layout_marginTop="5.3dp"
             android:text="1kg"
             android:textSize="12sp"
-            android:fontFamily="@font/nanumsquare_r"
-
-            />
+            android:fontFamily="@font/nanumsquare_r" />
 
     </LinearLayout>
 

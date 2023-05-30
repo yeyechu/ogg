@@ -21,10 +21,10 @@ class MyActivity2Adapter(val context : Context, val onList : ArrayList<CardItem>
 
         class CardViewHolder(view : View?) : RecyclerView.ViewHolder(view!!) {
 
-            var textTitle = view?.findViewById<TextView>(R.id.tv_title)
-            var textCo2 = view?.findViewById<TextView>(R.id.tv_co2)
-            //var image = view?.findViewById<ImageView>(R.id.)
-            var button = view?.findViewById<Button>(R.id.btn)
+            val textTitle = view?.findViewById<TextView>(R.id.tv_title)
+            val textCo2 = view?.findViewById<TextView>(R.id.tv_co2)
+            //val image = view?.findViewById<ImageView>(R.id.)
+            val button = view?.findViewById<Button>(R.id.btn)
 
             fun bind(room : CardItem, context: Context, onClickListener: OnClickListener) {
 

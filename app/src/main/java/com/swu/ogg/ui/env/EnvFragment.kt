@@ -1,6 +1,6 @@
 package com.swu.ogg.ui.env
 
-import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
@@ -9,22 +9,19 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.navOptions
 import com.swu.ogg.R
-import com.swu.ogg.database.NewRecordActivity
 import com.swu.ogg.databinding.FragmentEnvBinding
-import com.swu.ogg.member.SettingsFragment
 
 class EnvFragment : Fragment() {
 
     private var _binding: FragmentEnvBinding? = null
-
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+
+    //lateinit var dbManager : dbHelper
+    //lateinit var sqlitedb : SQLiteDatabase
+    lateinit var stickerImage : ByteArray
+
+    var stickerArray = ArrayList<Bitmap>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -81,16 +78,20 @@ class EnvFragment : Fragment() {
         val textDday: TextView = binding.tvDday
         val textCo2Alarm : TextView = binding.tvCo2Alarm
 
-        envViewModel.dDayText.observe(viewLifecycleOwner) {
-            textDday.text = "21일 중" + it + "일 째"
-        }
+        // db 처리해서 연결
+        // 며칠째인지
+        // 탄소량 얼마 남았는지
+        // 오늘 스티커 뭔지
 
-        envViewModel.co2Text.observe(viewLifecycleOwner) {
-            textCo2Alarm.text = "21일 목표 탄소량 까지 " + it + "kg 남았어요"
+        envViewModel.dDayText.observe(viewLifecycleOwner) {
+            textDday.text = "21일 중 " + it + "일 째"
         }
+        textCo2Alarm.text = "전체 목표 탄소량까지 " + "?db?" + "kg 남았어요"
 
         return root
     }
+
+    // 툴바 메뉴 처리
     override fun onOptionsItemSelected(item: MenuItem) = when(item.itemId){
         R.id.navigation_settings -> {
             //findNavController().navigate(R.id.action_navigation_env_to_navigation_settings2)

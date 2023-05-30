@@ -27,10 +27,10 @@ class MyActivityAdapter (val context : Context, val toList : ArrayList<CardItem>
 
     class CardViewHolder(view : View?) : RecyclerView.ViewHolder(view!!) {
 
-        var textTitle = view?.findViewById<TextView>(R.id.tv_title)
-        var textCo2 = view?.findViewById<TextView>(R.id.tv_co2)
-        var image = view?.findViewById<ImageView>(R.id.img_view)
-        var button = view?.findViewById<Button>(R.id.btn)
+        val textTitle = view?.findViewById<TextView>(R.id.tv_title)
+        val textCo2 = view?.findViewById<TextView>(R.id.tv_co2)
+        val image = view?.findViewById<ImageView>(R.id.img_view)
+        val button = view?.findViewById<Button>(R.id.btn)
 
         fun bind(room : CardItem, context: Context, onClickListener : View.OnClickListener){
 
@@ -71,7 +71,6 @@ class MyActivityAdapter (val context : Context, val toList : ArrayList<CardItem>
     interface  OnItemClickListener {
         fun onClick(v: View, position: Int){
         }
-
     }
 
     private lateinit var itemClickListener : OnItemClickListener

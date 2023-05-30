@@ -13,9 +13,11 @@ class EnvViewModel : ViewModel() {
     private val db1Text = MutableLiveData<String>().apply {
         value = "11"
     }
-    private val db2Text = MutableLiveData<String>().apply {
-        value = "1.05"
-    }
     val dDayText: LiveData<String> = db1Text
-    val co2Text : LiveData<String> = db2Text
+
+//    private var _list = MutableLiveData<ArrayList<SummaryItem>>().apply {
+//        value = arrayListOf<SummaryItem>()
+//    }
+//
+//    var sumList : LiveData<ArrayList<SummaryItem>> = _list
 }
