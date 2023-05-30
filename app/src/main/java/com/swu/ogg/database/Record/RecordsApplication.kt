@@ -1,4 +1,4 @@
-package com.swu.ogg.database
+package com.swu.ogg.database.Record
 
 import android.app.Application
 import kotlinx.coroutines.CoroutineScope

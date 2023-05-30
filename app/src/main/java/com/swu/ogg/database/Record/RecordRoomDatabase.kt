@@ -1,4 +1,4 @@
-package com.swu.ogg.database
+package com.swu.ogg.database.Record
 
 import android.content.Context
 import androidx.room.Database
@@ -7,7 +7,6 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import java.io.File
 
 // SQLiteOpenHelper에서 하던 처리를 담당
 // Room Query가 Flow를 반환해주면 자동으로 백그라운드 스레드에서 비동기식 실행
