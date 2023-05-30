@@ -205,7 +205,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
 
-                    android:background="@drawable/box_orange"
+                    android:background="@drawable/box_mainblue"
                     android:paddingTop="12dp"
                     android:paddingBottom="12dp"
 
