@@ -21,5 +21,6 @@
     <!--main color-->
     <color name="Primary_blue">#6897F3</color>
     <color name="Secondary_orange">#FF7F48</color>
+    <color name="light_Blue">#E1EAFD</color>
 
 </resources>
