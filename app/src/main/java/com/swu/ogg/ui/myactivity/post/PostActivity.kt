@@ -6,9 +6,11 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -16,6 +18,7 @@ import android.widget.TextView
 import com.swu.ogg.R
 import com.swu.ogg.databinding.ActivityPostBinding
 import com.swu.ogg.dbHelper
+import java.io.IOException
 
 class PostActivity : AppCompatActivity() {
 
@@ -26,6 +29,9 @@ class PostActivity : AppCompatActivity() {
     lateinit var Image : ByteArray
 
     var imgArray = ArrayList<Bitmap>()
+
+    private val REQUEST_IMAGE_CODE = 1
+    var imgArr : Array<Bitmap?> = arrayOfNulls<Bitmap>(1)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,9 +107,9 @@ class PostActivity : AppCompatActivity() {
         cursor_c = sqlitedb.rawQuery("SELECT * FROM co2TBL WHERE aID = '" + activityNum + "' ;", null)
 
         while(cursor_c.moveToNext()) {
-            var co2 = cursor_c.getString(cursor_c.getColumnIndexOrThrow("cReduce")).toString() + "kg"
-            var freq = cursor_c.getString(cursor_c.getColumnIndexOrThrow("cFreq")).toString()
-            var limit = cursor_c.getString(cursor_c.getColumnIndexOrThrow("cLimit")).toString()
+            val co2 = cursor_c.getString(cursor_c.getColumnIndexOrThrow("cReduce")).toString() + "kg"
+            val freq = cursor_c.getString(cursor_c.getColumnIndexOrThrow("cFreq")).toString()
+            val limit = cursor_c.getString(cursor_c.getColumnIndexOrThrow("cLimit")).toString()
             activityCo2 = cursor_c.getString(cursor_c.getColumnIndexOrThrow("cReduce")).toString()
 
             val co2Text : TextView = binding.tvCo2
@@ -137,8 +143,12 @@ class PostActivity : AppCompatActivity() {
         }
 
         // ─────────────────────────────────── 갤러리 버튼 ───────────────────────────────────
+
+        val retakeButton : Button = binding.btnRetake
+        retakeButton.text = "다시 고르기"
+        val postButton : Button = binding.btnPost
+
         var cursor_b : Cursor
-        val REQUEST_IMAGE_CODE = 1001
         cursor_b = sqlitedb.rawQuery("SELECT gGallery FROM guideTBL WHERE aID = '" + activityNum + "' ;", null)
         while (cursor_b.moveToNext()) {
             var gallery = cursor_b.getInt(cursor_b.getColumnIndexOrThrow("gGallery")).toInt()
@@ -148,18 +158,66 @@ class PostActivity : AppCompatActivity() {
                 buttonAlbum.isEnabled = true
                 //색 바뀌게 코드
 
-
                 buttonAlbum.setOnClickListener {
                     // 앨범 연결 부분
-                    val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-
-                    startActivityForResult(intent,REQUEST_IMAGE_CODE)
-
-                    finish()
+                    val intent = Intent(Intent.ACTION_GET_CONTENT)
+                    intent.setType("image/*")
+                    startActivityForResult(intent, REQUEST_IMAGE_CODE)
 
                 }
             }
         }
         cursor_b.close()
+
+        retakeButton.setOnClickListener {
+            binding.previewLayout.visibility = View.GONE
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.setType("image/*")
+            startActivityForResult(intent, REQUEST_IMAGE_CODE)
+        }
+        postButton.setOnClickListener {
+
+            // db 처리
+            // 인증 등록 사진 db 저장 후
+            // 인증 완료 비활성화 처리 필요한 부분 구현 필요
+
+            // LiveData observe 구현 필요
+            // -> 오늘 게이지
+            // -> 전체 게이지
+            // -> 활동탭 리스트
+            // -> 환경
+            // -> 환경탭 스티커
+            // -> 피드(2학기)
+
+            val replyIntent = Intent()
+            if(true) {
+                setResult(Activity.RESULT_CANCELED, replyIntent)
+            } else {
+                val record = " "
+                replyIntent.putExtra(CameraActivity.EXTRA_REPLY, record)
+                setResult(Activity.RESULT_OK, replyIntent)
+            }
+            finish()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        when(requestCode) {
+            1 -> if (resultCode == RESULT_OK) {
+                val image: Uri? = data?.data
+                var bitmap : Bitmap? = null
+
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(contentResolver, image)
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+                binding.previewLayout.visibility = View.VISIBLE
+                binding.imagePreview.setImageBitmap(CameraActivity().rotateBitmap(bitmap))
+                imgArr[0] = bitmap
+            }
+        }
     }
 }
