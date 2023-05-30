@@ -43,45 +43,30 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nanumsquare_eb"
                         android:text="김하루"
-
                         android:textSize="23sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/nanumsquare_b"
-                        android:gravity="bottom"
-                        android:text="님"
-
-                        android:textSize="23sp" />
-
 
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:layout_marginLeft="16dp"
-
                     android:layout_marginTop="28dp"
                     android:fontFamily="@font/nanumsquare_b"
-
                     android:text="오늘도 함께 지구를 지켜볼까요?"
                     android:textSize="16sp" />
 
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
+
         <TextView
-            android:id="@+id/text_title_myactivity_co"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nanumsquare_b"
             android:textSize="16sp"
             android:layout_marginLeft="@dimen/big_padding"
             android:layout_marginTop="26dp"
-
             android:text="오늘 줄인 탄소량" />
 
 
@@ -94,13 +79,11 @@
             android:layout_marginLeft="@dimen/big_padding">
 
             <TextView
-                android:id="@+id/text_title_myactivity_one"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nanumsquare_b"
                 android:textSize="16sp"
                 android:layout_gravity="center"
-
                 android:text="오늘의 활동" />
 
             <ImageButton
@@ -127,12 +110,10 @@
             >
 
             <TextView
-                android:id="@+id/text_title_myactivity_two"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nanumsquare_b"
                 android:textSize="16sp"
-
                 android:layout_gravity="center"
                 android:text="지속성 활동" />
 
@@ -140,7 +121,6 @@
                 android:layout_marginStart="10dp"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
-
                 android:src="@drawable/baseline_help_outline_24"
                 android:layout_gravity="center|bottom"
                 android:tooltipText="한 번 등록하면 매일 일정 탄소량이 자동 등록됩니다"/>

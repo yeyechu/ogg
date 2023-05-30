@@ -11,7 +11,7 @@
 
     <stroke
         android:width="2dp"
-        android:color="@color/Primary_blue"
+        android:color="@color/lightgray"
 
         />
 

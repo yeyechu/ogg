@@ -42,4 +42,8 @@
         <item name="android:windowAnimationStyle">@android:style/Animation</item>
         <item name="android:backgroundDimEnabled">true</item>
     </style>
+
+    <style name="Theme.Ogg.state_enabled">
+        <item name="android:state_enabled">true</item>
+    </style>
 </resources>

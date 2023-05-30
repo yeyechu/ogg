@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.swu.ogg.R
 import com.swu.ogg.ui.myactivity.post.PostActivity
 
+
+// 지속성 활동에 대한 어댑터
+
 class MyActivity2Adapter(val context : Context, val onList : ArrayList<CardItem>)
     : RecyclerView.Adapter<MyActivity2Adapter.CardViewHolder>() {
 

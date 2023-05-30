@@ -48,10 +48,10 @@ class MyActivityFragment : Fragment() {
         _binding = FragmentMyactivityBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textTitleMyactivityOne
+        val textView: TextView = binding.textNameMyactivity
 
         myActivityViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+            textView.text = it + "님"
         }
 
         // ─────────────────────────────────── 리사이클러뷰 ───────────────────────────────────
@@ -64,6 +64,8 @@ class MyActivityFragment : Fragment() {
 
         todayList.clear()
         onlyList.clear()
+
+        // DB에서 불러온 데이터 연결
 
         var cursor_today : Cursor
         cursor_today = sqlitedb.rawQuery("SELECT aTitle, cReduce, aImg FROM activityTBL, co2TBL WHERE activityTBL.aID = co2TBL.cID AND co2TBL.cCode = 'R'; ", null)
@@ -89,6 +91,10 @@ class MyActivityFragment : Fragment() {
             onlyList.add(CardItem(bitmap, title, co2))
         }
 
+        // ViewModel에 변경을 알리는 observer 구현
+        // tolist : 오늘의 활동에 대한 내용
+        // onlist : 일회성 활동에 대한 내용
+
         myActivityViewModel.tolist.observe(viewLifecycleOwner) {
 
             val tolist : ArrayList<CardItem> = todayList
@@ -104,7 +110,11 @@ class MyActivityFragment : Fragment() {
 
         }
 
+        cursor_today.close()
+        cursor_only.close()
+
         sqlitedb.close()
+        dbManager.close()
 
         return root
     }

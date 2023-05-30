@@ -49,11 +49,23 @@ class EnvFragment : Fragment() {
         val startButton : Button = binding.btnStart
         val expandButton : ImageButton = binding.btnExpand
 
+        // 프로젝트 시작 전 화면 트랜지션 구현할 곳
+        // DB 확인 -> 진행 중인 프로젝트가 없으면 visible
+
+        var flag : Int = 0
+
+        if(flag == 0){
+            beforeLayout.visibility = View.VISIBLE
+        }
+
         startButton.setOnClickListener {
+            flag = 1
             beforeLayout.visibility = View.GONE
             afterLayout.visibility = View.VISIBLE
             expandButton.visibility = View.VISIBLE
         }
+
+        // 프로젝트 시작 이후 화면 구현
 
         expandButton.setOnClickListener {
 
@@ -66,9 +78,15 @@ class EnvFragment : Fragment() {
             }
         }
 
-        val textView: TextView = binding.textEnv
-        envViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        val textDday: TextView = binding.tvDday
+        val textCo2Alarm : TextView = binding.tvCo2Alarm
+
+        envViewModel.dDayText.observe(viewLifecycleOwner) {
+            textDday.text = "21일 중" + it + "일 째"
+        }
+
+        envViewModel.co2Text.observe(viewLifecycleOwner) {
+            textCo2Alarm.text = "21일 목표 탄소량 까지 " + it + "kg 남았어요"
         }
 
         return root

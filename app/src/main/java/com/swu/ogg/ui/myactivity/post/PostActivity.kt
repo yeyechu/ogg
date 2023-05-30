@@ -2,6 +2,7 @@ package com.swu.ogg.ui.myactivity.post
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.Resources
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
@@ -12,6 +13,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import com.swu.ogg.R
 import com.swu.ogg.databinding.ActivityPostBinding
 import com.swu.ogg.dbHelper
 
@@ -75,8 +77,10 @@ class PostActivity : AppCompatActivity() {
         leftButton.isEnabled = false
         rightButton.isEnabled = false
 
-        // leftButton : 보여줄 사진 있을 때만 isEnabled = true 처리
-        // rightButton : 보여줄 사진 있을 때만 isEnabled = true 처리
+        // leftButton : 보여줄 사진 있을 때만 활성화
+        // leftButton.setColorFilter(resources.getColor(R.color.black))
+        // rightButton : 보여줄 사진 있을 때만 활성화
+        // rightButton.setColorFilter(resources.getColor(R.color.black))
 
         leftButton.setOnClickListener {
             cursor_img++
@@ -93,6 +97,7 @@ class PostActivity : AppCompatActivity() {
             }
             imageView.setImageBitmap(imgArray[cursor_img])
         }
+
         // ─────────────────────────────────── 인증 가능 횟수 ───────────────────────────────────
 
         var cursor_c: Cursor
@@ -130,6 +135,9 @@ class PostActivity : AppCompatActivity() {
             intent.putExtra("titleActivity", extraTitle)
             intent.putExtra("co2Activity", activityCo2)
             this.startActivity(intent)
+
+            // 여기 액티비티 파괴할지
+            // 아니면 그냥 둘지 고민해보기
             finish()
 
         }
@@ -152,5 +160,8 @@ class PostActivity : AppCompatActivity() {
             }
         }
         cursor_b.close()
+        sqlitedb.close()
+        dbManager.close()
+
     }
 }

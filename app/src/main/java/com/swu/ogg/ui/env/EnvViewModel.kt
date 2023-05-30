@@ -10,8 +10,12 @@ import androidx.lifecycle.ViewModel
 //
 class EnvViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "21일 중 11일 째"
+    private val db1Text = MutableLiveData<String>().apply {
+        value = "11"
     }
-    val text: LiveData<String> = _text
+    private val db2Text = MutableLiveData<String>().apply {
+        value = "1.05"
+    }
+    val dDayText: LiveData<String> = db1Text
+    val co2Text : LiveData<String> = db2Text
 }

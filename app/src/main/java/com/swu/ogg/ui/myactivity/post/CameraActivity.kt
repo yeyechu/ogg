@@ -77,6 +77,7 @@ class CameraActivity : AppCompatActivity() {
 
             // db 처리
             // 인증 등록 사진 db 저장 후
+            // 인증 완료 비활성화 처리 필요한 부분 구현 필요
 
             // LiveData observe 구현 필요
             // -> 오늘 게이지
@@ -168,7 +169,7 @@ class CameraActivity : AppCompatActivity() {
         cameraProviderFuture.addListener({
 
             // 카메라 lifercycle과 카메라 소유자의 lifecycle 같게하기 -> 카메라 열고 닫는 작업을 따로 하지 않아도 됨
-            //
+
             val cameraProvider : ProcessCameraProvider = cameraProviderFuture.get()
 
             val preview = Preview.Builder()

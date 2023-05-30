@@ -15,6 +15,8 @@ import com.swu.ogg.R
 import com.swu.ogg.database.NewRecordActivity
 import com.swu.ogg.ui.myactivity.post.PostActivity
 
+// 오늘의 활동에 대한 어댑터
+
 data class CardItem(
     val image : Bitmap,
     val title : String,
@@ -52,6 +54,10 @@ class MyActivityAdapter (val context : Context, val toList : ArrayList<CardItem>
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
 
         val cardItem = toList[position]
+
+        // 활동 카드 클릭 시 불러야 할 것 정의
+        // Intent : 화면(Activity)
+        // putExtra : 전달 해야할 내용
 
         holder.apply {
             bind(cardItem, context, View.OnClickListener {
