@@ -65,19 +65,6 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(intent, newRecordActivityRequestCode)
         }
 
-        // ─────────────────────────────────── DB 리사이클러뷰 ───────────────────────────────────
-//        val recyclerView = binding.recyclerview
-//        val adapter = RecordListAdapter()
-//
-//        recyclerView.adapter = adapter
-//        recyclerView.layoutManager = LinearLayoutManager(this)
-//
-//        // 관찰자 추가 -> getAlphabetizedWords가 반환하는 LiveData에 대한
-//        // onChanged() : 관찰된 데이터가 변경되고 Activity가 foreground에 있을 때만 실행
-//        recordViewModel.allRecords.observe(this, Observer { records ->
-//            records.let { adapter.submitList(it) }
-//        })
-
         // ─────────────────────────────────── DB 불러오기 ───────────────────────────────────
 
         var checkDB : File = File(filePath + "oggDB.db")
@@ -105,7 +92,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     // ─────────────────────────────────── 플로팅버튼 연결 ───────────────────────────────────
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
         super.onActivityResult(requestCode, resultCode, intentData)
 
@@ -123,8 +109,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // ─────────────────────────────────── 기존 DB 불러오기 ───────────────────────────────────
-
+    // ─────────────────────────────────── assets 폴더의 기존 DB 불러오기 ───────────────────────────────────
     private fun setDB(ctx: Context) {
 
         var folder: File = File(filePath)
@@ -165,4 +150,17 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+
+    // ─────────────────────────────────── DB 리사이클러뷰 관찰자 ───────────────────────────────────
+
+//        val adapter = RecordListAdapter()
+//
+//        recyclerView.adapter = adapter
+//        recyclerView.layoutManager = LinearLayoutManager(this)
+//
+//        // 관찰자 추가 -> getAlphabetizedWords가 반환하는 LiveData에 대한
+//        // onChanged() : 관찰된 데이터가 변경되고 Activity가 foreground에 있을 때만 실행
+//        recordViewModel.allRecords.observe(this, Observer { records ->
+//            records.let { adapter.submitList(it) }
+//        })
 }

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="60dp"
+        android:paddingBottom="@dimen/scroll_margin"
         android:id="@+id/activity_list_layout">
 
         <com.google.android.material.appbar.AppBarLayout

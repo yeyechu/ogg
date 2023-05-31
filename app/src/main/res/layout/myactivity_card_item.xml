@@ -13,6 +13,25 @@
         android:layout_gravity="center"
         android:layout_margin="@dimen/small_padding">
 
+        <FrameLayout
+            android:id="@+id/done_layout"
+            android:layout_width="140dp"
+            android:layout_height="176dp"
+            android:background="#CC000000"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="완료"
+                android:layout_gravity="center"
+                android:textColor="@color/white"/>
+
+        </FrameLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -87,15 +106,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="80px"
                 android:layout_gravity="center"
-
                 android:background="@drawable/button_skyblue"
                 android:fontFamily="@font/nanumsquare_eb"
-
-
                 android:padding="8px"
                 android:text="인증하기"
                 android:textColor="@color/white"
-                android:textSize="13sp" />
+                android:textSize="13sp"
+                android:enabled="true"/>
 
         </LinearLayout>
 

@@ -23,14 +23,14 @@ class MyActivity2Adapter(val context : Context, val onList : ArrayList<CardItem>
 
             val textTitle = view?.findViewById<TextView>(R.id.tv_title)
             val textCo2 = view?.findViewById<TextView>(R.id.tv_co2)
-            //val image = view?.findViewById<ImageView>(R.id.)
+            val image = view?.findViewById<ImageView>(R.id.imageView)
             val button = view?.findViewById<Button>(R.id.btn)
 
             fun bind(room : CardItem, context: Context, onClickListener: OnClickListener) {
 
                 textTitle?.text = room.title
                 textCo2?.text = room.co2
-                //image?.setImageBitmap(room.image)
+                image?.setImageBitmap(room.image)
                 button?.setOnClickListener(onClickListener)
             }
         }

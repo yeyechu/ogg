@@ -17,6 +17,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -88,13 +89,16 @@ class CameraActivity : AppCompatActivity() {
             // -> 피드(2학기)
 
             val replyIntent = Intent()
+
+            // if문 조건에 값이 없으면 등록 취소
             if(true) {
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             } else {
-                val record = " "
-                replyIntent.putExtra(EXTRA_REPLY, record)
+                val result = "여기에 보낼 데이터를 저장하여 보냄"
+                replyIntent.putExtra(EXTRA_REPLY, result)
                 setResult(Activity.RESULT_OK, replyIntent)
             }
+
             finish()
         }
 

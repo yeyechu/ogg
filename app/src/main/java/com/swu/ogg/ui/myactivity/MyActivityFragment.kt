@@ -12,7 +12,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.swu.ogg.databinding.FragmentMyactivityBinding
 import com.swu.ogg.dbHelper
 
@@ -89,6 +91,7 @@ class MyActivityFragment : Fragment() {
         // tolist : 오늘의 활동에 대한 내용
         // onlist : 일회성 활동에 대한 내용
 
+
         myActivityViewModel.tolist.observe(viewLifecycleOwner) {
 
             val tolist : ArrayList<CardItem> = todayList
@@ -117,4 +120,5 @@ class MyActivityFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

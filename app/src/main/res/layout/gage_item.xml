@@ -19,24 +19,24 @@
         android:visibility="visible">
 
         <FrameLayout
-            android:id="@+id/textbox"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="2dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="10sp"
-        android:textColor="@color/white"
-        android:text="0.74kg 남았어요!"
-        android:background="@drawable/box_mainblue"
-        android:paddingTop="3.3dp"
-        android:paddingBottom="3.3dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:fontFamily="@font/nanumsquare_eb" />
+            <TextView
+                android:id="@+id/tv_co2_alarm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textColor="@color/white"
+                android:text="0.74kg 남았어요!"
+                android:background="@drawable/box_mainblue"
+                android:paddingTop="3.3dp"
+                android:paddingBottom="3.3dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:fontFamily="@font/nanumsquare_eb" />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -78,6 +78,7 @@
             android:fontFamily="@font/nanumsquare_r" />
 
         <TextView
+            android:id="@+id/tv_co2_aim"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/big_padding"

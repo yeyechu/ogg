@@ -17,6 +17,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider.NewInstanceFactory.Companion.instance
 import com.swu.ogg.R
 import com.swu.ogg.databinding.ActivityPostBinding
 import com.swu.ogg.dbHelper
@@ -194,11 +195,11 @@ class PostActivity : AppCompatActivity() {
             // -> 피드(2학기)
 
             val replyIntent = Intent()
-            if(true) {
+            if(false) {
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             } else {
-                val record = " "
-                replyIntent.putExtra(CameraActivity.EXTRA_REPLY, record)
+                val result = "여기에 보낼 데이터를 저장하여 보냄"
+                replyIntent.putExtra(CameraActivity.EXTRA_REPLY, result)
                 setResult(Activity.RESULT_OK, replyIntent)
             }
             finish()
@@ -222,6 +223,16 @@ class PostActivity : AppCompatActivity() {
                 binding.imagePreview.setImageBitmap(CameraActivity().rotateBitmap(bitmap))
                 imgArr[0] = bitmap
             }
+        }
+    }
+
+    init{
+        instance = this
+    }
+    companion object {
+        private var instance : PostActivity? = null
+        fun getInstance() : PostActivity? {
+            return instance
         }
     }
 }
