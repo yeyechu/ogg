@@ -25,19 +25,33 @@
                 <variable name="title" type="String" />
             </data>
             -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="317dp"
+        android:layout_height="560dp"
+
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="17dp"
+        android:padding="18dp"
+
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+
+
         <LinearLayout
-            android:layout_width="317dp"
-            android:layout_height="560dp"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:padding="20dp"
-            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
 
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/btn_exit"
@@ -49,6 +63,9 @@
                 android:minHeight="45dp"
                 android:layout_gravity="right"
 
+
+
+
                 android:src="@drawable/baseline_close_24"/>
 
             <TextView
@@ -56,7 +73,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:layout_marginBottom="13dp"
+
+                android:layout_gravity="center_horizontal"
 
                 android:maxLines="1"
                 android:text="냉장고 적정용량 유지하기"
@@ -68,17 +86,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:layout_marginLeft="20px"
-        android:layout_marginRight="20px"
-        android:layout_marginBottom="13dp"
+        android:layout_gravity="center_horizontal"
+
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="14dp"
         android:background="@drawable/box_lightsky"
 
-
         >
-
-
-
             <TextView
                 android:id="@+id/tv_co2_title"
                 android:layout_width="match_parent"
@@ -107,11 +121,10 @@
     </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-
 
                 >
 
@@ -158,14 +171,17 @@
                 android:maxLines="1"
                 android:text="인증 가능 횟수"
                 android:textSize="17sp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/nanumsquare_eb"
+                android:textColor="@color/black"
+
+                />
 
             <TextView
                 android:id="@+id/tv_content_freq"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_horizontal"
-                android:layout_marginBottom="@dimen/small_padding"
+                android:layout_marginBottom="21dp"
                 android:gravity="center"
                 android:text="하루에 한번"
                 android:textSize="12sp" />
@@ -178,9 +194,12 @@
                 android:layout_marginBottom="@dimen/small_padding"
                 android:gravity="center"
                 android:maxLines="1"
-                android:text="인증 방법"
+                android:text="인증 세부 미션"
                 android:textSize="17sp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/nanumsquare_eb"
+                android:textColor="@color/black"
+
+                />
 
             <TextView
                 android:id="@+id/tv_content_guide"
@@ -189,13 +208,14 @@
                 android:layout_gravity="fill_horizontal"
                 android:layout_marginBottom="@dimen/small_padding"
                 android:gravity="center"
-                android:text="어쩌구저쩌구"
+                android:text="어쩌구저쩌구 \n이러쿵저러쿵 \n블라블라 \n요리조리"
                 android:textSize="12sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:orientation="horizontal"
+                android:layout_marginTop="24dp"
 
                 >
 
@@ -240,7 +260,7 @@
 
             </LinearLayout>
 
-        </LinearLayout>
+
 
     <FrameLayout
         android:id="@+id/previewLayout"
@@ -301,4 +321,8 @@
         </LinearLayout>
 
     </FrameLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
