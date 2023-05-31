@@ -101,15 +101,15 @@
                 android:textColor="@color/black"
                 />
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="167dp"
                 android:layout_height="wrap_content"
-                android:padding="105dp"
+
                 />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/editbtn"
-                android:layout_width="68dp"
-                android:layout_height="25dp"
+                android:layout_width="67dp"
+                android:layout_height="21dp"
                 android:layout_gravity="center"
 
                 android:background="@drawable/box_mainblue"

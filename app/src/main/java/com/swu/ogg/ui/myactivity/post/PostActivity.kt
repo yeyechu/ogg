@@ -2,6 +2,7 @@ package com.swu.ogg.ui.myactivity.post
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
@@ -15,6 +16,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.swu.ogg.R
 import com.swu.ogg.databinding.ActivityPostBinding
 import com.swu.ogg.dbHelper
@@ -157,6 +159,10 @@ class PostActivity : AppCompatActivity() {
                 val buttonAlbum : Button = binding.btnAlbum
                 buttonAlbum.isEnabled = true
                 //색 바뀌게 코드
+                buttonAlbum.setTextColor(ContextCompat.getColor(this, R.color.Primary_blue))
+                buttonAlbum.setBackgroundResource(R.drawable.box_lineblue) // 배경 리소스 설정
+
+
 
                 buttonAlbum.setOnClickListener {
                     // 앨범 연결 부분
