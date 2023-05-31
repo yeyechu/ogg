@@ -1,7 +1,6 @@
-package com.swu.ogg.database.Explane
+package com.swu.ogg.database.explane
 
 import androidx.room.*
-import com.swu.ogg.database.BadgeTBL
 import com.swu.ogg.database.ExplanTBL
 import kotlinx.coroutines.flow.Flow
 

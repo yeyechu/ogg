@@ -17,7 +17,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.swu.ogg.database.Record.*
+import com.swu.ogg.database.*
 import com.swu.ogg.databinding.ActivityMainBinding
 import java.io.File
 import java.io.FileOutputStream

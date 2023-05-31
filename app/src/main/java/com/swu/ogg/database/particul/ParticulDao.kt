@@ -1,4 +1,4 @@
-package com.swu.ogg.database.Particul
+package com.swu.ogg.database.particul
 
 import androidx.room.*
 import com.swu.ogg.database.ParticulTBL

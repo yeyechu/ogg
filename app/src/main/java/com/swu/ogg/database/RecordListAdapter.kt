@@ -1,4 +1,4 @@
-package com.swu.ogg.database.Record
+package com.swu.ogg.database
 
 import android.view.LayoutInflater
 import android.view.View

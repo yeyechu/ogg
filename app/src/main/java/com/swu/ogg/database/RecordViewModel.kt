@@ -1,4 +1,4 @@
-package com.swu.ogg.database.Record
+package com.swu.ogg.database
 
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch

@@ -1,4 +1,4 @@
-package com.swu.ogg.database.Record
+package com.swu.ogg.database
 
 import androidx.annotation.WorkerThread
 import kotlinx.coroutines.flow.Flow

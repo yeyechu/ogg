@@ -1,7 +1,6 @@
-package com.swu.ogg.database.Level
+package com.swu.ogg.database.level
 
 import androidx.room.*
-import com.swu.ogg.database.GuideTBL
 import com.swu.ogg.database.LevelTBL
 import kotlinx.coroutines.flow.Flow
 

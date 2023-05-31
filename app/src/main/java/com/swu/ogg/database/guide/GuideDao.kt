@@ -1,7 +1,6 @@
-package com.swu.ogg.database.Guide
+package com.swu.ogg.database.guide
 
 import androidx.room.*
-import com.swu.ogg.database.ExplanTBL
 import com.swu.ogg.database.GuideTBL
 import kotlinx.coroutines.flow.Flow
 

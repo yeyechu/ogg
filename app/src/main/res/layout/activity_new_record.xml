@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="bottom"
-    tools:context=".database.Record.NewRecordActivity">
+    tools:context=".database.NewRecordActivity">
 
     <EditText
         android:id="@+id/edit_record"

@@ -1,4 +1,4 @@
-package com.swu.ogg.database.Member
+package com.swu.ogg.database.member
 
 import androidx.room.*
 import com.swu.ogg.database.MemberTBL

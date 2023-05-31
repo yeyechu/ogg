@@ -1,4 +1,4 @@
-package com.swu.ogg.database.Activity
+package com.swu.ogg.database.activity
 
 import android.content.Context
 import androidx.room.Database

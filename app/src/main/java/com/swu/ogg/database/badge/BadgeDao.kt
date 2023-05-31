@@ -1,4 +1,4 @@
-package com.swu.ogg.database.Badge
+package com.swu.ogg.database.badge
 
 import androidx.room.*
 import com.swu.ogg.database.BadgeTBL

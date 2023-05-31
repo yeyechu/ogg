@@ -1,4 +1,4 @@
-package com.swu.ogg.database.Sticker
+package com.swu.ogg.database.sticker
 
 import androidx.room.*
 import com.swu.ogg.database.StickerTBL
