@@ -24,9 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ogg"
         tools:targetApi="31">
-        <activity
-            android:name=".Main22Activity"
-            android:exported="false" />
+
         <activity
             android:name=".ui.myactivity.post.CameraActivity"
             android:exported="false"

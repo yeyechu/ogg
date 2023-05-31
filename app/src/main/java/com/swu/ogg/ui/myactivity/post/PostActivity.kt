@@ -162,8 +162,6 @@ class PostActivity : AppCompatActivity() {
                 buttonAlbum.setTextColor(ContextCompat.getColor(this, R.color.Primary_blue))
                 buttonAlbum.setBackgroundResource(R.drawable.box_lineblue) // 배경 리소스 설정
 
-
-
                 buttonAlbum.setOnClickListener {
                     // 앨범 연결 부분
                     val intent = Intent(Intent.ACTION_GET_CONTENT)
