@@ -165,10 +165,7 @@ class PostActivity : AppCompatActivity() {
 
                 buttonAlbum.setOnClickListener {
                     // 앨범 연결 부분
-                    val intent = Intent(Intent.ACTION_GET_CONTENT)
-                    intent.setType("image/*")
-                    startActivityForResult(intent, REQUEST_IMAGE_CODE)
-
+                    openGallery()
                 }
             }
         }
@@ -176,9 +173,7 @@ class PostActivity : AppCompatActivity() {
 
         retakeButton.setOnClickListener {
             binding.previewLayout.visibility = View.GONE
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
-            intent.setType("image/*")
-            startActivityForResult(intent, REQUEST_IMAGE_CODE)
+            openGallery()
         }
         postButton.setOnClickListener {
 
@@ -206,6 +201,12 @@ class PostActivity : AppCompatActivity() {
         }
     }
 
+    private fun openGallery(){
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.setType("image/*")
+        startActivityForResult(intent, REQUEST_IMAGE_CODE)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -220,19 +221,11 @@ class PostActivity : AppCompatActivity() {
                     e.printStackTrace()
                 }
                 binding.previewLayout.visibility = View.VISIBLE
-                binding.imagePreview.setImageBitmap(CameraActivity().rotateBitmap(bitmap))
+                binding.imagePreview.setImageBitmap(bitmap)
+                //binding.imagePreview.setImageBitmap(CameraActivity().rotateBitmap(bitmap))
+
                 imgArr[0] = bitmap
             }
-        }
-    }
-
-    init{
-        instance = this
-    }
-    companion object {
-        private var instance : PostActivity? = null
-        fun getInstance() : PostActivity? {
-            return instance
         }
     }
 }

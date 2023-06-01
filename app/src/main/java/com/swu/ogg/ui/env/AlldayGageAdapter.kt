@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -14,16 +15,12 @@ import com.swu.ogg.R
 import com.swu.ogg.ui.myactivity.post.PostActivity
 
 // 전체 게이지 구현할 어댑터 정의
-data class GageItem(
-    val co2 : String,
-    val aim : String,
-    val percent : Float
-)
 
-data class SummaryItem(
-    val day : Int,
-    val co2Left : String,
-    val image : Bitmap
+// 전체 게이지에 대한 데이터 클래스
+data class GageItem(
+    val co2Left : Float,
+    val aim : Float,
+    val percent : Float
 )
 
 class AlldayGageAdapter(val context : Context, val gageAllList : ArrayList<GageItem>)
@@ -31,17 +28,7 @@ class AlldayGageAdapter(val context : Context, val gageAllList : ArrayList<GageI
 
     class GageViewHolder(view : View?) : RecyclerView.ViewHolder(view!!) {
 
-        val textCo2Alarm = view?.findViewById<TextView>(R.id.tv_co2_alarm)
-        val textCo2Aim = view?.findViewById<TextView>(R.id.tv_co2_aim)
-        val layoutAlarm = view?.findViewById<LinearLayout>(R.id.alarm_box_layout)
-        val progressBar = view?.findViewById<ProgressBar>(R.id.determinateBar)
-
         fun bind(room : GageItem) {
-
-            textCo2Alarm?.text = room.co2
-            textCo2Aim?.text = room.aim
-            layoutAlarm!!.visibility = View.GONE
-            progressBar!!.progress
         }
     }
 

@@ -6,7 +6,6 @@ import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
 import android.os.Build
@@ -98,7 +97,6 @@ class CameraActivity : AppCompatActivity() {
                 replyIntent.putExtra(EXTRA_REPLY, result)
                 setResult(Activity.RESULT_OK, replyIntent)
             }
-
             finish()
         }
 
@@ -246,7 +244,7 @@ class CameraActivity : AppCompatActivity() {
 
     companion object {
 
-        const val EXTRA_REPLY = "com.swu.ogg.recordlistsql.REPLY"
+        const val EXTRA_REPLY = "com.swu.ogg.database.REPLY"
 
         private const val TAG = "Camera"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"

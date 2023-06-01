@@ -18,13 +18,13 @@ class TodayGageAdapter(val context : Context, val gageToList : ArrayList<GageIte
     class GageViewHolder(view : View?) : RecyclerView.ViewHolder(view!!) {
 
         val textCo2Alarm = view?.findViewById<TextView>(R.id.tv_co2_alarm)
-        val textCo2Aim = view?.findViewById<TextView>(R.id.tv_co2_aim)
+        val textCo2Aim = view?.findViewById<TextView>(R.id.tv_co2_aim_gage)
         val layoutAlarm = view?.findViewById<LinearLayout>(R.id.alarm_box_layout)
         val progressBar = view?.findViewById<ProgressBar>(R.id.determinateBar)
         fun bind(room : GageItem, context: Context) {
 
-            textCo2Alarm?.text = room.co2
-            textCo2Aim?.text = room.aim
+            textCo2Alarm?.text = room.co2Left.toString()
+            textCo2Aim?.text = room.aim.toString()
             layoutAlarm
             progressBar!!.progress
         }

@@ -99,10 +99,20 @@
     <LinearLayout
         android:id="@+id/expanded_layout"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/white"
+        android:padding="@dimen/big_padding"
         android:visibility="gone">
+
+
+        <GridView
+            android:id="@+id/stamp_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:horizontalSpacing="@dimen/small_padding"
+            android:verticalSpacing="@dimen/small_padding"
+            android:numColumns="7"/>
 
 
     </LinearLayout>
@@ -124,7 +134,6 @@
             android:visibility="gone" />
 
     </LinearLayout>
-
 
 
 </LinearLayout>
