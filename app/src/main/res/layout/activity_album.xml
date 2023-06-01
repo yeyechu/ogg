@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/albumLayout"
+    android:background="@android:color/transparent"
+    tools:context=".ui.myactivity.post.AlbumActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="317dp"
+        android:layout_height="560dp"
+
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="17dp"
+        android:padding="18dp"
+
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+
+
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/btn_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:adjustViewBounds="true"
+            android:maxHeight="45dp"
+            android:minHeight="45dp"
+            android:layout_gravity="right"
+
+
+            android:src="@drawable/baseline_close_24"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:layout_gravity="center_horizontal"
+
+            android:maxLines="1"
+            android:text="냉장고 적정용량 유지하기"
+            android:textSize="20sp"
+            android:fontFamily="@font/nanumsquare_eb" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="14dp"
+            android:background="@drawable/box_lightsky"
+
+            >
+            <TextView
+                android:id="@+id/tv_co2_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="탄소감축량"
+                android:textSize="15sp"
+                android:textColor="@color/Primary_blue"
+                android:fontFamily="@font/nanumsquare_eb"
+                />
+            <TextView
+                android:id="@+id/tv_co2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="3dp"
+
+                android:textColor="@color/Primary_blue"
+                android:fontFamily="@font/nanumsquare_b"
+
+                android:gravity="center"
+                android:text="0.38kg"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

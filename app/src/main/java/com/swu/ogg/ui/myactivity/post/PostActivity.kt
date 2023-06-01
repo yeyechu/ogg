@@ -160,7 +160,7 @@ class PostActivity : AppCompatActivity() {
                 val buttonAlbum : Button = binding.btnAlbum
                 buttonAlbum.isEnabled = true
                 //색 바뀌게 코드
-                buttonAlbum.setTextColor(ContextCompat.getColor(this, R.color.Primary_blue))
+                buttonAlbum.setTextColor(ContextCompat.getColor(applicationContext!!, R.color.Primary_blue))
                 buttonAlbum.setBackgroundResource(R.drawable.box_lineblue) // 배경 리소스 설정
 
                 buttonAlbum.setOnClickListener {
