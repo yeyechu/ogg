@@ -1,4 +1,4 @@
-package com.swu.ogg.database.activity
+package com.swu.ogg.database.dao
 
 import androidx.room.*
 import com.swu.ogg.database.ActivityTBL

@@ -1,4 +1,4 @@
-package com.swu.ogg.database.oneoff
+package com.swu.ogg.database.dao
 
 import androidx.room.*
 import com.swu.ogg.database.OneoffTBL

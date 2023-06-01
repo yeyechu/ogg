@@ -1,4 +1,4 @@
-package com.swu.ogg.database.explane
+package com.swu.ogg.database.dao
 
 import androidx.room.*
 import com.swu.ogg.database.ExplanTBL

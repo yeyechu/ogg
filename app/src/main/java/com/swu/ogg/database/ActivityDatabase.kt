@@ -1,12 +1,11 @@
-package com.swu.ogg.database.activity
+package com.swu.ogg.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.swu.ogg.database.ActivityTBL
-import com.swu.ogg.database.RoomTypeConverter
+import com.swu.ogg.database.dao.ActivityDao
 
 @Database(entities = [ActivityTBL::class], version = 1, exportSchema = false)
 @TypeConverters(RoomTypeConverter::class) //이미지 사용하는 경우에 필요
