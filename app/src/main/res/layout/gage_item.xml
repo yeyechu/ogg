@@ -57,8 +57,11 @@
         android:layout_marginLeft="@dimen/big_padding"
         android:layout_marginRight="@dimen/big_padding"
         android:layout_marginTop="5dp"
+        android:progressDrawable="@drawable/progress_drawable"
         style="@android:style/Widget.ProgressBar.Horizontal"
-        android:progress="50" />
+        android:max="100"
+        android:indeterminate="false"
+        android:progress="9" />
 
     <LinearLayout
         android:layout_width="match_parent"

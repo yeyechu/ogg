@@ -158,6 +158,7 @@ class PostActivity : AppCompatActivity() {
 
             if(gallery == 1) {
                 val buttonAlbum : Button = binding.btnAlbum
+                buttonAlbum.visibility = View.VISIBLE
                 buttonAlbum.isEnabled = true
                 //색 바뀌게 코드
                 buttonAlbum.setTextColor(ContextCompat.getColor(applicationContext!!, R.color.Primary_blue))

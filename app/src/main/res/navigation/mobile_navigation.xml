@@ -14,19 +14,7 @@
         android:id="@+id/navigation_env"
         android:name="com.swu.ogg.ui.env.EnvFragment"
         android:label="@string/app_name"
-        tools:layout="@layout/fragment_env" >
-
-        <action
-            android:id="@+id/action_navigation_env_to_navigation_settings2"
-            app:destination="@id/navigation_settings"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
-
-        <action
-            android:id="@+id/action_navigation_env_to_navigation_collections2"
-            app:destination="@id/navigation_collections"
-             />
-    </fragment>
+        tools:layout="@layout/fragment_env" />
 
     <fragment
         android:id="@+id/navigation_indicators"
@@ -37,29 +25,5 @@
         android:id="@+id/navigation_feed"
         android:name="com.swu.ogg.ui.feed.FeedFragment"
         tools:layout="@layout/fragment_feed" />
-
-    <fragment
-        android:id="@+id/navigation_settings"
-        android:name="com.swu.ogg.member.SettingsFragment"
-        android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" >
-        <action
-            android:id="@+id/action_navigation_settings_to_navigation_env2"
-            app:destination="@id/navigation_env"
-            app:popUpTo="@id/navigation_env"
-            app:popUpToInclusive="true" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/navigation_collections"
-        android:name="com.swu.ogg.ui.env.CollectionsFragment"
-        android:label="fragment_collections"
-        tools:layout="@layout/fragment_collections" >
-        <action
-            android:id="@+id/action_navigation_collections_to_navigation_env2"
-            app:destination="@id/navigation_env"
-            app:popUpTo="@id/navigation_env"
-            app:popUpToInclusive="true" />
-    </fragment>
 
 </navigation>

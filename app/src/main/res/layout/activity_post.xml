@@ -246,16 +246,15 @@
                     android:id="@+id/btn_album"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:layout_weight="1"
                     android:background="@drawable/box_disabled"
                     android:paddingTop="12dp"
                     android:paddingBottom="12dp"
-
                     android:text="앨범 업로드"
                     android:fontFamily="@font/nanumsquare_b"
                     android:textColor="@color/lightgray"
-                    android:enabled="false" />
+                    android:enabled="false"
+                    android:visibility="gone"/>
 
 
             </LinearLayout>

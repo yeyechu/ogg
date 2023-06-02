@@ -135,5 +135,7 @@
 
     </LinearLayout>
 
+    <include layout="@layout/fragment_env_layout" />
+
 
 </LinearLayout>
