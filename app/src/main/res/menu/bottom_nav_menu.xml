@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/navigation_env"
-        android:icon="@drawable/ic_baseline_grass_24"
+        android:icon="@drawable/env"
         android:title="@string/title_env" />
 
     <item

@@ -8,9 +8,10 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="140dp"
-        android:layout_height="176dp"
-        app:cardCornerRadius="50px"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="17dp"
         android:layout_gravity="center"
+        android:background="@drawable/button_white"
         android:layout_margin="@dimen/small_padding">
 
         <FrameLayout
@@ -52,61 +53,71 @@
                 android:layout_marginBottom="24px"
                  />
 
-            <TextView
-                android:id="@+id/tv_title"
+            <LinearLayout
+                android:id="@+id/title"
                 android:layout_width="match_parent"
-                android:layout_height="24dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:autoSizeMaxTextSize="15sp"
+                    android:autoSizeMinTextSize="8sp"
+                    android:autoSizeTextType="uniform"
+
+                    android:fontFamily="@font/nanumsquare_b"
+
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="냉장고 관리하기"
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/C"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMinTextSize="13sp"
-                android:autoSizeMaxTextSize="15sp"
-
-                android:fontFamily="@font/nanumsquare_b"
-                android:maxLines="1"
-                android:text="냉장고 관리하기"
-
-                 />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20px"
-            android:layout_marginRight="20px"
-            android:layout_marginBottom="24px"
-            >
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
 
 
-            <TextView
-                android:id="@+id/tv_co2_kr"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="fill_horizontal"
+                <TextView
+                    android:id="@+id/tv_co2_kr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="fill_horizontal"
 
-                android:fontFamily="@font/nanumsquare_b"
-                android:gravity="center"
-                android:text="탄소 감축량"
-                android:textSize="10sp" />
+                    android:fontFamily="@font/nanumsquare_b"
+                    android:gravity="center"
+                    android:text="탄소 감축량"
+                    android:textSize="10sp" />
 
-            <TextView
-                android:id="@+id/tv_co2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="3dp"
-                android:fontFamily="@font/nanumsquare_r"
-                android:text="0.05kg"
-                android:textSize="10sp" />
+                <TextView
+                    android:id="@+id/tv_co2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="3dp"
+                    android:fontFamily="@font/nanumsquare_r"
+                    android:text="0.05kg"
+                    android:textSize="10sp" />
 
-        </LinearLayout>>
+            </LinearLayout>>
 
             <android.widget.Button
                 android:id="@+id/btn"
                 android:layout_width="match_parent"
-                android:layout_height="80px"
+                android:layout_height="27dp"
                 android:layout_gravity="center"
-                android:background="@drawable/button_skyblue"
+                android:background="@drawable/box_strokemainblue"
+
+
                 android:fontFamily="@font/nanumsquare_eb"
                 android:padding="8px"
                 android:text="인증하기"
