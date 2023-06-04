@@ -1,20 +1,20 @@
 package com.swu.ogg.database
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.swu.ogg.database.dao.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+
 
 // SQLiteOpenHelper에서 하던 처리를 담당
 // Room Query가 Flow를 반환해주면 자동으로 백그라운드 스레드에서 비동기식 실행
 // UI 성능 저하를 위해 필수적으로 Flow 필요
 // 전체 앱에 RoomDatabase 인스턴스는 1개만 있어도 됨
 // exportSchema : 데이터베이스 이전에 관한 변수, 버전 제어 시스템으로 확인할 수 있도록 스키마를 내보내는 디렉터리 설정 필요
-@Database(entities = arrayOf(Record::class), version = 1, exportSchema = false)
-public abstract class RecordRoomDatabase : RoomDatabase() {
+@Database(entities = [Record::class], version = 2, exportSchema = true)
+abstract class RecordRoomDatabase : RoomDatabase() {
 
     abstract fun recordDao() : RecordDao
 
@@ -63,6 +63,159 @@ public abstract class RecordRoomDatabase : RoomDatabase() {
 
                 INSTANCE = instance
                 instance
+            }
+        }
+    }
+}
+
+
+//----------------Activity-------------------------------------------------------------
+@Database(entities = [ActivityTBL::class], version = 1, exportSchema = false)
+@TypeConverters(RoomTypeConverter::class) //이미지 사용하는 경우에 필요
+abstract class ActivityDatabase : RoomDatabase() {
+
+    abstract fun activityDao(): ActivityDao
+
+    companion object {
+        @Volatile
+        private var INSTANCE: ActivityDatabase? = null
+
+        fun getDatabase(context: Context): ActivityDatabase {
+            val tempInstance = INSTANCE
+            if (tempInstance != null) return tempInstance
+            synchronized(this)  {
+                val instance = Room.databaseBuilder(context.applicationContext, ActivityDatabase::class.java, "oggDB.db")
+                    .createFromAsset("database/oggDB.db")
+                    .build()
+                INSTANCE = instance
+                return instance
+            }
+        }
+    }
+}
+//----------------Badge-------------------------------------------------------------
+@Database(entities = [BadgeTBL::class], version = 1, exportSchema = false)
+@TypeConverters(RoomTypeConverter::class) //이미지 사용하는 경우에 필요
+abstract class BadgeDatabase : RoomDatabase() {
+
+    abstract fun badgeDao(): BadgeDao
+
+    companion object {
+        @Volatile
+        private var INSTANCE: BadgeDatabase? = null
+
+        fun getDatabase(context: Context): BadgeDatabase {
+            val tempInstance = INSTANCE
+            if (tempInstance != null) return tempInstance
+            synchronized(this)  {
+                val instance = Room.databaseBuilder(context.applicationContext, BadgeDatabase::class.java, "oggDB.db")
+                    .createFromAsset("database/oggDB.db")
+                    .build()
+                INSTANCE = instance
+                return instance
+            }
+        }
+    }
+}
+
+
+//----------------explane-------------------------------------------------------------
+@Database(entities = [ExplanTBL::class], version = 1, exportSchema = true)
+@TypeConverters(RoomTypeConverter::class) //이미지 사용하는 경우에 필요
+abstract class ExplanDatabase : RoomDatabase() {
+
+    abstract fun explanDao(): ExplanDao
+
+    companion object {
+        @Volatile
+        private var INSTANCE: ExplanDatabase? = null
+
+        fun getDatabase(context: Context): ExplanDatabase {
+            val tempInstance = INSTANCE
+            if (tempInstance != null) return tempInstance
+            synchronized(this)  {
+                val instance = Room.databaseBuilder(context.applicationContext, ExplanDatabase::class.java, "oggDB.db")
+                    .createFromAsset("database/oggDB.db")
+                    .build()
+                INSTANCE = instance
+                return instance
+            }
+        }
+    }
+}
+
+
+//----------------guide-------------------------------------------------------------
+@Database(entities = [GuideTBL::class], version = 1, exportSchema = true)
+@TypeConverters(RoomTypeConverter::class) //이미지 사용하는 경우에 필요
+abstract class GuideDatabase : RoomDatabase() {
+
+    abstract fun guideDao(): GuideDao
+
+    companion object {
+        @Volatile
+        private var INSTANCE: GuideDatabase? = null
+
+        fun getDatabase(context: Context): GuideDatabase {
+            val tempInstance = INSTANCE
+            if (tempInstance != null) return tempInstance
+            synchronized(this)  {
+                val instance = Room.databaseBuilder(context.applicationContext, GuideDatabase::class.java, "oggDB.db")
+                    .createFromAsset("database/oggDB.db")
+                    .build()
+                INSTANCE = instance
+                return instance
+            }
+        }
+    }
+}
+
+
+//----------------level-------------------------------------------------------------
+@Database(entities = [LevelTBL::class], version = 1, exportSchema = true)
+@TypeConverters(RoomTypeConverter::class) //이미지 사용하는 경우에 필요
+abstract class LevelDatabase : RoomDatabase() {
+
+    abstract fun levelDao(): LevelDao
+
+    companion object {
+        @Volatile
+        private var INSTANCE: LevelDatabase? = null
+
+        fun getDatabase(context: Context): LevelDatabase {
+            val tempInstance = INSTANCE
+            if (tempInstance != null) return tempInstance
+            synchronized(this)  {
+                val instance = Room.databaseBuilder(context.applicationContext, LevelDatabase::class.java, "oggDB.db")
+                    .createFromAsset("database/oggDB.db")
+                    .build()
+                INSTANCE = instance
+                return instance
+            }
+        }
+    }
+}
+
+//----------------member-------------------------------------------------------------
+@Database(entities = [MemberTBL::class], version = 1, exportSchema = true)
+@TypeConverters(RoomTypeConverter::class) //이미지 사용하는 경우에 필요
+abstract class MemberDatabase : RoomDatabase() {
+
+    abstract fun memberDao(): MemberDao
+
+    companion object {
+        @Volatile
+        private var INSTANCE: MemberDatabase? = null
+
+        fun getDatabase(context: Context): MemberDatabase {
+            val tempInstance = INSTANCE
+            if (tempInstance != null) return tempInstance
+            synchronized(this)  {
+                val instance = Room.databaseBuilder(context.applicationContext, MemberDatabase::class.java, "oggDB.db")
+                    .createFromAsset("database/oggDB.db")
+                    .build()
+                INSTANCE = instance
+                return instance
             }
         }
     }

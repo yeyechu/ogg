@@ -18,6 +18,6 @@ interface MemberDao {
     @Query("SELECT * FROM memberTBL")
     fun getAllMember() : List<MemberTBL>
 
-    @Query("SELECT * FROM memberTBL ORDER BY record ASC")
+    @Query("SELECT * FROM memberTBL ORDER BY mID ASC")
     fun getAlphabetizedMember() : Flow<List<MemberTBL>>
 }

@@ -3,6 +3,7 @@ package com.swu.ogg.database.dao
 import androidx.room.*
 import com.swu.ogg.database.StickerTBL
 
+@Dao
 interface StickerDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSticker(vararg sID: StickerTBL)

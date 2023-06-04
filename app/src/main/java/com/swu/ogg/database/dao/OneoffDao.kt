@@ -16,5 +16,5 @@ interface OneoffDao {
     fun deleteOneoff(oID: OneoffTBL)
 
     @Query("SELECT * FROM OneoffTBL")
-    fun getAllMember(): List<OneoffTBL>
+    fun getAllOneoff(): List<OneoffTBL>
 }

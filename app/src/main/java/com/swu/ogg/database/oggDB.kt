@@ -8,7 +8,7 @@ import java.sql.Blob
 
 
 @Entity(tableName = "activityTBL")
-class ActivityTBL(@PrimaryKey(autoGenerate = true) @ColumnInfo var aID: Int,
+class ActivityTBL(@PrimaryKey(autoGenerate = true) var aID: Int,
                   @ColumnInfo(name = "aTitle") var aTitle: String,
                   @ColumnInfo(name = "aImg") var aImg: Bitmap? = null,
                   @ColumnInfo(name = "aCo2") var aCo2: Float,
@@ -27,7 +27,7 @@ class BadgeTBL(@PrimaryKey(autoGenerate = true) var bID: Int,
                @ColumnInfo(name = "bImg") var bImg: Bitmap? = null,
 )
 
-@Entity(tableName = "explanTBL",  foreignKeys = [
+/*@Entity(tableName = "explanTBL",  foreignKeys = [
     ForeignKey(
         entity = ActivityTBL::class,
         parentColumns = ["aID"],
@@ -37,13 +37,33 @@ class BadgeTBL(@PrimaryKey(autoGenerate = true) var bID: Int,
         entity = ActivityTBL::class,
         parentColumns = ["aTitle"],
         childColumns = ["aTitle"]
-    )
-])
+    )],
+    indices = [
+        Index("aID"),
+        Index("aTitle")
+    ])*/
+@Entity(tableName = "explanTBL")
 class ExplanTBL(@PrimaryKey(autoGenerate = true) var eID: Int,
+               // @ColumnInfo(name = "aID") var aID: String,
+              //  @ColumnInfo(name = "aTitle") var aTitle: String,
                 @ColumnInfo(name = "eDetail") var eDetail: String?,
 )
 
-@Entity(tableName = "guideTBL",  foreignKeys = [
+/*class ExplanWithActivity(
+    @Embedded var aeID: ActivityTBL,
+    @Relation(
+        parentColumn = "aID",
+        entityColumn = "aID"
+    )
+    @Embedded var aeTitle: ActivityTBL,
+    @Relation(
+        parentColumn = "aTitle",
+        entityColumn = "aTitle"
+    )
+    val playlists: List<ExplanTBL>
+)*/
+
+/*@Entity(tableName = "guideTBL",  foreignKeys = [
     ForeignKey(
         entity = ActivityTBL::class,
         parentColumns = ["aID"],
@@ -53,12 +73,31 @@ class ExplanTBL(@PrimaryKey(autoGenerate = true) var eID: Int,
         entity = ActivityTBL::class,
         parentColumns = ["aTitle"],
         childColumns = ["aTitle"]
-    )
-])
+    )],
+    indices = [
+        Index("aID"),
+        Index("aTitle")
+    ])*/
+@Entity(tableName = "guideTBL")
 class GuideTBL(@PrimaryKey(autoGenerate = true) var gID: Int,
+               //@ColumnInfo(name = "aID") var aID: String,
+              // @ColumnInfo(name = "aTitle") var aTitle: String,
                @ColumnInfo(name = "gGuide") var gGallery: String,
                @ColumnInfo(name = "gImg") var gImg: Bitmap? = null,
 )
+/*class GuideWithActivity(
+    @Embedded var agID: ActivityTBL,
+    @Relation(
+        parentColumn = "aID",
+        entityColumn = "aID"
+    )
+    @Embedded var agTitle: ActivityTBL,
+    @Relation(
+        parentColumn = "aTitle",
+        entityColumn = "aTitle"
+    )
+    val playlists: List<GuideTBL>
+)*/
 
 @Entity(tableName = "levelTBL")
 class LevelTBL(@PrimaryKey(autoGenerate = true) var lID: Int,
