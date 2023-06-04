@@ -3,7 +3,6 @@ package com.swu.ogg.ui.env
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.swu.ogg.ui.myactivity.GageItem
 
 
 // DB나 서버 통신으로 받아온 데이터 관리하는 곳
@@ -18,13 +17,6 @@ class EnvViewModel : ViewModel() {
         value = arrayListOf<SummaryItem>()
     }
     var sumList : LiveData<ArrayList<SummaryItem>> = _list
-
-    // ───────────────────────────── 게이지 ─────────────────────────────
-
-    private var _list1 = MutableLiveData<ArrayList<GageItem>>().apply {
-        value = arrayListOf<GageItem>()
-    }
-    var gageAlllist : LiveData<ArrayList<GageItem>> = _list1
 
     // ───────────────────────────── 스탬프 ─────────────────────────────
 

@@ -13,11 +13,11 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.swu.ogg.R
 import com.swu.ogg.databinding.FragmentMyactivityBinding
 import com.swu.ogg.dbHelper
+
 
 // 나의 활동 전체 레이아웃 구현부
 
@@ -32,6 +32,8 @@ class MyActivityFragment : Fragment() {
 
     lateinit var dbManager: dbHelper
     lateinit var sqlitedb: SQLiteDatabase
+
+    lateinit var seekBar: SeekBar
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -52,6 +54,54 @@ class MyActivityFragment : Fragment() {
         }
         // ─────────────────────────────────── 게이지바 ───────────────────────────────────
 
+        // 처리할 데이터 :
+        // - textView : tv_co2_alarm_gage : 0.74kg 남았어요!
+        // - Seekbar : determinateBar
+        // - textView : tv_co2_aim_gage : 1.4kg
+
+        val gageTextAlarm : TextView = root.findViewById(R.id.tv_co2_alarm_gage)
+        val gageTextAim : TextView = root.findViewById(R.id.tv_co2_aim_gage)
+        val seekbar : SeekBar = root.findViewById(R.id.determinateBar)
+
+        // DB에서 받아올 데이터
+        // 임시 초기화
+        val gageAim : Float = 1.4f
+
+        gageTextAim.text = gageAim.toString() + "kg"
+
+        // 시크바 노터치
+        seekbar.setOnTouchListener { v, event -> true }
+
+        // 시크바 움직임 정의
+        seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+
+            override fun onProgressChanged(seekBar : SeekBar?, progress : Int, fromUser : Boolean) {
+
+                var co2Left : Float = kotlin.math.round(gageAim*1000 - progress * gageAim*10)/1000
+                gageTextAlarm.text = co2Left.toString() + "kg 남았어요"
+
+                if(progress > 0){
+                    gageTextAlarm.visibility = View.VISIBLE
+                }
+
+                val padding = seekBar!!.paddingLeft + seekBar!!.paddingRight
+                val sPos = seekBar!!.left + seekBar!!.paddingLeft
+                val xPos =
+                    (seekBar!!.width - padding) * seekBar!!.progress / seekBar!!.max + sPos - gageTextAlarm.width/2
+
+                gageTextAlarm.x = xPos.toFloat()
+            }
+
+            override fun onStartTrackingTouch(seekBar : SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(seekBar : SeekBar?) {
+                if(seekbar.progress > 98 || seekbar.progress < 2){
+                    gageTextAlarm.visibility = View.INVISIBLE
+                }
+            }
+        })
 
 
         // ─────────────────────────────────── 리사이클러뷰 ───────────────────────────────────

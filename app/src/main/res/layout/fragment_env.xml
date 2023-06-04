@@ -63,6 +63,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/big_padding"
+                    android:layout_weight="2"
                     android:orientation="vertical" >
 
                     <TextView
@@ -72,25 +74,62 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
-                        android:text=" "
+                        android:text="@string/app_name"
                         android:textStyle="bold"
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/tv_co2_alarm"
+                        android:id="@+id/tv_co2_alarm_all"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
-                        android:text=" "
+                        android:text="@string/app_name"
                         android:textSize="15sp"/>
 
                 </LinearLayout>
 
             </LinearLayout>
 
-            <include layout="@layout/gage_item" />
+            <ProgressBar
+                android:id="@+id/determinateBar_all"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/small_padding"
+                android:layout_marginRight="@dimen/small_padding"
+                android:indeterminate="false"
+                android:max="100"
+                android:progress="10"
+                android:progressDrawable="@drawable/progress_drawable" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/big_padding"
+                    android:layout_marginTop="5.3dp"
+                    android:layout_weight="2"
+                    android:text="0kg"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/nanumsquare_r" />
+
+                <TextView
+                    android:id="@+id/tv_co2_aim_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/big_padding"
+                    android:layout_marginTop="5.3dp"
+                    android:text="1kg"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/nanumsquare_r" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

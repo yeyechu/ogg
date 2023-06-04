@@ -6,19 +6,13 @@ import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.*
-import android.widget.Button
-import android.widget.GridView
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.swu.ogg.R
 import com.swu.ogg.databinding.FragmentEnvBinding
 import com.swu.ogg.dbHelper
-import com.swu.ogg.ui.myactivity.CardItem
-import com.swu.ogg.ui.myactivity.GageItem
 
 class EnvFragment : Fragment() {
 
@@ -31,7 +25,6 @@ class EnvFragment : Fragment() {
     lateinit var sqlitedb : SQLiteDatabase
 
     var summaryList = ArrayList<SummaryItem>()
-    var gageList = ArrayList<GageItem>()
     var stampList = ArrayList<StampItem>()
 
     lateinit var stickerImage : ByteArray
@@ -60,7 +53,6 @@ class EnvFragment : Fragment() {
         sqlitedb = dbManager.readableDatabase
 
         summaryList.clear()
-        gageList.clear()
         stampList.clear()
 
 //        var cursor_stamp : Cursor
@@ -115,18 +107,7 @@ class EnvFragment : Fragment() {
             }
         }
 
-        // 스탬프 레이아웃 구현
-        val gridView : GridView = binding.stampGrid
-
-        envViewModel.stamplist.observe(viewLifecycleOwner) {
-
-            val stamp : ArrayList<StampItem> = stampList
-            val stampAdapter = StampAdapter(requireContext(), stampList)
-            gridView.adapter = stampAdapter
-        }
-
         val textDday: TextView = binding.tvDday
-        val textCo2Alarm : TextView = binding.tvCo2Alarm
 
         // db 처리해서 연결
         // 며칠째인지
@@ -135,12 +116,45 @@ class EnvFragment : Fragment() {
 
         textDday.text = "21일 중 " + stampList.get(5).today.toString() + "일 째"
 
+
 //        envViewModel.dDayText.observe(viewLifecycleOwner) {
 //            textDday.text = "21일 중 " + it + "일 째"
 //        }
-        textCo2Alarm.text = "전체 목표 탄소량까지 " + "?db?" + "kg 남았어요"
 
+        // ─────────────────────────────────── 게이지바 ───────────────────────────────────
 
+        // 처리할 데이터 :
+        // - textView : tv_co2_alarm_gage : 0.74kg 남았어요!
+        // - Seekbar : determinateBar
+        // - textView : tv_co2_aim_gage : 1.4kg
+
+        val gageTextAim : TextView = binding.tvCo2AimAll
+        val gageCo2Alarm : TextView = binding.tvCo2AlarmAll
+        val progressBar : ProgressBar = binding.determinateBarAll
+
+        // DB에서 받아올 데이터
+        // 임시 초기화 ↓
+        val gageAllAim : Float = 1.4f*21
+
+        gageTextAim.text = gageAllAim.toString() + "kg"
+
+        // 진행률 받아와서 초기화
+        // 임시 초기화 ↓
+        progressBar.progress = 50
+
+        var co2Left : Float = kotlin.math.round(gageAllAim*1000 - progressBar.progress * gageAllAim*10)/1000
+        gageCo2Alarm.text = "목표 달성까지" + co2Left + "kg 남았어요"
+
+        // ─────────────────────────────────── 스탭프 레이아웃 ───────────────────────────────────
+
+        val gridView : GridView = binding.stampGrid
+
+        envViewModel.stamplist.observe(viewLifecycleOwner) {
+
+            val stamp : ArrayList<StampItem> = stampList
+            val stampAdapter = StampAdapter(requireContext(), stampList)
+            gridView.adapter = stampAdapter
+        }
 
         sqlitedb.close()
         dbManager.close()
