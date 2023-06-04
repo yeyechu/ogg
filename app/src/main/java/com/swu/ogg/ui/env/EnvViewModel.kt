@@ -3,7 +3,8 @@ package com.swu.ogg.ui.env
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.swu.ogg.ui.myactivity.CardItem
+import com.swu.ogg.ui.myactivity.GageItem
+
 
 // DB나 서버 통신으로 받아온 데이터 관리하는 곳
 // 데이터 변경이 감지되는 대로 UI 컴포넌트의 바인딩된 뷰에 나타냄

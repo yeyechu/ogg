@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/background_progress">
-        <shape>
-            <solid android:color="@color/lightgray" />
-            <corners android:radius ="@dimen/small_padding" />
-        </shape>
+    <item android:id="@+id/background_progress"
+        android:drawable="@drawable/progress_background">
+
     </item>
 
     <item android:id="@+id/progress_bar">
         <clip>
-            <shape>
-                <solid android:color="@color/Primary_blue" />
-                <corners android:radius ="@dimen/small_padding" />
-            </shape>
+            <scale android:drawable="@drawable/progress_foreground"
+                android:scaleHeight="10%"
+                android:scaleWidth="100%"/>
         </clip>
     </item>
 </layer-list>

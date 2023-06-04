@@ -23,8 +23,12 @@ class MyActivityViewModel : ViewModel() {
     private var _list = MutableLiveData<ArrayList<CardItem>>().apply {
         value = arrayListOf<CardItem>()
     }
+    private var _list1 = MutableLiveData<ArrayList<GageItem>>().apply {
+        value = arrayListOf<GageItem>()
+    }
 
     var tolist : LiveData<ArrayList<CardItem>> = _list
     var onlist : LiveData<ArrayList<CardItem>> = _list
+    var gagetolist : LiveData<ArrayList<GageItem>> = _list1
 
 }

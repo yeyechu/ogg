@@ -12,16 +12,12 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.swu.ogg.R
+import com.swu.ogg.ui.myactivity.GageItem
 import com.swu.ogg.ui.myactivity.post.PostActivity
 
 // 전체 게이지 구현할 어댑터 정의
 
-// 전체 게이지에 대한 데이터 클래스
-data class GageItem(
-    val co2Left : Float,
-    val aim : Float,
-    val percent : Float
-)
+
 
 class AlldayGageAdapter(val context : Context, val gageAllList : ArrayList<GageItem>)
     : RecyclerView.Adapter<AlldayGageAdapter.GageViewHolder>() {
