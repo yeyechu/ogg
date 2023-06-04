@@ -48,7 +48,6 @@
                 android:fontFamily="@font/nanumsquare_b"
                 android:gravity="center"
                 android:maxLines="1"
-
                 android:textColor="@color/black"
                 android:text="나무 심기" />
 
@@ -85,8 +84,6 @@
                 android:layout_width="73dp"
                 android:layout_height="27dp"
                 android:layout_marginTop="4dp"
-
-
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/button_white"
                 android:fontFamily="@font/nanumsquare_eb"

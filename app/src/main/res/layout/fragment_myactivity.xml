@@ -59,11 +59,8 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:scaleType="fitXY"
-
                     app:srcCompat="@drawable/myactivity_main_image" />
-
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
@@ -119,8 +116,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-
-
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/editbtn"
                 android:layout_width="70dp"
@@ -161,8 +156,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="23dp"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
 
         </LinearLayout>
 

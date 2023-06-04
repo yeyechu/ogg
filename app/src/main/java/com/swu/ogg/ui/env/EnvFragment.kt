@@ -18,6 +18,7 @@ import com.swu.ogg.R
 import com.swu.ogg.databinding.FragmentEnvBinding
 import com.swu.ogg.dbHelper
 import com.swu.ogg.ui.myactivity.CardItem
+import com.swu.ogg.ui.myactivity.GageItem
 
 class EnvFragment : Fragment() {
 
