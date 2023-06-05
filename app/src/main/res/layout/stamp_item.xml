@@ -11,6 +11,8 @@
         android:textSize="15sp"
         android:textColor="@color/lightgray"
         android:gravity="center"
+        android:adjustViewBounds="true"
         android:background="@drawable/stamp_drawable" />
+    <!-- 텍스트뷰 비율 고정되는지 확인 -->
 
 </FrameLayout>

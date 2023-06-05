@@ -4,8 +4,8 @@
 
     <item
         android:id="@+id/navigation_collections"
-        android:icon="@drawable/baseline_collections_bookmark_24"
-        android:title="@string/title_collections"
+
+        android:title=""
         android:menuCategory="secondary"
         app:showAsAction="always" />
 
