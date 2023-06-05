@@ -103,7 +103,7 @@ class MyActivityFragment : Fragment() {
 
 
         // ─────────────────────────────────── 리사이클러뷰 ───────────────────────────────────
-        dbManager = dbHelper(context, "oggDB.db")
+      /*  dbManager = dbHelper(context, "oggDB.db")
 
         val recyclerViewToday = binding.todayCardList
         val recyclerViewOnly = binding.onlyCardList
@@ -163,7 +163,7 @@ class MyActivityFragment : Fragment() {
         cursor_only.close()
 
         sqlitedb.close()
-        dbManager.close()
+        dbManager.close()*/
 
         return root
     }

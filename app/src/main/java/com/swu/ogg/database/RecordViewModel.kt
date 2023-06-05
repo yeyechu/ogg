@@ -41,3 +41,31 @@ class RecordViewModelFactory(private val repository: RecordRepository) : ViewMod
         throw  java.lang.IllegalArgumentException("Unknown ViewModel class")
     }
 }
+
+/*
+class MainViewModel(
+    application: Application
+) : ViewModel() {
+
+    private val repository: ExpenseRepository
+
+    init {
+        val expenseDao = ExpenseDatabase.getDatabase(application).expenseDao()
+        repository = ExpenseRepository(expenseDao)
+    }
+
+    fun insertExpense(expense: Expense) =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insertExpense(expense)
+        }
+
+    class Factory(
+        private val application: Application
+    ) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return MainViewModel(application) as T
+        }
+
+    }
+}
+ */
