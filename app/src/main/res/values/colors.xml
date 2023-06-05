@@ -5,22 +5,25 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+
+    <!-- ───────────────────────── 전체 UI ───────────────────────── -->
+    <color name="Primary_blue">#6897F3</color>
+    <color name="Secondary_orange">#FF7F48</color>
+    <color name="light_Blue">#E1EAFD</color>
+
+    <!-- ───────────────────────── ?? ───────────────────────── -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#6A6A6A</color>
     <color name="lightgray">#dee0e0</color>
+
+    <!-- ───────────────────────── 팝업 투명 ───────────────────────── -->
     <color name="transparent">#80000000</color>
 
-    <!-- DB test -->
-
+    <!-- ───────────────────────── db 테스트용 ───────────────────────── -->
     <color name="colorPrimary">#FFFFFFFF</color>
     <color name="colorPrimaryDark">#1f2021</color>
     <color name="colorAccent">#cf0c3d</color>
     <color name="buttonLabel">#FFFFFF</color>
-
-    <!--main color-->
-    <color name="Primary_blue">#6897F3</color>
-    <color name="Secondary_orange">#FF7F48</color>
-    <color name="light_Blue">#E1EAFD</color>
 
 </resources>

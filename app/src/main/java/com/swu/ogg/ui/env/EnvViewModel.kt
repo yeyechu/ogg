@@ -11,13 +11,6 @@ import androidx.lifecycle.ViewModel
 
 class EnvViewModel : ViewModel() {
 
-    // ───────────────────────────── 요약 ─────────────────────────────
-
-    private var _list = MutableLiveData<ArrayList<SummaryItem>>().apply {
-        value = arrayListOf<SummaryItem>()
-    }
-    var sumList : LiveData<ArrayList<SummaryItem>> = _list
-
     // ───────────────────────────── 스탬프 ─────────────────────────────
 
     private var _list2 = MutableLiveData<ArrayList<StampItem>>().apply {

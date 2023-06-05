@@ -33,8 +33,6 @@ class MyActivityFragment : Fragment() {
     lateinit var dbManager: dbHelper
     lateinit var sqlitedb: SQLiteDatabase
 
-    lateinit var seekBar: SeekBar
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,7 +68,7 @@ class MyActivityFragment : Fragment() {
         gageTextAim.text = gageAim.toString() + "kg"
 
         // 시크바 노터치
-        seekbar.setOnTouchListener { v, event -> true }
+        //seekbar.setOnTouchListener { v, event -> true }
 
         // 시크바 움직임 정의
         seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {

@@ -24,7 +24,6 @@ class EnvFragment : Fragment() {
     lateinit var dbManager : dbHelper
     lateinit var sqlitedb : SQLiteDatabase
 
-    var summaryList = ArrayList<SummaryItem>()
     var stampList = ArrayList<StampItem>()
 
     lateinit var stickerImage : ByteArray
@@ -49,10 +48,8 @@ class EnvFragment : Fragment() {
         // ────────────────────────────────── 데이터베이스 준비 ──────────────────────────────────
 
         dbManager = dbHelper(context, "oggDB.db")
-
         sqlitedb = dbManager.readableDatabase
 
-        summaryList.clear()
         stampList.clear()
 
 //        var cursor_stamp : Cursor
@@ -136,7 +133,7 @@ class EnvFragment : Fragment() {
         // 임시 초기화 ↓
         val gageAllAim : Float = 1.4f*21
 
-        gageTextAim.text = gageAllAim.toString() + "kg"
+        gageTextAim.text = gageAllAim.toString()
 
         // 진행률 받아와서 초기화
         // 임시 초기화 ↓
@@ -145,7 +142,7 @@ class EnvFragment : Fragment() {
         var co2Left : Float = kotlin.math.round(gageAllAim*1000 - progressBar.progress * gageAllAim*10)/1000
         gageCo2Alarm.text = "목표 달성까지" + co2Left + "kg 남았어요"
 
-        // ─────────────────────────────────── 스탭프 레이아웃 ───────────────────────────────────
+        // ─────────────────────────────────── 스탬프 레이아웃 ───────────────────────────────────
 
         val gridView : GridView = binding.stampGrid
 

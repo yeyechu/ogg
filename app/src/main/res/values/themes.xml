@@ -1,32 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+        <!-- ───────────────────────── 기본 테마 ───────────────────────── -->
+
     <style name="Theme.Ogg" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
+        <!-- ────────────────────── 메인 색상 ────────────────────── -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/white</item>
         <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
+
+        <!-- ────────────────────── 보조 색상 ────────────────────── -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
+
+        <!-- ────────────────────── 상태바 설정 ────────────────────── -->
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@color/transparent</item>
-
         <item name="android:windowLightStatusBar">true</item>
-        <!-- Customize your theme here. -->
     </style>
 
-    <!-- 리사이클러뷰의 기본 폰트는 너무 작음, 글자간 기본 마진은 delimiter가 됨 -->
-    <!-- Room에서 사용하는 값들 -->
-    <style name="word_title">
-        <item name="android:layout_marginBottom">8dp</item>
-        <item name="android:paddingLeft">8dp</item>
-        <item name="android:background">@android:color/holo_orange_light</item>
-        <item name="android:textAppearance">@android:style/TextAppearance</item>
-    </style>
-
-    <!-- UI 제어 -->
+        <!-- ───────────────────────── 상태바 설정2 ───────────────────────── -->
     <style name="Theme.Ogg.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">false</item>
@@ -36,6 +28,7 @@
     <style name="Theme.Ogg.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.Ogg.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+        <!-- ───────────────────────── 팝업창 설정 ───────────────────────── -->
     <style name="Transparent" parent="Theme.Ogg">
         <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -45,7 +38,42 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
-    <style name="Theme.Ogg.state_enabled">
-        <item name="android:state_enabled">true</item>
+        <!-- ───────────────────────── 프래그먼트 설정 ───────────────────────── -->
+    <style name="FrameSet" parent="Theme.Ogg">
+
     </style>
+
+        <!-- ───────────────────────── 레이아웃 설정 ───────────────────────── -->
+    <style name="layoutSet" parent="Theme.Ogg">
+
+    </style>
+        <!-- ───────────────────────── 타이틀 설정 ───────────────────────── -->
+    <style name="titleSet" parent="Theme.Ogg">
+
+    </style>
+
+        <!-- ───────────────────────── 바디 설정 ───────────────────────── -->
+    <style name="bodySet" parent="Theme.Ogg">
+
+    </style>
+
+        <!-- ───────────────────────── 디테일 설정 ───────────────────────── -->
+    <style name="detailSet" parent="Theme.Ogg">
+
+    </style>
+
+        <!-- ───────────────────────── 버튼뷰 설정 ───────────────────────── -->
+    <style name="ButtonViewSet" parent="Theme.Ogg">
+
+    </style>
+
+        <!-- 리사이클러뷰의 기본 폰트는 너무 작음, 글자간 기본 마진은 delimiter가 됨 -->
+        <!-- ───────────────────────── Room (임시 사용) ───────────────────────── -->
+    <style name="word_title">
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:background">@android:color/holo_orange_light</item>
+        <item name="android:textAppearance">@android:style/TextAppearance</item>
+    </style>
+
 </resources>
