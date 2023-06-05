@@ -1,6 +1,7 @@
 package com.swu.ogg.database.dao
 
 import androidx.room.*
+import com.swu.ogg.database.ActivityWithExplan
 import com.swu.ogg.database.ExplanTBL
 import kotlinx.coroutines.flow.Flow
 
@@ -20,4 +21,5 @@ interface ExplanDao {
 
     @Query("SELECT * FROM explanTBL ORDER BY eID ASC")
     fun getAlphabetizedExplan(): Flow<List<ExplanTBL>>
+
 }

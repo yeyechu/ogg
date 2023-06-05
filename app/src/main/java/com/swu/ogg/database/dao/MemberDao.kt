@@ -20,4 +20,9 @@ interface MemberDao {
 
     @Query("SELECT * FROM memberTBL ORDER BY mID ASC")
     fun getAlphabetizedMember() : Flow<List<MemberTBL>>
+
+    // ────────────────────────────────────────────────── 외래키
+    @Transaction
+    @Query("SELECT * FROM MemberTBL")
+    fun getLevelOfMembers() : Float
 }

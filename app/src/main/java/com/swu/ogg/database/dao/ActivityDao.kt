@@ -2,6 +2,8 @@ package com.swu.ogg.database.dao
 
 import androidx.room.*
 import com.swu.ogg.database.ActivityTBL
+import com.swu.ogg.database.ActivityWithExplan
+import com.swu.ogg.database.ActivityWithGuide
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -23,4 +25,13 @@ interface ActivityDao {
 
     @Query("SELECT aTitle FROM activityTBL WHERE aID = :id")
     fun getActivityWithID(id: Int): String
+
+    // ────────────────────────────────────────────────── 외래키
+    @Transaction
+    @Query("SELECT * FROM ActivityTBL")
+    fun getActivitiesWithExplans() : Int
+
+    @Transaction
+    @Query("SELECT * FROM ActivityTBL")
+    fun getActivitiesWithGuides() : Int
 }
