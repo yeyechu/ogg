@@ -13,5 +13,37 @@
     <dimen name="small_padding">7dp</dimen>
     <dimen name="min_height">48dp</dimen>
     <dimen name="scroll_margin">80dp</dimen>
+    <dimen name="activitymargin">30dp</dimen>
+
+
+
+    <!-- ───────────────────────── 버튼패딩 ───────────────────────── -->
+    <dimen name="btn_padding">3dp</dimen>
+
+
+    <!-- ───────────────────────── 텍스트 크기 ───────────────────────── -->
+    <dimen name="user_name">25sp</dimen>
+    <dimen name="title">20sp</dimen>
+    <dimen name="sub_title">18sp</dimen>
+    <dimen name="large_body">27sp</dimen>
+    <dimen name="body">14sp</dimen>
+
+    <!-- ─────────── 텍스트 크기 (카드) ──────────── -->
+    <dimen name="card_btn">13sp</dimen>
+    <dimen name="card_title">13sp</dimen>
+    <dimen name="card_goal_title">12sp</dimen>
+
+    <!-- ─────────── 텍스트 크기 (팝업) ──────────── -->
+    <dimen name="popup_title">20sp</dimen>
+    <dimen name="popup_subtitle">17sp</dimen>
+    <dimen name="popup_name_btn">15sp</dimen>
+    <dimen name="popup_goal_text">13sp</dimen>
+
+    <!-- ─────────── 텍스트 크기 (기타) ──────────── -->
+    <dimen name="today_num">14sp</dimen>
+    <dimen name="futerday_num">14sp</dimen>
+
+
+
 
 </resources>

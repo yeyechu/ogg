@@ -18,8 +18,11 @@
     <string name="title_layout_myactivity_first">프로젝트 시작 전</string>
     <string name="title_layout_myactivity_second">오늘의 활동</string>
     <string name="number_21">숫자</string>
+    <string name="activity_end">완료</string>
+    <string name="c_reduction">탄소감축량</string>
 
     <!-- 인증 -->
+    <string name="confirmation">인증하기</string>
 
     <!-- 통계 -->
 
@@ -37,5 +40,6 @@
     <string name="hint_string">내용</string>
     <string name="button_save">저장</string>
     <string name="empty_not_saved">비어있어서 안 저장</string>
+    <string name="user_name">김하루</string>
 
 </resources>

@@ -16,8 +16,8 @@
 
         <FrameLayout
             android:id="@+id/done_layout"
-            android:layout_width="140dp"
-            android:layout_height="176dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="#CC000000"
             android:visibility="gone">
 
@@ -25,11 +25,11 @@
                 android:id="@+id/tv_done"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:text="완료"
                 android:layout_gravity="center"
-                android:textColor="@color/white"/>
+                android:text="@string/activity_end"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </FrameLayout>
 
@@ -38,19 +38,30 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center"
-            android:padding="28px">
+            android:padding="10dp">
 
             <ImageView
                 android:id="@+id/img_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxHeight="200px"
+                android:maxHeight="67dp"
                 android:adjustViewBounds="true"
                 android:layout_gravity="fill_horizontal"
                 android:gravity="center"
                 android:src="@drawable/baseline_add_photo_alternate_24"
                 android:contentDescription="@string/app_name"
-                android:layout_marginBottom="24px" />
+
+                />
+
+            <LinearLayout
+                android:id="@+id/btnmargin1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/btn_padding"
+                >
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/title"
@@ -61,11 +72,13 @@
                 <TextView
                     android:id="@+id/tv_title"
                     android:layout_width="match_parent"
-                    android:layout_height="24dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:autoSizeMaxTextSize="15sp"
+
+                    android:autoSizeMaxTextSize="13sp"
                     android:autoSizeMinTextSize="8sp"
                     android:autoSizeTextType="uniform"
+
                     android:fontFamily="@font/nanumsquare_b"
                     android:gravity="center"
                     android:maxLines="1"
@@ -75,13 +88,22 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/btnmargin2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/btn_padding"
+                >
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/C"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="20px"
                 android:layout_marginRight="20px"
-                android:layout_marginBottom="8dp"
                 android:orientation="horizontal">
 
 
@@ -91,7 +113,7 @@
                     android:layout_gravity="fill_horizontal"
                     android:fontFamily="@font/nanumsquare_b"
                     android:gravity="center"
-                    android:text="탄소 감축량"
+                    android:text="@string/c_reduction"
                     android:textSize="10sp" />
 
                 <TextView
@@ -105,18 +127,30 @@
 
             </LinearLayout>
 
+
+            <LinearLayout
+                android:id="@+id/btnmargin3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/btn_padding"
+                >
+
+            </LinearLayout>
+
+
             <android.widget.Button
                 android:id="@+id/btn"
                 android:layout_width="match_parent"
                 android:layout_height="27dp"
                 android:layout_gravity="center"
                 android:background="@drawable/box_strokemainblue"
+                android:enabled="true"
                 android:fontFamily="@font/nanumsquare_eb"
-                android:padding="8px"
-                android:text="인증하기"
+                android:padding="@dimen/btn_padding"
+                android:text="@string/confirmation"
                 android:textColor="@color/white"
-                android:textSize="13sp"
-                android:enabled="true"/>
+                android:textSize="@dimen/card_btn" />
 
         </LinearLayout>
 
