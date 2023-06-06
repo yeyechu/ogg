@@ -30,12 +30,16 @@
             android:orientation="vertical"
             android:visibility="gone">
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/btn_start"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
+                android:background="@drawable/box_mainblue"
+                android:fontFamily="@font/nanumsquare_eb"
+                android:textColor="@color/white"
+                android:textSize="16dp"
                 android:text="21일 프로젝트 시작" />
 
         </LinearLayout>
