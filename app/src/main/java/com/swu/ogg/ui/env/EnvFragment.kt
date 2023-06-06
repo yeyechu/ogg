@@ -62,7 +62,14 @@ class EnvFragment : Fragment() {
         // 임시 데이터 생성 부분
         var x = 1
         while(x <= 21){
-            stampList.add(StampItem(x++, 0f, 5))
+            stampList.add(StampItem(x++, 0f, 10))
+        }
+
+        val dayButton : Button = root.findViewById(R.id.btn_day)
+        val index = stampList.get(1).day
+
+        dayButton.setOnClickListener {
+
         }
 
         // ────────────────────────────────── 레이아웃 트랜지션 ──────────────────────────────────
@@ -85,11 +92,9 @@ class EnvFragment : Fragment() {
 
         startButton.setOnClickListener {
 
-//            beforeLayout.visibility = View.GONE
-//            afterLayout.visibility = View.VISIBLE
-//            expandButton.visibility = View.VISIBLE
-            val intent = Intent(context, StartProjectActivity::class.java)
-            startActivity(intent)
+            beforeLayout.visibility = View.GONE
+            afterLayout.visibility = View.VISIBLE
+            expandButton.visibility = View.VISIBLE
         }
 
         // ──────────────────────────────── 프로젝트 시작 레이아웃 ────────────────────────────────
@@ -113,7 +118,7 @@ class EnvFragment : Fragment() {
         // 탄소량 얼마 남았는지
         // 오늘 스티커 뭔지
 
-        textDday.text = "21일 중 " + stampList.get(5).today.toString() + "일 째"
+        textDday.text = "21일 중 " + stampList.get(1).today.toString() + "일 째"
 
 
 //        envViewModel.dDayText.observe(viewLifecycleOwner) {

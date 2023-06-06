@@ -59,64 +59,23 @@ class PostActivity : AppCompatActivity() {
         dbManager = dbHelper(this, "oggDB.db")
         sqlitedb = dbManager.readableDatabase
 
+        val co2Text : TextView = binding.tvCo2
+        val freqText : TextView = binding.tvContentFreq
+
         var cursor: Cursor
-        cursor = sqlitedb.rawQuery("SELECT aID, aImg FROM activityTBL WHERE aTitle = '" + extraTitle + "' ;", null)
+        cursor = sqlitedb.rawQuery("SELECT * FROM TodayTBL WHERE aTitle = '" + extraTitle + "' ;", null)
         var activityNum : String = ""
         var activityCo2 : String = ""
 
         while(cursor.moveToNext()){
-            Image = cursor.getBlob(cursor.getColumnIndexOrThrow("aImg"))
+            Image = cursor.getBlob(cursor.getColumnIndexOrThrow("aGuide"))
             val bitmap : Bitmap = BitmapFactory.decodeByteArray(Image, 0, Image.size)
             activityNum = cursor.getString(cursor.getColumnIndexOrThrow("aID")).toString()
 
-            imgArray.add(bitmap)
-        }
-
-        val imageView : ImageView = binding.imgView
-        imageView.setImageBitmap(imgArray[0])
-        cursor.close()
-
-        // ───────────────────────────── 오른쪽 왼쪽 사진 넘어가는 버튼 ─────────────────────────────
-        var size : Int = imgArray.size
-        var cursor_img : Int = 0
-
-        val leftButton : ImageButton = binding.btnLeft
-        val rightButton : ImageButton = binding.btnRight
-
-        leftButton.isEnabled = false
-        rightButton.isEnabled = false
-
-        // leftButton : 보여줄 사진 있을 때만 isEnabled = true 처리
-        // rightButton : 보여줄 사진 있을 때만 isEnabled = true 처리
-
-        leftButton.setOnClickListener {
-            cursor_img++
-            if(cursor_img > size - 1) {
-                cursor_img = 0
-            }
-            imageView.setImageBitmap(imgArray[cursor_img])
-        }
-
-        rightButton.setOnClickListener {
-            cursor_img--
-            if(cursor_img < 0) {
-                cursor_img = size -1
-            }
-            imageView.setImageBitmap(imgArray[cursor_img])
-        }
-        // ─────────────────────────────────── 인증 가능 횟수 ───────────────────────────────────
-
-        var cursor_c: Cursor
-        cursor_c = sqlitedb.rawQuery("SELECT * FROM co2TBL WHERE aID = '" + activityNum + "' ;", null)
-
-        while(cursor_c.moveToNext()) {
-            val co2 = cursor_c.getString(cursor_c.getColumnIndexOrThrow("cReduce")).toString() + "kg"
-            val freq = cursor_c.getString(cursor_c.getColumnIndexOrThrow("cFreq")).toString()
-            val limit = cursor_c.getString(cursor_c.getColumnIndexOrThrow("cLimit")).toString()
-            activityCo2 = cursor_c.getString(cursor_c.getColumnIndexOrThrow("cReduce")).toString()
-
-            val co2Text : TextView = binding.tvCo2
-            val freqText : TextView = binding.tvContentFreq
+            val co2 = cursor.getString(cursor.getColumnIndexOrThrow("aCo2")).toString() + "kg"
+            val freq = cursor.getString(cursor.getColumnIndexOrThrow("aFreq")).toString()
+            val limit = cursor.getString(cursor.getColumnIndexOrThrow("aLimit")).toString()
+            activityCo2 = cursor.getString(cursor.getColumnIndexOrThrow("aCo2")).toString()
 
             co2Text.text = co2
             if(limit != null && freq == "1") {
@@ -129,9 +88,57 @@ class PostActivity : AppCompatActivity() {
 
                 freqText.text = "하루 " + freq + "번"
             }
+
+            imgArray.add(bitmap)
+
+            var gallery = cursor.getInt(cursor.getColumnIndexOrThrow("aGallery")).toInt()
+
+            if(gallery == 1) {
+                val buttonAlbum : Button = binding.btnAlbum
+                buttonAlbum.visibility = View.VISIBLE
+                buttonAlbum.isEnabled = true
+                //색 바뀌게 코드
+                buttonAlbum.setTextColor(ContextCompat.getColor(applicationContext!!, R.color.Primary_blue))
+                buttonAlbum.setBackgroundResource(R.drawable.box_lineblue) // 배경 리소스 설정
+
+                buttonAlbum.setOnClickListener {
+                    // 앨범 연결 부분
+                    openGallery()
+                }
+            }
         }
 
-        cursor_c.close()
+        val imageView : ImageView = binding.imgView
+        imageView.setImageBitmap(imgArray[0])
+        cursor.close()
+
+        // ───────────────────────────── 오른쪽 왼쪽 사진 넘어가는 버튼 ─────────────────────────────
+//        var size : Int = imgArray.size
+//        var cursor_img : Int = 0
+//
+//        val leftButton : ImageButton = binding.btnLeft
+//        val rightButton : ImageButton = binding.btnRight
+//
+//        leftButton.isEnabled = false
+//        rightButton.isEnabled = false
+
+        // leftButton : 보여줄 사진 있을 때만 isEnabled = true 처리
+        // rightButton : 보여줄 사진 있을 때만 isEnabled = true 처리
+
+//        leftButton.setOnClickListener {
+//            cursor_img++
+//            if(cursor_img > size - 1) {
+//                cursor_img = 0
+//            }
+//            imageView.setImageBitmap(imgArray[cursor_img])
+//        }
+//
+//        rightButton.setOnClickListener {
+//            cursor_img--
+//            if(cursor_img < 0) {
+//                cursor_img = size -1
+//            }
+//            imageView.setImageBitmap(imgArray[cursor_img])
 
         // ─────────────────────────────────── 카메라 버튼 ───────────────────────────────────
         val buttonCamera : Button = binding.btnCamera
@@ -150,27 +157,6 @@ class PostActivity : AppCompatActivity() {
         val retakeButton : Button = binding.btnRetake
         retakeButton.text = "다시 고르기"
         val postButton : Button = binding.btnPost
-
-        var cursor_b : Cursor
-        cursor_b = sqlitedb.rawQuery("SELECT gGallery FROM guideTBL WHERE aID = '" + activityNum + "' ;", null)
-        while (cursor_b.moveToNext()) {
-            var gallery = cursor_b.getInt(cursor_b.getColumnIndexOrThrow("gGallery")).toInt()
-
-            if(gallery == 1) {
-                val buttonAlbum : Button = binding.btnAlbum
-                buttonAlbum.visibility = View.VISIBLE
-                buttonAlbum.isEnabled = true
-                //색 바뀌게 코드
-                buttonAlbum.setTextColor(ContextCompat.getColor(applicationContext!!, R.color.Primary_blue))
-                buttonAlbum.setBackgroundResource(R.drawable.box_lineblue) // 배경 리소스 설정
-
-                buttonAlbum.setOnClickListener {
-                    // 앨범 연결 부분
-                    openGallery()
-                }
-            }
-        }
-        cursor_b.close()
 
         retakeButton.setOnClickListener {
             binding.previewLayout.visibility = View.GONE
@@ -222,8 +208,8 @@ class PostActivity : AppCompatActivity() {
                     e.printStackTrace()
                 }
                 binding.previewLayout.visibility = View.VISIBLE
-                binding.imagePreview.setImageBitmap(bitmap)
-                //binding.imagePreview.setImageBitmap(CameraActivity().rotateBitmap(bitmap))
+                //binding.imagePreview.setImageBitmap(bitmap)
+                binding.imagePreview.setImageBitmap(CameraActivity().rotateBitmap(bitmap))
 
                 imgArr[0] = bitmap
             }

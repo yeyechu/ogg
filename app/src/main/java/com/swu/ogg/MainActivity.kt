@@ -29,8 +29,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
 
-//    val filePath : String = "/data/data/com.swu.ogg/databases/"
-//    lateinit var  sqlDB : SQLiteDatabase
+    val filePath : String = "/data/data/com.swu.ogg/databases/"
+    lateinit var  sqlDB : SQLiteDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,16 +62,16 @@ class MainActivity : AppCompatActivity() {
 
         // ─────────────────────────────────── DB 불러오기 ───────────────────────────────────
 
-//        var checkDB : File = File(filePath + "oggDB.db")
-//        if(checkDB.exists()){
-//
-//        } else {
-//            setDB(this)
-//            val oggHelper : dbHelper = dbHelper(this, "oggDB.db")
-//            sqlDB = oggHelper.readableDatabase
-//
-//            // sqlDB.close()
-//        }
+        var checkDB : File = File(filePath + "oggDB.db")
+        if(checkDB.exists()){
+
+        } else {
+            setDB(this)
+            val oggHelper : dbHelper = dbHelper(this, "oggDB.db")
+            sqlDB = oggHelper.readableDatabase
+
+            // sqlDB.close()
+        }
     }
 
     // ─────────────────────────────────── 툴바 함수 ───────────────────────────────────
@@ -87,46 +87,46 @@ class MainActivity : AppCompatActivity() {
     }
 
     // ─────────────────────────────────── assets 폴더의 기존 DB 불러오기 ───────────────────────────────────
-//    private fun setDB(ctx: Context) {
-//
-//        var folder: File = File(filePath)
-//
-//        if (folder.exists()) {
-//
-//        } else {
-//            folder.mkdirs();
-//        }
-//
-//        var assetManager: AssetManager = ctx.resources.assets
-//        var outfile: File = File(filePath + "oggDB.db")
-//
-//        var IStr: InputStream? = null
-//        var fo: FileOutputStream? = null
-//        var filesize: Int = 0
-//
-//        try {
-//            IStr = assetManager.open("oggDB.db", AssetManager.ACCESS_BUFFER)
-//            filesize = IStr.available()
-//
-//            if (outfile.length() <= 0) {
-//
-//                val buffer = ByteArray(filesize)
-//
-//                IStr.read(buffer)
-//                IStr.close()
-//                outfile.createNewFile()
-//
-//                fo = FileOutputStream(outfile)
-//                fo.write(buffer)
-//                fo.close()
-//
-//            } else {
-//
-//            }
-//        } finally {
-//
-//        }
-//    }
+    private fun setDB(ctx: Context) {
+
+        var folder: File = File(filePath)
+
+        if (folder.exists()) {
+
+        } else {
+            folder.mkdirs();
+        }
+
+        var assetManager: AssetManager = ctx.resources.assets
+        var outfile: File = File(filePath + "oggDB.db")
+
+        var IStr: InputStream? = null
+        var fo: FileOutputStream? = null
+        var filesize: Int = 0
+
+        try {
+            IStr = assetManager.open("oggDB.db", AssetManager.ACCESS_BUFFER)
+            filesize = IStr.available()
+
+            if (outfile.length() <= 0) {
+
+                val buffer = ByteArray(filesize)
+
+                IStr.read(buffer)
+                IStr.close()
+                outfile.createNewFile()
+
+                fo = FileOutputStream(outfile)
+                fo.write(buffer)
+                fo.close()
+
+            } else {
+
+            }
+        } finally {
+
+        }
+    }
 
     // ─────────────────────────────────── DB 리사이클러뷰 관찰자 ───────────────────────────────────
 

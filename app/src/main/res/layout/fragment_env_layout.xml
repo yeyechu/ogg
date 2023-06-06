@@ -12,6 +12,21 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/box_disabled"
+            android:paddingTop="12dp"
+            android:layout_gravity="center"
+            android:paddingBottom="12dp"
+            android:layout_marginTop="400dp"
+            android:text="날짜 바꾸기"
+            android:fontFamily="@font/nanumsquare_b"
+            android:textColor="@color/lightgray"
+            android:visibility="gone"/>
+
     </LinearLayout>
 
 </ScrollView>

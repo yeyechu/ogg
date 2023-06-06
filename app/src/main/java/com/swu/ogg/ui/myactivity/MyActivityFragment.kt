@@ -19,8 +19,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.swu.ogg.MainActivity
 import com.swu.ogg.R
-import com.swu.ogg.database.CardViewModel
-import com.swu.ogg.database.CardViewModelFactory
 import com.swu.ogg.database.OggApplication
 import com.swu.ogg.databinding.FragmentMyactivityBinding
 import com.swu.ogg.dbHelper
@@ -37,8 +35,8 @@ class MyActivityFragment : Fragment() {
     var todayList = ArrayList<CardItem>()
     var onlyList = ArrayList<CardItem>()
 
-    //lateinit var dbManager: dbHelper
-    //lateinit var sqlitedb: SQLiteDatabase
+    lateinit var dbManager: dbHelper
+    lateinit var sqlitedb: SQLiteDatabase
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -48,8 +46,6 @@ class MyActivityFragment : Fragment() {
     ): View {
         val myActivityViewModel =
             ViewModelProvider(this).get(MyActivityViewModel::class.java)
-
-        //val cardViewModel = ViewModelProvider(this).get(CardViewModel::class.java)
 
         _binding = FragmentMyactivityBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -125,57 +121,54 @@ class MyActivityFragment : Fragment() {
         // onlist : 일회성 활동에 대한 내용
 
 
-//        myActivityViewModel.tolist.observe(viewLifecycleOwner) {
-//
-//            val tolist : ArrayList<CardItem> = todayList
-//            val toAdapter = MyActivityAdapter(requireContext(), tolist)
-//            recyclerViewToday.adapter = toAdapter
-//        }
-//
-//        myActivityViewModel.onlist.observe(viewLifecycleOwner) {
-//
-//            val onlist : ArrayList<CardItem> = onlyList
-//            val onAdapter = MyActivity2Adapter(requireContext(), onlist)
-//            recyclerViewOnly.adapter = onAdapter
-//
-//        }
-
-      /*  dbManager = dbHelper(context, "oggDB.db")
+        dbManager = dbHelper(context, "oggDB.db")
         sqlitedb = dbManager.readableDatabase
 
         // DB에서 불러온 데이터 연결
 
         var cursor_today : Cursor
-        cursor_today = sqlitedb.rawQuery("SELECT aTitle, cReduce, aImg FROM activityTBL, co2TBL WHERE activityTBL.aID = co2TBL.cID AND co2TBL.cCode = 'R'; ", null)
+        cursor_today = sqlitedb.rawQuery("SELECT aTitle, aCo2, aImg FROM TodayTBL; ", null)
 
         var cursor_only : Cursor
-        cursor_only = sqlitedb.rawQuery("SELECT aTitle, cReduce, aImg FROM activityTBL, co2TBL WHERE activityTBL.aID = co2TBL.cID AND co2TBL.cFreq = 0; ", null)
+        cursor_only = sqlitedb.rawQuery("SELECT oTitle, oCo2, oImg FROM OnlyTBL; ", null)
 
         while(cursor_today.moveToNext()) {
             Image = cursor_today.getBlob(cursor_today.getColumnIndexOrThrow("aImg"))
             val bitmap : Bitmap = BitmapFactory.decodeByteArray(Image, 0, Image.size)
             var title = cursor_today.getString((cursor_today.getColumnIndexOrThrow("aTitle"))).toString()
-            var co2 = cursor_today.getString((cursor_today.getColumnIndexOrThrow("cReduce"))).toString() + "kg"
+            var co2 = cursor_today.getString((cursor_today.getColumnIndexOrThrow("aCo2"))).toString() + "kg"
 
             todayList.add(CardItem(bitmap, title, co2))
         }
 
         while(cursor_only.moveToNext()) {
-            Image = cursor_only.getBlob(cursor_only.getColumnIndexOrThrow("aImg"))
+            Image = cursor_only.getBlob(cursor_only.getColumnIndexOrThrow("oImg"))
             val bitmap : Bitmap = BitmapFactory.decodeByteArray(Image, 0, Image.size)
-            var title = cursor_only.getString((cursor_only.getColumnIndexOrThrow("aTitle"))).toString()
-            var co2 = cursor_only.getString((cursor_only.getColumnIndexOrThrow("cReduce"))).toString() + "kg"
+            var title = cursor_only.getString((cursor_only.getColumnIndexOrThrow("oTitle"))).toString()
+            var co2 = cursor_only.getString((cursor_only.getColumnIndexOrThrow("oCo2"))).toString() + "kg"
 
             onlyList.add(CardItem(bitmap, title, co2))
         }
+        myActivityViewModel.tolist.observe(viewLifecycleOwner) {
 
+            val tolist : ArrayList<CardItem> = todayList
+            val toAdapter = MyActivityAdapter(requireContext(), tolist)
+            recyclerViewToday.adapter = toAdapter
+        }
 
+        myActivityViewModel.onlist.observe(viewLifecycleOwner) {
+
+            val onlist : ArrayList<CardItem> = onlyList
+            val onAdapter = MyActivity2Adapter(requireContext(), onlist)
+            recyclerViewOnly.adapter = onAdapter
+
+        }
 
         cursor_today.close()
         cursor_only.close()
 
         sqlitedb.close()
-        dbManager.close()*/
+        dbManager.close()
 
         return root
     }

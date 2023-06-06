@@ -19,7 +19,7 @@ interface ActivityDao {
     suspend fun deleteAll()
 
     @Query("SELECT * FROM activities")
-    suspend fun getAllActivity() : List<ActivityTBL>
+    fun getAllActivity() : Flow<List<ActivityTBL>>
 
     @Query("SELECT * FROM activities WHERE aID = :id")
     fun setTodayCardByIds(id : Int) : List<ActivityTBL>

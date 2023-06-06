@@ -50,9 +50,9 @@ class MyActivity2Adapter(val context : Context, val onList : ArrayList<CardItem>
 
         holder.apply {
             bind(cardItem, context, View.OnClickListener {
-                var intent : Intent = Intent(context, PostActivity::class.java)
-                intent.putExtra("titleActivity", cardItem.title)
-                context.startActivity(intent)
+//                var intent : Intent = Intent(context, PostActivity::class.java)
+//                intent.putExtra("titleActivity", cardItem.title)
+//                context.startActivity(intent)
             })
         }
     }

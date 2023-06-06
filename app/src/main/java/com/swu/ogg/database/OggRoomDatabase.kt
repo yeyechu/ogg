@@ -1,6 +1,7 @@
 package com.swu.ogg.database
 
 import android.content.Context
+import android.widget.Toast
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -20,13 +21,10 @@ import kotlinx.coroutines.launch
     GuideTBL::class,
     ExplainTBL::class,
     LevelTBL::class,
-    MemberTBL::class,
     BadgeTBL::class,
     OnlyTBL::class,
     SpecialTBL::class,
-    StickerTBL::class,
-    UserProject::class,
-    PostProject::class], version = 1)
+    StickerTBL::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 public abstract class OggRoomDatabase : RoomDatabase() {
 
@@ -40,14 +38,14 @@ public abstract class OggRoomDatabase : RoomDatabase() {
     abstract fun specialActivityDao() : SpecialDao
 
     abstract fun levelDao() : LevelDao
-    abstract fun memberDao() : MemberDao
-    abstract fun memberLevelDao() : MemberLevelDao
+//    abstract fun memberDao() : MemberDao
+//    abstract fun memberLevelDao() : MemberLevelDao
 
     abstract fun badgeDao() : BadgeDao
     abstract fun stickerDao() : StickerDao
 
-    abstract fun userDao() : UserProjectDao
-    abstract fun postDao() : PostProjectDao
+//    abstract fun userDao() : UserProjectDao
+//    abstract fun postDao() : PostProjectDao
 
     private class OggDatabaseCallback(
         private val scope : CoroutineScope
@@ -56,22 +54,36 @@ public abstract class OggRoomDatabase : RoomDatabase() {
             super.onCreate(db)
             INSTANCE?.let{database ->
                 scope.launch {
-                    var activityDao = database.activityDao()
-                    activityDao.deleteAll()
 
-                    var cursorActivity = ActivityTBL(1, "C", "냉난방 온도 조절", 0.5f, 1001, 1, null, false, null)
-                    activityDao.insertActivity(cursorActivity)
 
-                    var userProjectDao = database.userDao()
-
-                    userProjectDao.deleteAll()
-
-                    var cursorUserProject = UserProject(0, 1, 1, 1, 1, 1)
-                    userProjectDao.insert(cursorUserProject)
-                    cursorUserProject = UserProject(1, 1, 1, 1, 1, 1)
-                    userProjectDao.insert(cursorUserProject)
-                    cursorUserProject = UserProject(2, 1, 1, 1, 1, 1)
-                    userProjectDao.insert(cursorUserProject)
+//                    // ───────────────────────────────────────────────────── Activity
+//                    var activityDao = database.activityDao()
+//                    activityDao.deleteAll()
+//
+//                    var cursorActivity = ActivityTBL(1, "C", "냉난방 온도 조절", 0.5f, 1001, 1, null, false, null)
+//                    activityDao.insertActivity(cursorActivity)
+//
+//                    // ───────────────────────────────────────────────────── Guide
+//                    var guideDao = database.guideDao()
+//                    guideDao.getAllGuide()
+//
+//                    var cursorGuide = GuideTBL(1, " ", null, 1)
+//                    guideDao.insertGuide(cursorGuide)
+//
+//                    // ─────────────────────────────────────────────────────
+//
+//
+//                    // ───────────────────────────────────────────────────── UserProject
+//                    var userProjectDao = database.userDao()
+//
+//                    userProjectDao.deleteAll()
+//
+//                    var cursorUserProject = UserProject(0, 1, 1, 1, 1, 1)
+//                    userProjectDao.insert(cursorUserProject)
+//                    cursorUserProject = UserProject(1, 1, 1, 1, 1, 1)
+//                    userProjectDao.insert(cursorUserProject)
+//                    cursorUserProject = UserProject(2, 1, 1, 1, 1, 1)
+//                    userProjectDao.insert(cursorUserProject)
                 }
             }
         }
@@ -95,6 +107,7 @@ public abstract class OggRoomDatabase : RoomDatabase() {
                 "ogg_database"
                 )
                     .addCallback(OggDatabaseCallback(scope))
+                    .fallbackToDestructiveMigration()
                     .build()
 
                 INSTANCE = instance

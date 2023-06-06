@@ -14,7 +14,7 @@ data class ActivityTBL(@PrimaryKey(autoGenerate = true) val aID: Int,
                        @ColumnInfo val aNum: Int,
                        @ColumnInfo val aFreq: Int,
                        @ColumnInfo val aLimit: Int?,
-                       @ColumnInfo val aGallery: Boolean?,
+                       @ColumnInfo val aGallery: Int?,
                        @ColumnInfo val aImg: Bitmap? = null
 )
 // 설명 테이블 : 설명ID | 디테일, 이미지, 활동ID(foreign)
@@ -69,37 +69,37 @@ data class ActivitiesWithGuides(
 
 // ────────────────────────────────────────────────────────────────────────────────────────────────
 // 레벨 테이블 : 레벨ID | 목표레벨명, 목표탄소
-@Entity(tableName = "levels", indices = [Index(value = ["lAim"], unique = true)])
+@Entity(tableName = "levels")
 data class LevelTBL(@PrimaryKey(autoGenerate = true) val lID: Int,
                     @ColumnInfo val lTitle : String,
                     @ColumnInfo val lAim : Float
 )
 
-// 멤버 테이블 : 멤버ID | 사용자ID, 사용자PW, 자동차소유형태, 프로젝트횟수, 목표탄소(foreign)
-@Entity(tableName = "members",
-    foreignKeys = [
-        ForeignKey(
-            entity = LevelTBL::class,
-            parentColumns = ["lAim"],
-            childColumns = ["levelAim"])])
-data class MemberTBL(@PrimaryKey(autoGenerate = true) val mID: Int,
-                     @ColumnInfo val mName: String,
-                     @ColumnInfo var mPw: String,
-                     @ColumnInfo var mCar: Int?,
-                     @ColumnInfo var mProject : Int = 0,
-
-                     @ColumnInfo var levelAim : Float?
-)
-
-// 레벨-멤버 테이블 관계 정의 : 외래키, 일대다
-data class LevelOfMembers(
-    @Embedded val level : LevelTBL,
-    @Relation(
-        parentColumn = "lAim",
-        entityColumn = "levelAim"
-    )
-    val member : List<MemberTBL>?
-)
+//// 멤버 테이블 : 멤버ID | 사용자ID, 사용자PW, 자동차소유형태, 프로젝트횟수, 목표탄소(foreign)
+//@Entity(tableName = "members",
+//    foreignKeys = [
+//        ForeignKey(
+//            entity = LevelTBL::class,
+//            parentColumns = ["lAim"],
+//            childColumns = ["levelAim"])])
+//data class MemberTBL(@PrimaryKey(autoGenerate = true) val mID: Int,
+//                     @ColumnInfo val mName: String,
+//                     @ColumnInfo var mPw: String,
+//                     @ColumnInfo var mCar: Int?,
+//                     @ColumnInfo var mProject : Int = 0,
+//
+//                     @ColumnInfo var levelAim : Float?
+//)
+//
+//// 레벨-멤버 테이블 관계 정의 : 외래키, 일대다
+//data class LevelOfMembers(
+//    @Embedded val level : LevelTBL,
+//    @Relation(
+//        parentColumn = "lAim",
+//        entityColumn = "levelAim"
+//    )
+//    val member : List<MemberTBL>?
+//)
 
 // ────────────────────────────────────────────────────────────────────────────────────────────────
 // 일회성 테이블 : 일회성ID | 제목, 활동분류, 활동가이드, 디테일, 탄소, 이미지
@@ -130,9 +130,9 @@ data class SpecialTBL(@PrimaryKey(autoGenerate = true) val sID: Int,
 @Entity(tableName = "badges")
 data class BadgeTBL(@PrimaryKey(autoGenerate = true) val bID: Int,
 
-                    @ColumnInfo(name = "bCode") val bCode: String,
+                    @ColumnInfo(name = "bCode") val bCode: String?,
                     @ColumnInfo(name = "bTitle") val bTitle: String,
-                    @ColumnInfo(name = "bRequire") val bRequire: String,
+                    @ColumnInfo(name = "bRequire") val bRequire: String?,
                     @ColumnInfo(name = "bImg") val bImg: Bitmap? = null
 )
 
