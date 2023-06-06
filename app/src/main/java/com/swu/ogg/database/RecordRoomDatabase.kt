@@ -120,55 +120,55 @@ abstract class BadgeDatabase : RoomDatabase() {
 
 
 //----------------explane-------------------------------------------------------------
-@Database(entities = [ExplanTBL::class], version = 1, exportSchema = true)
-@TypeConverters(RoomTypeConverter::class) //이미지 사용하는 경우에 필요
-abstract class ExplanDatabase : RoomDatabase() {
-
-    abstract fun explanDao(): ExplanDao
-
-    companion object {
-        @Volatile
-        private var INSTANCE: ExplanDatabase? = null
-
-        fun getDatabase(context: Context): ExplanDatabase {
-            val tempInstance = INSTANCE
-            if (tempInstance != null) return tempInstance
-            synchronized(this)  {
-                val instance = Room.databaseBuilder(context.applicationContext, ExplanDatabase::class.java, "oggDB.db")
-                    .createFromAsset("oggDB.db")
-                    .build()
-                INSTANCE = instance
-                return instance
-            }
-        }
-    }
-}
+//@Database(entities = [ExplainTBL::class], version = 1, exportSchema = true)
+//@TypeConverters(RoomTypeConverter::class) //이미지 사용하는 경우에 필요
+//abstract class ExplainDatabase : RoomDatabase() {
+//
+//    abstract fun explanDao(): ExplainDao
+//
+//    companion object {
+//        @Volatile
+//        private var INSTANCE: ExplainDatabase? = null
+//
+//        fun getDatabase(context: Context): ExplainDatabase {
+//            val tempInstance = INSTANCE
+//            if (tempInstance != null) return tempInstance
+//            synchronized(this)  {
+//                val instance = Room.databaseBuilder(context.applicationContext, ExplainDatabase::class.java, "oggDB.db")
+//                    .createFromAsset("oggDB.db")
+//                    .build()
+//                INSTANCE = instance
+//                return instance
+//            }
+//        }
+//    }
+//}
 
 
 //----------------guide-------------------------------------------------------------
-@Database(entities = [GuideTBL::class], version = 1, exportSchema = true)
-@TypeConverters(RoomTypeConverter::class) //이미지 사용하는 경우에 필요
-abstract class GuideDatabase : RoomDatabase() {
-
-    abstract fun guideDao(): GuideDao
-
-    companion object {
-        @Volatile
-        private var INSTANCE: GuideDatabase? = null
-
-        fun getDatabase(context: Context): GuideDatabase {
-            val tempInstance = INSTANCE
-            if (tempInstance != null) return tempInstance
-            synchronized(this)  {
-                val instance = Room.databaseBuilder(context.applicationContext, GuideDatabase::class.java, "oggDB.db")
-                    .createFromAsset("oggDB.db")
-                    .build()
-                INSTANCE = instance
-                return instance
-            }
-        }
-    }
-}
+//@Database(entities = [GuideTBL::class], version = 1, exportSchema = true)
+//@TypeConverters(RoomTypeConverter::class) //이미지 사용하는 경우에 필요
+//abstract class GuideDatabase : RoomDatabase() {
+//
+//    abstract fun guideDao(): GuideDao
+//
+//    companion object {
+//        @Volatile
+//        private var INSTANCE: GuideDatabase? = null
+//
+//        fun getDatabase(context: Context): GuideDatabase {
+//            val tempInstance = INSTANCE
+//            if (tempInstance != null) return tempInstance
+//            synchronized(this)  {
+//                val instance = Room.databaseBuilder(context.applicationContext, GuideDatabase::class.java, "oggDB.db")
+//                    .createFromAsset("oggDB.db")
+//                    .build()
+//                INSTANCE = instance
+//                return instance
+//            }
+//        }
+//    }
+//}
 
 
 //----------------level-------------------------------------------------------------
@@ -222,54 +222,54 @@ abstract class LevelDatabase : RoomDatabase() {
 //}
 
 //----------------oneoff-------------------------------------------------------------
-@Database(entities = [OneoffTBL::class], version = 1, exportSchema = true)
-@TypeConverters(RoomTypeConverter::class) //이미지 사용하는 경우에 필요
-abstract class OneoffDatabase : RoomDatabase() {
-
-    abstract fun oneoffDao(): OneoffDao
-
-    companion object {
-        @Volatile
-        private var INSTANCE: OneoffDatabase? = null
-
-        fun getDatabase(context: Context): OneoffDatabase {
-            val tempInstance = INSTANCE
-            if (tempInstance != null) return tempInstance
-            synchronized(this)  {
-                val instance = Room.databaseBuilder(context.applicationContext, OneoffDatabase::class.java, "oggDB.db")
-                    .createFromAsset("oggDB.db")
-                    .build()
-                INSTANCE = instance
-                return instance
-            }
-        }
-    }
-}
+//@Database(entities = [OneoffTBL::class], version = 1, exportSchema = true)
+//@TypeConverters(RoomTypeConverter::class) //이미지 사용하는 경우에 필요
+//abstract class OneoffDatabase : RoomDatabase() {
+//
+//    abstract fun oneoffDao(): OneoffDao
+//
+//    companion object {
+//        @Volatile
+//        private var INSTANCE: OneoffDatabase? = null
+//
+//        fun getDatabase(context: Context): OneoffDatabase {
+//            val tempInstance = INSTANCE
+//            if (tempInstance != null) return tempInstance
+//            synchronized(this)  {
+//                val instance = Room.databaseBuilder(context.applicationContext, OneoffDatabase::class.java, "oggDB.db")
+//                    .createFromAsset("oggDB.db")
+//                    .build()
+//                INSTANCE = instance
+//                return instance
+//            }
+//        }
+//    }
+//}
 
 //----------------particul-------------------------------------------------------------
-@Database(entities = [ParticulTBL::class], version = 1, exportSchema = true)
-@TypeConverters(RoomTypeConverter::class) //이미지 사용하는 경우에 필요
-abstract class ParticulDatabase : RoomDatabase() {
-
-    abstract fun particulDao(): ParticulDao
-
-    companion object {
-        @Volatile
-        private var INSTANCE: ParticulDatabase? = null
-
-        fun getDatabase(context: Context): ParticulDatabase {
-            val tempInstance = INSTANCE
-            if (tempInstance != null) return tempInstance
-            synchronized(this)  {
-                val instance = Room.databaseBuilder(context.applicationContext, ParticulDatabase::class.java, "oggDB.db")
-                    .createFromAsset("oggDB.db")
-                    .build()
-                INSTANCE = instance
-                return instance
-            }
-        }
-    }
-}
+//@Database(entities = [ParticulTBL::class], version = 1, exportSchema = true)
+//@TypeConverters(RoomTypeConverter::class) //이미지 사용하는 경우에 필요
+//abstract class ParticulDatabase : RoomDatabase() {
+//
+//    abstract fun particulDao(): ParticulDao
+//
+//    companion object {
+//        @Volatile
+//        private var INSTANCE: ParticulDatabase? = null
+//
+//        fun getDatabase(context: Context): ParticulDatabase {
+//            val tempInstance = INSTANCE
+//            if (tempInstance != null) return tempInstance
+//            synchronized(this)  {
+//                val instance = Room.databaseBuilder(context.applicationContext, ParticulDatabase::class.java, "oggDB.db")
+//                    .createFromAsset("oggDB.db")
+//                    .build()
+//                INSTANCE = instance
+//                return instance
+//            }
+//        }
+//    }
+//}
 
 //----------------particul-------------------------------------------------------------
 @Database(entities = [StickerTBL::class], version = 1, exportSchema = true)

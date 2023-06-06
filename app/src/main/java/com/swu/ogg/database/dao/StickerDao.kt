@@ -2,18 +2,19 @@ package com.swu.ogg.database.dao
 
 import androidx.room.*
 import com.swu.ogg.database.StickerTBL
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface StickerDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertSticker(vararg sID: StickerTBL)
+    suspend fun insertSticker(vararg stickers : StickerTBL)
 
     @Update
-    fun updateSticker(vararg sID: StickerTBL)
+    suspend fun updateSticker(vararg stickers : StickerTBL)
 
     @Delete
-    fun deleteSticker(sID: StickerTBL)
+    suspend fun deleteSticker(stickers : StickerTBL)
 
-    @Query("SELECT * FROM StickerTBL")
-    fun getAllParticul(): List<StickerTBL>
+    @Query("SELECT * FROM stickers")
+    fun getAllSticker(): Flow<List<StickerTBL>>
 }

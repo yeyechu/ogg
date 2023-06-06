@@ -7,17 +7,15 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface LevelDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertLevel(vararg lID: LevelTBL)
+    suspend fun insertLevel(vararg levels : LevelTBL)
 
     @Update
-    fun updateLevel(vararg lID: LevelTBL)
+    fun updateLevel(vararg levels : LevelTBL)
 
     @Delete
-    fun deleteLevel(lID: LevelTBL)
+    fun deleteLevel(levels : LevelTBL)
 
-    @Query("SELECT * FROM LevelTBL")
+    @Query("SELECT * FROM levels")
     fun getAllLevel() : List<LevelTBL>
 
-    @Query("SELECT * FROM levelTBL ORDER BY lID ASC")
-    fun getAlphabetizedLevel(): Flow<List<LevelTBL>>
 }

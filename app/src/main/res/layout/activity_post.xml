@@ -150,7 +150,7 @@
                 android:layout_marginBottom="@dimen/small_padding"
                 android:gravity="center"
                 android:maxLines="1"
-                android:text="인증 가능 횟수"
+                android:text="등록 가능 횟수"
                 android:textSize="17sp"
                 android:fontFamily="@font/nanumsquare_eb"
                 android:textColor="@color/black" />
@@ -173,7 +173,7 @@
                 android:layout_marginBottom="@dimen/small_padding"
                 android:gravity="center"
                 android:maxLines="1"
-                android:text="인증 세부 미션"
+                android:text="활동 방법"
                 android:textSize="17sp"
                 android:fontFamily="@font/nanumsquare_eb"
                 android:textColor="@color/black" />

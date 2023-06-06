@@ -7,17 +7,20 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface BadgeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertBadge(vararg bID: BadgeTBL)
+    suspend fun insertBadge(vararg badges : BadgeTBL)
 
     @Update
-    fun updateBadge(vararg bID: BadgeTBL)
+    fun updateBadge(vararg badges : BadgeTBL)
 
     @Delete
-    fun deleteBadge(bID: BadgeTBL)
+    fun deleteBadge(badges : BadgeTBL)
 
-    @Query("SELECT * FROM badgeTBL")
-    fun getAllBadge() : List<BadgeTBL>
+    @Query("SELECT * FROM badges")
+    fun getAllBadge() : Flow<List<BadgeTBL>>
 
-    @Query("SELECT * FROM badgeTBL ORDER BY bID ASC")
+    @Query("SELECT * FROM badges ORDER BY bID ASC")
     fun getAlphabetizedBadge(): Flow<List<BadgeTBL>>
+
+    @Query("SELECT * FROM badges WHERE bcode = :code")
+    fun getBadgesByCode(code : String) : Flow<List<BadgeTBL>>
 }
