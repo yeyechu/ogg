@@ -3,7 +3,7 @@ package com.swu.ogg.database
 import androidx.annotation.WorkerThread
 import com.swu.ogg.database.dao.ActivityDao
 import com.swu.ogg.database.dao.BadgeDao
-import com.swu.ogg.database.dao.ExplanDao
+import com.swu.ogg.database.dao.ExplainDao
 import kotlinx.coroutines.flow.Flow
 
 // 쿼리를 관리하고 여러 백엔드를 사용하도록 허용
@@ -46,10 +46,10 @@ class BadgeRepository(
 }
 
 class ExplanRepository(
-    private val explanDao: ExplanDao
+    private val explainDao: ExplainDao
 ) {
-    suspend fun getAllExpenses() = explanDao.getAllExplan()
-    suspend fun insertExpense(explan : ExplanTBL) = explanDao.insertExplan(explan)
-    suspend fun updateExpense(explan : ExplanTBL) = explanDao.updateExplan(explan)
-    suspend fun deleteExpense(explan : ExplanTBL) = explanDao.deleteExplan(explan)
+    suspend fun getAllExpenses() = explainDao.getAllExplan()
+    suspend fun insertExpense(explan : ExplainTBL) = explainDao.insertExplan(explan)
+    suspend fun updateExpense(explan : ExplainTBL) = explainDao.updateExplan(explan)
+    suspend fun deleteExpense(explan : ExplainTBL) = explainDao.deleteExplan(explan)
 }

@@ -197,29 +197,29 @@ abstract class LevelDatabase : RoomDatabase() {
 }
 
 //----------------member-------------------------------------------------------------
-@Database(entities = [MemberTBL::class], version = 1, exportSchema = true)
-@TypeConverters(RoomTypeConverter::class) //이미지 사용하는 경우에 필요
-abstract class MemberDatabase : RoomDatabase() {
-
-    abstract fun memberDao(): MemberDao
-
-    companion object {
-        @Volatile
-        private var INSTANCE: MemberDatabase? = null
-
-        fun getDatabase(context: Context): MemberDatabase {
-            val tempInstance = INSTANCE
-            if (tempInstance != null) return tempInstance
-            synchronized(this)  {
-                val instance = Room.databaseBuilder(context.applicationContext, MemberDatabase::class.java, "oggDB.db")
-                    .createFromAsset("oggDB.db")
-                    .build()
-                INSTANCE = instance
-                return instance
-            }
-        }
-    }
-}
+//@Database(entities = [MemberTBL::class], version = 1, exportSchema = true)
+//@TypeConverters(RoomTypeConverter::class) //이미지 사용하는 경우에 필요
+//abstract class MemberDatabase : RoomDatabase() {
+//
+//    abstract fun memberDao(): MemberDao
+//
+//    companion object {
+//        @Volatile
+//        private var INSTANCE: MemberDatabase? = null
+//
+//        fun getDatabase(context: Context): MemberDatabase {
+//            val tempInstance = INSTANCE
+//            if (tempInstance != null) return tempInstance
+//            synchronized(this)  {
+//                val instance = Room.databaseBuilder(context.applicationContext, MemberDatabase::class.java, "oggDB.db")
+//                    .createFromAsset("oggDB.db")
+//                    .build()
+//                INSTANCE = instance
+//                return instance
+//            }
+//        }
+//    }
+//}
 
 //----------------oneoff-------------------------------------------------------------
 @Database(entities = [OneoffTBL::class], version = 1, exportSchema = true)
