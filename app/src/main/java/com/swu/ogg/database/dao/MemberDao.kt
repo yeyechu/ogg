@@ -1,8 +1,26 @@
 package com.swu.ogg.database.dao
 
 import androidx.room.*
+import com.swu.ogg.database.LevelOfMembers
+import com.swu.ogg.database.LevelTBL
 import com.swu.ogg.database.MemberTBL
 import kotlinx.coroutines.flow.Flow
+
+@Dao
+interface LevelDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertLevel(vararg levels : LevelTBL)
+
+    @Update
+    fun updateLevel(vararg levels : LevelTBL)
+
+    @Delete
+    fun deleteLevel(levels : LevelTBL)
+
+    @Query("SELECT * FROM levels")
+    fun getAllLevel() : List<LevelTBL>
+
+}
 
 @Dao
 interface MemberDao {
@@ -27,7 +45,10 @@ interface MemberDao {
 interface MemberLevelDao{
 
     @Transaction
-    @Query("SELECT levelAim FROM members WHERE mID = :memberID")
-    fun getLevelOfMembers(memberID : String) : Float
+    @Query("SELECT * from levels")
+    suspend fun getAll() : List<LevelOfMembers>?
+    @Transaction
+    @Query("SELECT * FROM levels WHERE lAim = :levelAim")
+    suspend fun getLevelOfMembers(levelAim : Float) : LevelOfMembers?
 
 }

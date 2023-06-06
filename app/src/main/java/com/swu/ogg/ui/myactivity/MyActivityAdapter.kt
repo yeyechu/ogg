@@ -12,15 +12,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.swu.ogg.R
+import com.swu.ogg.database.UserProject
 import com.swu.ogg.ui.myactivity.post.PostActivity
 
 // 오늘의 활동에 대한 어댑터
-
 data class CardItem(
     val image : Bitmap,
     val title : String,
     val co2 : String,
 )
+
 class MyActivityAdapter (val context : Context, val toList : ArrayList<CardItem>)
     : RecyclerView.Adapter<MyActivityAdapter.CardViewHolder>() {
 
@@ -42,16 +43,20 @@ class MyActivityAdapter (val context : Context, val toList : ArrayList<CardItem>
             button?.setOnClickListener(onClickListener)
             doneFrame?.visibility
             textDone?.text
+        }
 
+        companion object {
+            fun create(parent: ViewGroup) : CardViewHolder {
+
+                val view : View = LayoutInflater.from(parent.context).inflate(R.layout.myactivity_card_item, parent, false)
+                return CardViewHolder(view)
+            }
         }
     }
 
     // 뷰 생성
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.myactivity_card_item, parent, false)
-
-        return  CardViewHolder(view)
+        return  CardViewHolder.create(parent)
     }
 
     // 뷰 내용 전환

@@ -54,7 +54,7 @@ data class ActivitiesWithExplains(
         parentColumn = "aID",
         entityColumn = "activityID"
     )
-    val explan : List<ExplainTBL>?
+    val explain : List<ExplainTBL>?
 )
 
 // 활동-가이드 테이블 관계 정의 : 외래키/일대일
@@ -64,18 +64,18 @@ data class ActivitiesWithGuides(
         parentColumn = "aID",
         entityColumn = "activityID"
     )
-    val explan : GuideTBL
+    val explain : GuideTBL
 )
 
 // ────────────────────────────────────────────────────────────────────────────────────────────────
 // 레벨 테이블 : 레벨ID | 목표레벨명, 목표탄소
-@Entity(tableName = "levels")
+@Entity(tableName = "levels", indices = [Index(value = ["lAim"], unique = true)])
 data class LevelTBL(@PrimaryKey(autoGenerate = true) val lID: Int,
                     @ColumnInfo val lTitle : String,
                     @ColumnInfo val lAim : Float
 )
 
-// 멤버 테이블 : 멤버ID | 사용자ID, 사용자PW, 자동차소유형태, 목표탄소(foreign)
+// 멤버 테이블 : 멤버ID | 사용자ID, 사용자PW, 자동차소유형태, 프로젝트횟수, 목표탄소(foreign)
 @Entity(tableName = "members",
     foreignKeys = [
         ForeignKey(
@@ -84,13 +84,14 @@ data class LevelTBL(@PrimaryKey(autoGenerate = true) val lID: Int,
             childColumns = ["levelAim"])])
 data class MemberTBL(@PrimaryKey(autoGenerate = true) val mID: Int,
                      @ColumnInfo val mName: String,
-                     @ColumnInfo val mPw: String,
-                     @ColumnInfo val mCar: Int?,
+                     @ColumnInfo var mPw: String,
+                     @ColumnInfo var mCar: Int?,
+                     @ColumnInfo var mProject : Int = 0,
 
-                     @ColumnInfo val levelAim : Float?
+                     @ColumnInfo var levelAim : Float?
 )
 
-// 레벨-멤버 테이블 관계 정의
+// 레벨-멤버 테이블 관계 정의 : 외래키, 일대다
 data class LevelOfMembers(
     @Embedded val level : LevelTBL,
     @Relation(

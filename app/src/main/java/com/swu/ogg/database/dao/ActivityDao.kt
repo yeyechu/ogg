@@ -15,8 +15,11 @@ interface ActivityDao {
     @Delete
     suspend fun deleteActivity(activities : ActivityTBL)
 
+    @Query("DELETE FROM activities")
+    suspend fun deleteAll()
+
     @Query("SELECT * FROM activities")
-    fun getAllActivity() : Flow<List<ActivityTBL>>
+    suspend fun getAllActivity() : List<ActivityTBL>
 
     @Query("SELECT * FROM activities WHERE aID = :id")
     fun setTodayCardByIds(id : Int) : List<ActivityTBL>
@@ -33,24 +36,20 @@ interface ExplainDao {
     @Delete
     fun deleteExplain(explains : ExplainTBL)
 
-    @Query("SELECT * FROM explains")
-    fun getAllExplain() : Flow<List<ExplainTBL>>
-
-    @Query("SELECT * FROM explains ORDER BY eID ASC")
-    fun getAllByIds(): Flow<List<ExplainTBL>>
+    @Query("SELECT * FROM explains WHERE activityID = :activityID")
+    fun getAllByIds(activityID : Int): List<ExplainTBL>
 
 }
 // ────────────────────────────────────────────────── 외래키
 @Dao
-interface ActivityExplainDao{
+interface ActivityExplainDao {
 
     @Transaction
-    @Query("SELECT * FROM activities ")
-    fun getAllActivitiesWithExplains() : List<ActivitiesWithExplains>?
+    @Query("SELECT * FROM activities")
+    suspend fun getAllActivitiesWithExplains() : List<ActivitiesWithExplains>?
     @Transaction
-    @Query("SELECT * FROM activities WHERE activities.aID = :id")
-    fun getActivitiesWithExplains(id : Int) : ActivitiesWithExplains?
-
+    @Query("SELECT * FROM activities WHERE aID = :activityID")
+    fun getActivitiesWithExplains(activityID : Int) : ActivitiesWithExplains?
 }
 
 @Dao
@@ -71,19 +70,22 @@ interface GuideDao {
     fun getAlphabetizedGuide(): Flow<List<GuideTBL>>
 
     //────────────────────────────────────────────────── 외래키
-    @Transaction
-    @Query("SELECT * FROM guidelines WHERE activityID = :id")
-    fun getActivitiesWithGuides(id : Int) : Int
+//    @Transaction
+//    @Query("SELECT * FROM guideslines")
+//    fun getAllActivitiesWithGuides() : List<GuideTBL>
+//    @Transaction
+//    @Query("SELECT * FROM guidelines WHERE activityID = :id")
+//    fun getActivitiesWithGuides(id : Int) : Int
 
 }
 @Dao
 interface ActivityGuideDao {
 
     @Transaction
-    @Query("SELECT * FROM activities ")
+    @Query("SELECT * FROM activities")
     fun getAllActivitiesWithGuides() : List<ActivitiesWithGuides>
     @Transaction
-    @Query("SELECT * FROM activities WHERE activities.aID = :id")
-    fun getActivitiesWithGuides(id : Int) : ActivitiesWithGuides
+    @Query("SELECT * FROM activities WHERE aID = :activityID")
+    fun getActivitiesWithGuides(activityID : Int) : ActivitiesWithGuides
 
 }

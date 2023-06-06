@@ -47,97 +47,33 @@
                 android:maxHeight="67dp"
                 android:adjustViewBounds="true"
                 android:layout_gravity="fill_horizontal"
+                android:layout_marginBottom="3dp"
                 android:gravity="center"
-                android:src="@drawable/baseline_add_photo_alternate_24"
-                android:contentDescription="@string/app_name"
-
-                />
-
-            <LinearLayout
-                android:id="@+id/btnmargin1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_margin="@dimen/btn_padding"
-                >
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:src="@drawable/baseline_add_photo_alternate_24" />
 
                 <TextView
                     android:id="@+id/tv_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-
+                    android:layout_marginBottom="3dp"
                     android:autoSizeMaxTextSize="13sp"
                     android:autoSizeMinTextSize="8sp"
                     android:autoSizeTextType="uniform"
-
                     android:fontFamily="@font/nanumsquare_b"
                     android:gravity="center"
                     android:maxLines="1"
-                    android:text="냉장고 관리하기"
-
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/btnmargin2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_margin="@dimen/btn_padding"
-                >
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/C"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20px"
-                android:layout_marginRight="20px"
-                android:orientation="horizontal">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="fill_horizontal"
-                    android:fontFamily="@font/nanumsquare_b"
-                    android:gravity="center"
-                    android:text="@string/c_reduction"
-                    android:textSize="10sp" />
+                    android:text="냉장고 관리하기" />
 
                 <TextView
                     android:id="@+id/tv_co2"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="3dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="3dp"
                     android:fontFamily="@font/nanumsquare_r"
-                    android:text="0.05kg"
+                    android:text="탄소 감축량 0.05kg"
                     android:textSize="10sp" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/btnmargin3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_margin="@dimen/btn_padding"
-                >
-
-            </LinearLayout>
-
 
             <android.widget.Button
                 android:id="@+id/btn"

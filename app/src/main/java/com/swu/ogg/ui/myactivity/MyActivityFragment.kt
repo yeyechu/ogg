@@ -30,8 +30,8 @@ class MyActivityFragment : Fragment() {
     var todayList = ArrayList<CardItem>()
     var onlyList = ArrayList<CardItem>()
 
-    lateinit var dbManager: dbHelper
-    lateinit var sqlitedb: SQLiteDatabase
+    //lateinit var dbManager: dbHelper
+    //lateinit var sqlitedb: SQLiteDatabase
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -103,15 +103,38 @@ class MyActivityFragment : Fragment() {
 
 
         // ─────────────────────────────────── 리사이클러뷰 ───────────────────────────────────
-      /*  dbManager = dbHelper(context, "oggDB.db")
 
         val recyclerViewToday = binding.todayCardList
         val recyclerViewOnly = binding.onlyCardList
 
-        sqlitedb = dbManager.readableDatabase
-
         todayList.clear()
         onlyList.clear()
+
+//        val todayAdapter = MyActivityAdapter()
+//        recyclerViewToday.adapter = todayAdapter
+
+        // ViewModel에 변경을 알리는 observer 구현
+        // tolist : 오늘의 활동에 대한 내용
+        // onlist : 일회성 활동에 대한 내용
+
+
+        myActivityViewModel.tolist.observe(viewLifecycleOwner) {
+
+            val tolist : ArrayList<CardItem> = todayList
+            val toAdapter = MyActivityAdapter(requireContext(), tolist)
+            recyclerViewToday.adapter = toAdapter
+        }
+
+        myActivityViewModel.onlist.observe(viewLifecycleOwner) {
+
+            val onlist : ArrayList<CardItem> = onlyList
+            val onAdapter = MyActivity2Adapter(requireContext(), onlist)
+            recyclerViewOnly.adapter = onAdapter
+
+        }
+
+      /*  dbManager = dbHelper(context, "oggDB.db")
+        sqlitedb = dbManager.readableDatabase
 
         // DB에서 불러온 데이터 연결
 
@@ -139,25 +162,7 @@ class MyActivityFragment : Fragment() {
             onlyList.add(CardItem(bitmap, title, co2))
         }
 
-        // ViewModel에 변경을 알리는 observer 구현
-        // tolist : 오늘의 활동에 대한 내용
-        // onlist : 일회성 활동에 대한 내용
 
-
-        myActivityViewModel.tolist.observe(viewLifecycleOwner) {
-
-            val tolist : ArrayList<CardItem> = todayList
-            val toAdapter = MyActivityAdapter(requireContext(), tolist)
-            recyclerViewToday.adapter = toAdapter
-        }
-
-        myActivityViewModel.onlist.observe(viewLifecycleOwner) {
-
-            val onlist : ArrayList<CardItem> = onlyList
-            val onAdapter = MyActivity2Adapter(requireContext(), onlist)
-            recyclerViewOnly.adapter = onAdapter
-
-        }
 
         cursor_today.close()
         cursor_only.close()

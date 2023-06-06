@@ -23,33 +23,3 @@ class RecordRepository(private val recordDao: RecordDao) {
         recordDao.insert(record)
     }
 }
-
-class ActivityRepository(
-    private val activityDao: ActivityDao
-) {
-//    val allRecords : Flow<List<ActivityTBL>> = activityDao.getAlphabetizedActivity()
-//
-//    @Suppress("RedundantSuspendModifier")
-//    @WorkerThread
-//    suspend fun insert(record : ActivityTBL) {
-//        activityDao.insertActivity(record)
-//    }
-}
-
-class BadgeRepository(
-    private val badgeDao: BadgeDao
-) {
-    suspend fun getAllExpenses() = badgeDao.getAllBadge()
-    suspend fun insertExpense(badge : BadgeTBL) = badgeDao.insertBadge(badge)
-    suspend fun updateExpense(badge : BadgeTBL) = badgeDao.updateBadge(badge)
-    suspend fun deleteExpense(badge : BadgeTBL) = badgeDao.deleteBadge(badge)
-}
-
-class ExplainRepository(
-    private val explainDao: ExplainDao
-) {
-//    suspend fun getAllExpenses() = explainDao.getAllExplan()
-//    suspend fun insertExpense(explan : ExplainTBL) = explainDao.insertExplan(explan)
-//    suspend fun updateExpense(explan : ExplainTBL) = explainDao.updateExplan(explan)
-//    suspend fun deleteExpense(explan : ExplainTBL) = explainDao.deleteExplan(explan)
-}
