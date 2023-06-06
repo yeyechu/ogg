@@ -10,19 +10,16 @@ import java.io.ByteArrayOutputStream
 // ( Room에서는 기본형 이외의 자료를 저장하기 위해서는 TypeConvert를 사용합니다. )
 
 //TypeConvert는 기본 자료형 이외의 자료를 저장할때 형변환을 자동으로 해주는 코드
-class RoomTypeConverter {
-
-    // Bitmap -> ByteArray 변환
+object Converters {
     @TypeConverter
-    fun toByteArray(bitmap : Bitmap) : ByteArray{
+    fun fromBitmap(bitmap: Bitmap): ByteArray {
         val outputStream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
         return outputStream.toByteArray()
     }
 
-    // ByteArray -> Bitmap 변환
     @TypeConverter
-    fun toBitmap(bytes : ByteArray) : Bitmap {
+    fun toBitmap(bytes: ByteArray): Bitmap {
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
     }
 }

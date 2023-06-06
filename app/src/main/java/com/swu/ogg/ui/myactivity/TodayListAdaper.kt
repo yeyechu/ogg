@@ -1,66 +1,38 @@
 package com.swu.ogg.ui.myactivity
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.swu.ogg.R
 import com.swu.ogg.database.UserProject
+import com.swu.ogg.databinding.TestUserItemBinding
 
-class TodayListAdaper : ListAdapter<UserProject, TodayListAdaper.CardViewHolder>(CardComparator()) {
+class TodayListAdaper : RecyclerView.Adapter<TodayListAdaper.CardViewHolder>() {
+
+    private var projectList = emptyList<UserProject>()
+    class CardViewHolder(val binding : TestUserItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType : Int) : CardViewHolder {
-        return CardViewHolder.create(parent)
+        val binding = TestUserItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return CardViewHolder(binding)
     }
     override fun onBindViewHolder(holder : CardViewHolder, position : Int) {
 
-        val current = getItem(position)
-        holder.bind(current.uIndex)
-    }
-    class CardViewHolder(view : View?) : RecyclerView.ViewHolder(view!!) {
+        val currentItem = projectList[position]
 
-        val textTitle = view?.findViewById<TextView>(R.id.tv_title)
-        val textCo2 = view?.findViewById<TextView>(R.id.tv_co2)
-        val image = view?.findViewById<ImageView>(R.id.img_view)
-        val button = view?.findViewById<Button>(R.id.btn)
-
-        val doneFrame = view?.findViewById<FrameLayout>(R.id.done_layout)
-        val textDone = view?.findViewById<TextView>(R.id.tv_done)
-
-        fun bind(Index : Int?) {
-
-            textTitle?.text = Index.toString()
-//            textCo2?.text
-//            image?.setImageBitmap(room.image)
-//            button?.setOnClickListener(onClickListener)
-//            doneFrame?.visibility
-//            textDone?.text
-        }
-
-        companion object {
-            fun create(parent : ViewGroup) : CardViewHolder {
-
-                val view : View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.myactivity_card_item, parent, false)
-                return CardViewHolder(view)
-            }
-        }
+        holder.binding.text1.text = currentItem.project1.toString()
+        holder.binding.text2.text = currentItem.project2.toString()
+        holder.binding.text3.text = currentItem.project3.toString()
+        holder.binding.text4.text = currentItem.project4.toString()
+        holder.binding.text5.text = currentItem.project5.toString()
     }
 
-    class CardComparator : DiffUtil.ItemCallback<UserProject>() {
+    override fun getItemCount(): Int {
+        return projectList.size
+    }
 
-        override fun areItemsTheSame(oldItem: UserProject, newItem: UserProject): Boolean {
-            return oldItem === newItem
-        }
-
-        override fun areContentsTheSame(oldItem: UserProject, newItem: UserProject): Boolean {
-            return oldItem.uIndex == newItem.uIndex
-        }
+    fun setDate(project : List<UserProject>) {
+        projectList = project
+        notifyDataSetChanged()
     }
 }

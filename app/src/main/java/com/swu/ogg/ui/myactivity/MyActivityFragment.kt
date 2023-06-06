@@ -11,10 +11,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.swu.ogg.MainActivity
 import com.swu.ogg.R
+import com.swu.ogg.database.CardViewModel
+import com.swu.ogg.database.CardViewModelFactory
+import com.swu.ogg.database.OggApplication
 import com.swu.ogg.databinding.FragmentMyactivityBinding
 import com.swu.ogg.dbHelper
 
@@ -41,6 +48,8 @@ class MyActivityFragment : Fragment() {
     ): View {
         val myActivityViewModel =
             ViewModelProvider(this).get(MyActivityViewModel::class.java)
+
+        //val cardViewModel = ViewModelProvider(this).get(CardViewModel::class.java)
 
         _binding = FragmentMyactivityBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -110,28 +119,26 @@ class MyActivityFragment : Fragment() {
         todayList.clear()
         onlyList.clear()
 
-//        val todayAdapter = MyActivityAdapter()
-//        recyclerViewToday.adapter = todayAdapter
 
         // ViewModel에 변경을 알리는 observer 구현
         // tolist : 오늘의 활동에 대한 내용
         // onlist : 일회성 활동에 대한 내용
 
 
-        myActivityViewModel.tolist.observe(viewLifecycleOwner) {
-
-            val tolist : ArrayList<CardItem> = todayList
-            val toAdapter = MyActivityAdapter(requireContext(), tolist)
-            recyclerViewToday.adapter = toAdapter
-        }
-
-        myActivityViewModel.onlist.observe(viewLifecycleOwner) {
-
-            val onlist : ArrayList<CardItem> = onlyList
-            val onAdapter = MyActivity2Adapter(requireContext(), onlist)
-            recyclerViewOnly.adapter = onAdapter
-
-        }
+//        myActivityViewModel.tolist.observe(viewLifecycleOwner) {
+//
+//            val tolist : ArrayList<CardItem> = todayList
+//            val toAdapter = MyActivityAdapter(requireContext(), tolist)
+//            recyclerViewToday.adapter = toAdapter
+//        }
+//
+//        myActivityViewModel.onlist.observe(viewLifecycleOwner) {
+//
+//            val onlist : ArrayList<CardItem> = onlyList
+//            val onAdapter = MyActivity2Adapter(requireContext(), onlist)
+//            recyclerViewOnly.adapter = onAdapter
+//
+//        }
 
       /*  dbManager = dbHelper(context, "oggDB.db")
         sqlitedb = dbManager.readableDatabase

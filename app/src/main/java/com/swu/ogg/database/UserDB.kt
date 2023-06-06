@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 
 // 유저활동 테이블 : 인덱스(1~21) | 등록활동(1~5)
 @Entity(tableName = "user_project")
-data class UserProject (@PrimaryKey(autoGenerate = true) val uIndex : Int = 1,
+data class UserProject (@PrimaryKey(autoGenerate = true) val uIndex : Int,
 
                         @ColumnInfo var project1 : Int?,
                         @ColumnInfo var project2 : Int?,

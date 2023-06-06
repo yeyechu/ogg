@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">OGG</string>
 
-        <!-- ───────────────────────── 전체 UI ───────────────────────── -->
+    <!-- ───────────────────────── 전체 UI ───────────────────────── -->
     <!-- 페이지 제목 -->
     <string name="title_env">환경</string>
     <string name="title_myactivity">활동</string>

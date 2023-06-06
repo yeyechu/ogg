@@ -10,7 +10,7 @@ class OggRepository(private val userDao : UserProjectDao) {
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun insert(user : UserProject){
-        userDao.insert(user)
+    suspend fun insert(project : UserProject){
+        userDao.insert(project)
     }
 }

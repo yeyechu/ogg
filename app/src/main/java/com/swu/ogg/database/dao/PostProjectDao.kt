@@ -19,9 +19,9 @@ interface PostProjectDao {
     @Query("DELETE FROM post_project")
     suspend fun deleteAll()
 
-    @Query("DELETE FROM post_project WHERE project_number = :num")
-    suspend fun deleteSet(num : Int)
+//    @Query("DELETE * FROM post_project WHERE project_number = :num")
+//    suspend fun deleteSet(num : Int)
 
     @Query("SELECT * FROM post_project")
-    fun getAllPostList(index : Int) : Flow<List<PostProject>>
+    fun getAllPostList() : Flow<List<PostProject>>
 }

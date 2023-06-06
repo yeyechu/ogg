@@ -85,9 +85,11 @@ class EnvFragment : Fragment() {
 
         startButton.setOnClickListener {
 
-            beforeLayout.visibility = View.GONE
-            afterLayout.visibility = View.VISIBLE
-            expandButton.visibility = View.VISIBLE
+//            beforeLayout.visibility = View.GONE
+//            afterLayout.visibility = View.VISIBLE
+//            expandButton.visibility = View.VISIBLE
+            val intent = Intent(context, StartProjectActivity::class.java)
+            startActivity(intent)
         }
 
         // ──────────────────────────────── 프로젝트 시작 레이아웃 ────────────────────────────────

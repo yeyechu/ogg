@@ -13,6 +13,7 @@ import androidx.activity.viewModels
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -26,13 +27,7 @@ import java.io.InputStream
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-
-    // DB에 현재 콘텐츠 표시를 위해 ViewModel에서 LiveData를 관찰하는 관찰자 추가
-    private val newRecordActivityRequestCode = 1
-    private val recordViewModel : RecordViewModel by viewModels {
-        RecordViewModelFactory((application as RecordsApplication).repository)
-    }
+    private lateinit var binding : ActivityMainBinding
 
 //    val filePath : String = "/data/data/com.swu.ogg/databases/"
 //    lateinit var  sqlDB : SQLiteDatabase
@@ -61,8 +56,8 @@ class MainActivity : AppCompatActivity() {
 
         val fab : FloatingActionButton = binding.fab
         fab.setOnClickListener {
-            val intent = Intent(this@MainActivity, NewRecordActivity::class.java)
-            startActivityForResult(intent, newRecordActivityRequestCode)
+//            val intent = Intent(this@MainActivity, NewRecordActivity::class.java)
+//            startActivityForResult(intent, newRecordActivityRequestCode)
         }
 
         // ─────────────────────────────────── DB 불러오기 ───────────────────────────────────
@@ -89,24 +84,6 @@ class MainActivity : AppCompatActivity() {
     // 툴바 클릭 이벤트 정의
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return super.onOptionsItemSelected(item)
-    }
-
-    // ─────────────────────────────────── 플로팅버튼 연결 ───────────────────────────────────
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
-        super.onActivityResult(requestCode, resultCode, intentData)
-
-        if(requestCode == newRecordActivityRequestCode && resultCode == Activity.RESULT_OK) {
-            intentData?.getStringExtra(NewRecordActivity.EXTRA_REPLY)?.let {
-                val record = Record(it)
-                recordViewModel.insert(record)
-            }
-        } else {
-            Toast.makeText(
-                applicationContext,
-                "비어있어서 안 저장",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
     }
 
     // ─────────────────────────────────── assets 폴더의 기존 DB 불러오기 ───────────────────────────────────

@@ -15,7 +15,6 @@ import kotlinx.coroutines.launch
 // UI 성능 저하를 위해 필수적으로 Flow 필요
 // 전체 앱에 RoomDatabase 인스턴스는 1개만 있어도 됨
 // exportSchema : 데이터베이스 이전에 관한 변수, 버전 제어 시스템으로 확인할 수 있도록 스키마를 내보내는 디렉터리 설정 필요
-
 @Database(entities = [
     ActivityTBL::class,
     GuideTBL::class,
@@ -25,9 +24,11 @@ import kotlinx.coroutines.launch
     BadgeTBL::class,
     OnlyTBL::class,
     SpecialTBL::class,
-    StickerTBL::class], version = 1)
-@TypeConverters(RoomTypeConverter::class) //이미지 사용하는 경우에 필요
-abstract class OggRoomDatabase : RoomDatabase() {
+    StickerTBL::class,
+    UserProject::class,
+    PostProject::class], version = 1)
+@TypeConverters(Converters::class)
+public abstract class OggRoomDatabase : RoomDatabase() {
 
     abstract fun activityDao(): ActivityDao
     abstract fun guideDao() : GuideDao
@@ -39,11 +40,14 @@ abstract class OggRoomDatabase : RoomDatabase() {
     abstract fun specialActivityDao() : SpecialDao
 
     abstract fun levelDao() : LevelDao
-    abstract fun MemberDao() : MemberDao
+    abstract fun memberDao() : MemberDao
     abstract fun memberLevelDao() : MemberLevelDao
 
     abstract fun badgeDao() : BadgeDao
     abstract fun stickerDao() : StickerDao
+
+    abstract fun userDao() : UserProjectDao
+    abstract fun postDao() : PostProjectDao
 
     private class OggDatabaseCallback(
         private val scope : CoroutineScope
@@ -53,10 +57,22 @@ abstract class OggRoomDatabase : RoomDatabase() {
             INSTANCE?.let{database ->
                 scope.launch {
                     var activityDao = database.activityDao()
-
                     activityDao.deleteAll()
-                }
 
+                    var cursorActivity = ActivityTBL(1, "C", "냉난방 온도 조절", 0.5f, 1001, 1, null, false, null)
+                    activityDao.insertActivity(cursorActivity)
+
+                    var userProjectDao = database.userDao()
+
+                    userProjectDao.deleteAll()
+
+                    var cursorUserProject = UserProject(0, 1, 1, 1, 1, 1)
+                    userProjectDao.insert(cursorUserProject)
+                    cursorUserProject = UserProject(1, 1, 1, 1, 1, 1)
+                    userProjectDao.insert(cursorUserProject)
+                    cursorUserProject = UserProject(2, 1, 1, 1, 1, 1)
+                    userProjectDao.insert(cursorUserProject)
+                }
             }
         }
     }
