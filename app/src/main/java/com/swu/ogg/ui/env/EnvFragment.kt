@@ -78,6 +78,7 @@ class EnvFragment : Fragment() {
         val afterLayout : LinearLayout = binding.afterLayout
         val expandLayout : LinearLayout = binding.expandedLayout
 
+
         val startButton : Button = binding.btnStart
         val expandButton : ImageButton = binding.btnExpand
 
@@ -95,6 +96,7 @@ class EnvFragment : Fragment() {
             beforeLayout.visibility = View.GONE
             afterLayout.visibility = View.VISIBLE
             expandButton.visibility = View.VISIBLE
+
         }
 
         // ──────────────────────────────── 프로젝트 시작 레이아웃 ────────────────────────────────

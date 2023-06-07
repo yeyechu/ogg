@@ -8,7 +8,6 @@
     tools:context=".MainActivity">
 
 
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -35,37 +34,42 @@
 
 
 
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottomAppBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:fabCradleMargin="10dp"
-        app:fabCradleRoundedCornerRadius="10dp"
-        app:fabCradleVerticalOffset="10dp"
+<!--    <com.google.android.material.bottomappbar.BottomAppBar-->
+<!--        android:id="@+id/bottomAppBar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="bottom"-->
+<!--        app:fabCradleMargin="10dp"-->
+<!--        app:fabCradleRoundedCornerRadius="40dp"-->
+<!--        app:contentInsetLeft="0dp"-->
+<!--        app:contentInsetStart="0dp"-->
+<!--        app:contentInsetRight="0dp"-->
+<!--        app:contentInsetEnd="0dp"-->
 
-        >
+
+<!--        >-->
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="65dp"
             android:layout_gravity="bottom"
             android:layout_below="@id/nav_host_fragment_activity_main"
             android:background="@drawable/bottom_nav_rounded"
+
             app:menu="@menu/bottom_nav_menu"
             app:labelVisibilityMode="unlabeled"
             app:itemIconSize="50dp"
             />
 
-    </com.google.android.material.bottomappbar.BottomAppBar>
+<!--    </com.google.android.material.bottomappbar.BottomAppBar>-->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="83dp"
         android:layout_marginRight="@dimen/big_padding"
 
         app:srcCompat="@drawable/icon_edit"
