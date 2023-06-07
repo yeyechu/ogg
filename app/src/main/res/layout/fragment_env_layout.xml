@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_Blue">
+    android:layout_marginBottom="@dimen/scroll_margin">
 
     <!-- ─────────────────────── 환경 레이어 ─────────────────────── -->
 
-    <LinearLayout
-        android:id="@+id/layout_under_the_sea"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-
-
-        >
-
-
+            <ImageView
+                android:id="@+id/start_env_image"
+                android:layout_width="match_parent"
+                android:layout_height="900dp"
+                android:src="@drawable/background"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/scroll_margin"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_day"
@@ -33,6 +30,5 @@
             android:textColor="@color/lightgray"
             android:visibility="gone"/>
 
-    </LinearLayout>
 
-</ScrollView>
+</FrameLayout>

@@ -63,6 +63,8 @@ class EnvFragment : Fragment() {
         var x = 1
         while(x <= 21){
             stampList.add(StampItem(x++, 0f, 10))
+            stampList.add(StampItem(x++, 0.5f, 10))
+            stampList.add(StampItem(x++, 0.9f, 10))
         }
 
         val dayButton : Button = root.findViewById(R.id.btn_day)
@@ -81,6 +83,7 @@ class EnvFragment : Fragment() {
 
         val startButton : Button = binding.btnStart
         val expandButton : ImageButton = binding.btnExpand
+        val imageChange : ImageView = root.findViewById(R.id.start_env_image)
 
         // 프로젝트 시작 전 화면 트랜지션 구현할 곳
         // DB 확인 -> 진행 중인 프로젝트가 없으면 visible
@@ -96,6 +99,7 @@ class EnvFragment : Fragment() {
             beforeLayout.visibility = View.GONE
             afterLayout.visibility = View.VISIBLE
             expandButton.visibility = View.VISIBLE
+            imageChange.setImageResource(R.drawable.prototypebackground_bad)
 
         }
 

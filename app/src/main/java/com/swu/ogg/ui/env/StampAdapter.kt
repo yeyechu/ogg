@@ -42,7 +42,7 @@ class StampAdapter(val context : Context, val stamplist : ArrayList<StampItem>) 
             0.5f -> textDay.setBackgroundResource(R.drawable.calendersticker_2)
             // 100% 이상일 때 스탬프
             1f -> textDay.setBackgroundResource(R.drawable.calendersticker_3)
-
+            else -> textDay.setBackgroundResource(R.drawable.calendersticker_3)
         }
 
         if(stamps.day > stamps.today) {
