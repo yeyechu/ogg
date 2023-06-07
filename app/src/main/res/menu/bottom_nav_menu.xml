@@ -3,12 +3,14 @@
 
     <item
         android:id="@+id/navigation_env"
-        android:icon="@drawable/env"
-        android:title="@string/title_env" />
+        android:icon="@drawable/nav_1"
+        android:title="@string/title_env"
+
+        />
 
     <item
         android:id="@+id/navigation_myactivity"
-        android:icon="@drawable/ic_baseline_library_add_check_24"
+        android:icon="@drawable/nav_2"
         android:title="@string/title_myactivity" />
 
 <!--    <item-->
@@ -17,12 +19,12 @@
 
     <item
         android:id="@+id/navigation_indicators"
-        android:icon="@drawable/ic_baseline_insert_chart_outlined_24"
+        android:icon="@drawable/nav_3"
         android:title="@string/title_indicators" />
 
     <item
         android:id="@+id/navigation_feed"
-        android:icon="@drawable/ic_baseline_group_24"
+        android:icon="@drawable/nav_4"
         android:title="@string/title_feed" />
 
 </menu>

@@ -14,14 +14,23 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/env_toolbar"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:minHeight="?attr/actionBarSize"
-            app:title="@string/app_name"
-            android:theme="?attr/actionBarTheme" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/env_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:title="@string/app_name" />
+
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/before_layout"
@@ -59,10 +68,10 @@
                 <ImageView
                     android:id="@+id/image_today_sticker"
                     android:layout_width="80dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_margin="@dimen/small_padding"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/baseline_add_photo_alternate_24" />
+                    android:src="@drawable/calendersticker_1" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -138,6 +147,8 @@
         </LinearLayout>
 
     </LinearLayout>
+
+
 
     <LinearLayout
         android:id="@+id/expanded_layout"
