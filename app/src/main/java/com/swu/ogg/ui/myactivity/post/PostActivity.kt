@@ -12,6 +12,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
@@ -20,6 +21,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider.NewInstanceFactory.Companion.instance
 import com.swu.ogg.R
+import com.swu.ogg.database.Co2Today
 import com.swu.ogg.database.Converters
 import com.swu.ogg.databinding.ActivityPostBinding
 import com.swu.ogg.dbHelper
@@ -154,19 +156,17 @@ class PostActivity : AppCompatActivity() {
             // -> 환경
             // -> 환경탭 스티커
             // -> 피드(2학기)
-            if(imgArr[0] != null){
-                image = Converters.fromBitmap(imgArr[0])
-                var addImage : SQLiteStatement = sqlitedb.compileStatement("INSERT INTO post VALUES (0, '');")
-            }
 
-            val replyIntent = Intent()
-            if(false) {
-                setResult(Activity.RESULT_CANCELED, replyIntent)
-            } else {
-                val result = "여기에 보낼 데이터를 저장하여 보냄"
-                replyIntent.putExtra(CameraActivity.EXTRA_REPLY, result)
-                setResult(Activity.RESULT_OK, replyIntent)
-            }
+//            val replyIntent = Intent()
+//            if(false) {
+//                setResult(Activity.RESULT_CANCELED, replyIntent)
+//            } else {
+//                val result = "여기에 보낼 데이터를 저장하여 보냄"
+//                replyIntent.putExtra(CameraActivity.EXTRA_REPLY, result)
+//                setResult(Activity.RESULT_OK, replyIntent)
+//            }
+            Co2Today.setCo2Today(activityCo2.toFloat())
+            Log.d("인증버튼 클릭", Co2Today.getCo2Today().toString())
             finish()
         }
 

@@ -1,11 +1,13 @@
 package com.swu.ogg.ui.env
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.TextView
 import com.swu.ogg.R
 import com.swu.ogg.database.DateSet
@@ -30,6 +32,7 @@ class StampAdapter(val context : Context, val stamplist : ArrayList<StampItem>) 
         val view : View = LayoutInflater.from(parent?.context).inflate(R.layout.stamp_item, null)
 
         var textDay : TextView = view!!.findViewById(R.id.tv_stamp_day)
+        //var stampToday : ImageView = view!!.findViewById(R.id.image_today_sticker)
         val stamps = stamplist[position]
 
         textDay.text = stamps.day.toString()
@@ -42,6 +45,10 @@ class StampAdapter(val context : Context, val stamplist : ArrayList<StampItem>) 
             0.7f -> textDay.setBackgroundResource(R.drawable.calendersticker_2)
             // 100% 이상일 때 스탬프
             else -> textDay.setBackgroundResource(R.drawable.calendersticker_3)
+
+//            0f -> stampToday.setImageResource(R.drawable.calendersticker_1)
+//            0.7f -> stampToday.setImageResource(R.drawable.calendersticker_2)
+//            else -> stampToday.setImageResource(R.drawable.calendersticker_3)
         }
 
         if(stamps.day > DateSet.getDateToday()) {

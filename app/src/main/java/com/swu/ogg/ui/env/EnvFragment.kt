@@ -107,6 +107,7 @@ class EnvFragment : Fragment() {
 
             textDday.text = "21일 중 " + it.toString() + "일 째"
             DateSet.setDateToday(it)
+            //stampList.set(it, )
             //stampList.add(StampItem(it, 0f))
         }
 
@@ -136,7 +137,7 @@ class EnvFragment : Fragment() {
 
         // 진행률 받아와서 초기화
         // 임시 초기화 ↓
-        progressBar.progress = 50
+        progressBar.progress = 0
 
         var co2Left : Float = kotlin.math.round(gageAllAim*1000 - progressBar.progress * gageAllAim*10)/1000
         gageCo2Alarm.text = "목표 달성까지" + co2Left + "kg 남았어요"
@@ -147,7 +148,7 @@ class EnvFragment : Fragment() {
 
         var actionDate = 1
         while(actionDate <= 21){
-            stampList.add(StampItem(actionDate++, 0.3f))
+            stampList.add(StampItem(actionDate++, 0f))
         }
 
         envViewModel.stamplist.observe(viewLifecycleOwner) {

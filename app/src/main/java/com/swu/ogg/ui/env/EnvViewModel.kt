@@ -3,6 +3,7 @@ package com.swu.ogg.ui.env
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.swu.ogg.database.Co2All
 import com.swu.ogg.database.DateSet
 
 
@@ -20,10 +21,10 @@ class EnvViewModel : ViewModel() {
     }
     val today: LiveData<Int> = _today
 
-    private val _allday = MutableLiveData<Int>().apply {
-        value = DateSet.getDateToday()
+    private val _allday = MutableLiveData<Float>().apply {
+        value = Co2All.getCo2All()
     }
-    val allday: LiveData<Int> = _allday
+    val allday: LiveData<Float> = _allday
 
 
     // ───────────────────────────── 스탬프 ─────────────────────────────
@@ -36,6 +37,11 @@ class EnvViewModel : ViewModel() {
     fun update(action : Action) {
         when(action) {
             Action.UP -> _today.value = _today.value?.plus(1)
+        }
+    }
+    fun increase(action: Action) {
+        when(action) {
+            Action.UP -> _allday.value = _allday.value?.plus(Co2All.getCo2All())
         }
     }
 }

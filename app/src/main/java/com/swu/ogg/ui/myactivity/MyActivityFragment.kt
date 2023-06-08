@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.swu.ogg.MainActivity
 import com.swu.ogg.R
+import com.swu.ogg.database.Co2Today
 import com.swu.ogg.database.OggApplication
 import com.swu.ogg.databinding.FragmentMyactivityBinding
 import com.swu.ogg.dbHelper
@@ -78,14 +79,19 @@ class MyActivityFragment : Fragment() {
 
         // 시크바 노터치
         seekbar.setOnTouchListener { v, event -> true }
+        seekbar.progress = 0
 
         // 시크바 움직임 정의
         seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar : SeekBar?, progress : Int, fromUser : Boolean) {
 
-                var co2Left : Float = kotlin.math.round(gageAim*1000 - progress * gageAim*10)/1000
+//                var co2Left : Float = kotlin.math.round(gageAim*1000 - progress * gageAim*10)/1000
+//                gageTextAlarm.text = co2Left.toString() + "kg 남음"
+                var co2Left : Float = gageAim - Co2Today.getCo2Today()
                 gageTextAlarm.text = co2Left.toString() + "kg 남음"
+                var co2Converter = (Co2Today.getCo2Today() / gageAim) * 100
+                seekbar.progress = co2Converter.toInt()
 
                 if(progress > 0){
                     gageTextAlarm.visibility = View.VISIBLE

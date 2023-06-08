@@ -25,6 +25,7 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.swu.ogg.database.Co2Today
 import com.swu.ogg.databinding.ActivityCameraBinding
 import java.io.File
 import java.text.SimpleDateFormat
@@ -87,16 +88,18 @@ class CameraActivity : AppCompatActivity() {
             // -> 환경탭 스티커
             // -> 피드(2학기)
 
-            val replyIntent = Intent()
-
-            // if문 조건에 값이 없으면 등록 취소
-            if(true) {
-                setResult(Activity.RESULT_CANCELED, replyIntent)
-            } else {
-                val result = "여기에 보낼 데이터를 저장하여 보냄"
-                replyIntent.putExtra(EXTRA_REPLY, result)
-                setResult(Activity.RESULT_OK, replyIntent)
-            }
+//            val replyIntent = Intent()
+//
+//            // if문 조건에 값이 없으면 등록 취소
+//            if(true) {
+//                setResult(Activity.RESULT_CANCELED, replyIntent)
+//            } else {
+//                val result = "여기에 보낼 데이터를 저장하여 보냄"
+//                replyIntent.putExtra(EXTRA_REPLY, result)
+//                setResult(Activity.RESULT_OK, replyIntent)
+//            }
+            Co2Today.setCo2Today(extraCo2.toString().toFloat())
+            Log.d("인증버튼 클릭", Co2Today.getCo2Today().toString())
             finish()
         }
 
