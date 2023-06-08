@@ -12,14 +12,17 @@ import java.io.ByteArrayOutputStream
 //TypeConvert는 기본 자료형 이외의 자료를 저장할때 형변환을 자동으로 해주는 코드
 object Converters {
     @TypeConverter
-    fun fromBitmap(bitmap: Bitmap): ByteArray {
+    fun fromBitmap(bitmap: Bitmap?): ByteArray {
+
         val outputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+        bitmap!!.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+
         return outputStream.toByteArray()
     }
 
     @TypeConverter
     fun toBitmap(bytes: ByteArray): Bitmap {
+
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
     }
 }

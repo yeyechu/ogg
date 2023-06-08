@@ -22,6 +22,8 @@ import com.swu.ogg.R
 import com.swu.ogg.database.OggApplication
 import com.swu.ogg.databinding.FragmentMyactivityBinding
 import com.swu.ogg.dbHelper
+import com.swu.ogg.ui.env.EnvViewModel
+import com.swu.ogg.ui.env.StampAdapter
 
 
 // 나의 활동 전체 레이아웃 구현부
@@ -47,6 +49,8 @@ class MyActivityFragment : Fragment() {
         val myActivityViewModel =
             ViewModelProvider(this).get(MyActivityViewModel::class.java)
 
+        //val envViewModel = ViewModelProvider(this).get(EnvViewModel::class.java)
+
         _binding = FragmentMyactivityBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -68,12 +72,12 @@ class MyActivityFragment : Fragment() {
 
         // DB에서 받아올 데이터
         // 임시 초기화
-        val gageAim : Float = 1.4f
+        val gageAim = 1.4f
 
         gageTextAim.text = gageAim.toString() + "kg"
 
         // 시크바 노터치
-        //seekbar.setOnTouchListener { v, event -> true }
+        seekbar.setOnTouchListener { v, event -> true }
 
         // 시크바 움직임 정의
         seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -81,7 +85,7 @@ class MyActivityFragment : Fragment() {
             override fun onProgressChanged(seekBar : SeekBar?, progress : Int, fromUser : Boolean) {
 
                 var co2Left : Float = kotlin.math.round(gageAim*1000 - progress * gageAim*10)/1000
-                gageTextAlarm.text = co2Left.toString() + "kg 남았어요"
+                gageTextAlarm.text = co2Left.toString() + "kg 남음"
 
                 if(progress > 0){
                     gageTextAlarm.visibility = View.VISIBLE

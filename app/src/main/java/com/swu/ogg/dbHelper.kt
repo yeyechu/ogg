@@ -44,6 +44,7 @@ class dbHelper(context : Context) : SQLiteOpenHelper(context, FILE_NAME, null, 1
 
     // ─────────────────────────── db파일 존재 확인 ───────────────────────────
     private fun checkDB() {
+        Log.d(TAG, "checkDB()")
         val dbFile = File(filePath + FILE_NAME)
 
         if(!dbFile.exists()){
@@ -81,7 +82,7 @@ class dbHelper(context : Context) : SQLiteOpenHelper(context, FILE_NAME, null, 1
 
         } catch (e : IOException) {
             e.printStackTrace()
-            Log.d("dbCopy()", ": 예외 발생")
+            Log.d(TAG, "dbCopy(), 예외 발생")
         }
     }
     companion object {

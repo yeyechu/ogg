@@ -5,13 +5,13 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.view.*
-import android.view.animation.TranslateAnimation
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import com.swu.ogg.R
+import com.swu.ogg.database.DateSet
 import com.swu.ogg.databinding.FragmentEnvBinding
 import com.swu.ogg.dbHelper
 
@@ -29,6 +29,8 @@ class EnvFragment : Fragment() {
 
     lateinit var stickerImage : ByteArray
     var stickerArray = ArrayList<Bitmap>()
+
+    lateinit var dayButton : Button
 
     // ────────────────────────────────────────────────────────────────────────────
 
@@ -53,26 +55,10 @@ class EnvFragment : Fragment() {
 
         stampList.clear()
 
-//        var cursor_stamp : Cursor
-//        cursor_stamp = sqlitedb.rawQuery("", null)
-//
-//        while (cursor_stamp.moveToNext()) {
-//
-//
-//        }
-        // 임시 데이터 생성 부분
-        var x = 1
-        while(x <= 21){
-            stampList.add(StampItem(x++, 0f, 10))
-            stampList.add(StampItem(x++, 0.5f, 10))
-            stampList.add(StampItem(x++, 0.9f, 10))
-        }
-
-        val dayButton : Button = root.findViewById(R.id.btn_day)
-        val index = stampList.get(1).day
+        dayButton = root.findViewById(R.id.btn_day)
 
         dayButton.setOnClickListener {
-
+            envViewModel.update(Action.UP)
         }
 
         // ────────────────────────────────── 레이아웃 트랜지션 ──────────────────────────────────
@@ -85,22 +71,43 @@ class EnvFragment : Fragment() {
         val stampLayout : GridView = binding.stampGrid
         val imageChange : ImageView = root.findViewById(R.id.start_env_image)
 
+        val textDday: TextView = binding.tvDday
+
         // 프로젝트 시작 전 화면 트랜지션 구현할 곳
         // DB 확인 -> 진행 중인 프로젝트가 없으면 visible
 
-        var flag : Int = 0
+        if(DateSet.date == 0){
 
-        if(flag == 0){
             beforeLayout.visibility = View.VISIBLE
+
+        } else {
+            beforeLayout.visibility = View.GONE
+            afterLayout.visibility = View.VISIBLE
+            expandButton.visibility = View.VISIBLE
+            imageChange.setImageResource(R.drawable.prototypebackground_bad)
         }
 
         startButton.setOnClickListener {
+
+            DateSet.setDateToday(1)
+            textDday.text = "21일 중 " + DateSet.getDateToday() + "일 째"
 
             beforeLayout.visibility = View.GONE
             afterLayout.visibility = View.VISIBLE
             expandButton.visibility = View.VISIBLE
             imageChange.setImageResource(R.drawable.prototypebackground_bad)
 
+        }
+
+        // db 처리해서 연결
+        // 탄소량 얼마 남았는지
+        // 오늘 스티커 뭔지
+
+        envViewModel.today.observe(viewLifecycleOwner) {
+
+            textDday.text = "21일 중 " + it.toString() + "일 째"
+            DateSet.setDateToday(it)
+            //stampList.add(StampItem(it, 0f))
         }
 
         // ──────────────────────────────── 프로젝트 시작 레이아웃 ────────────────────────────────
@@ -118,35 +125,13 @@ class EnvFragment : Fragment() {
             }
         }
 
-        val textDday: TextView = binding.tvDday
-
-        // db 처리해서 연결
-        // 며칠째인지
-        // 탄소량 얼마 남았는지
-        // 오늘 스티커 뭔지
-
-        textDday.text = "21일 중 " + stampList.get(1).today.toString() + "일 째"
-
-
-//        envViewModel.dDayText.observe(viewLifecycleOwner) {
-//            textDday.text = "21일 중 " + it + "일 째"
-//        }
-
         // ─────────────────────────────────── 게이지바 ───────────────────────────────────
-
-        // 처리할 데이터 :
-        // - textView : tv_co2_alarm_gage : 0.74kg 남았어요!
-        // - Seekbar : determinateBar
-        // - textView : tv_co2_aim_gage : 1.4kg
 
         val gageTextAim : TextView = binding.tvCo2AimAll
         val gageCo2Alarm : TextView = binding.tvCo2AlarmAll
         val progressBar : ProgressBar = binding.determinateBarAll
 
-        // DB에서 받아올 데이터
-        // 임시 초기화 ↓
         val gageAllAim : Float = 1.4f*21
-
         gageTextAim.text = gageAllAim.toString()
 
         // 진행률 받아와서 초기화
@@ -160,15 +145,17 @@ class EnvFragment : Fragment() {
 
         val gridView : GridView = binding.stampGrid
 
+        var actionDate = 1
+        while(actionDate <= 21){
+            stampList.add(StampItem(actionDate++, 0.3f))
+        }
+
         envViewModel.stamplist.observe(viewLifecycleOwner) {
 
-            val stamp : ArrayList<StampItem> = stampList
+            //val stamp : ArrayList<StampItem> = stampList
             val stampAdapter = StampAdapter(requireContext(), stampList)
             gridView.adapter = stampAdapter
         }
-
-        sqlitedb.close()
-        dbManager.close()
 
         return root
     }
@@ -187,7 +174,12 @@ class EnvFragment : Fragment() {
         }
     }
 
+
     override fun onDestroyView() {
+
+        sqlitedb.close()
+        dbManager.close()
+
         super.onDestroyView()
         _binding = null
     }

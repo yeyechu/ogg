@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.swu.ogg.R
+import com.swu.ogg.database.DateSet
 
 // 스탬프에 대한 데이터 클래스
 data class StampItem(
     val day : Int,
-    val percent : Float,
-    val today : Int
+    val Co2Today : Float
 )
 
 class StampAdapter(val context : Context, val stamplist : ArrayList<StampItem>) : BaseAdapter() {
@@ -34,22 +34,21 @@ class StampAdapter(val context : Context, val stamplist : ArrayList<StampItem>) 
 
         textDay.text = stamps.day.toString()
 
-        when(stamps.percent) {
+        when(stamps.Co2Today) {
 
             // 하나도 못했을 때 스탬프
             0f -> textDay.setBackgroundResource(R.drawable.calendersticker_1)
             // 50%일 때 스탬프
-            0.5f -> textDay.setBackgroundResource(R.drawable.calendersticker_2)
+            0.7f -> textDay.setBackgroundResource(R.drawable.calendersticker_2)
             // 100% 이상일 때 스탬프
-            1f -> textDay.setBackgroundResource(R.drawable.calendersticker_3)
             else -> textDay.setBackgroundResource(R.drawable.calendersticker_3)
         }
 
-        if(stamps.day > stamps.today) {
+        if(stamps.day > DateSet.getDateToday()) {
 
             textDay.setBackgroundResource(R.drawable.stamp_drawable)
 
-        } else if(stamps.day < stamps.today) {
+        } else if(stamps.day < DateSet.getDateToday()) {
 
             textDay.text = ""
 

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteStatement
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -19,6 +20,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider.NewInstanceFactory.Companion.instance
 import com.swu.ogg.R
+import com.swu.ogg.database.Converters
 import com.swu.ogg.databinding.ActivityPostBinding
 import com.swu.ogg.dbHelper
 import java.io.IOException
@@ -29,12 +31,12 @@ class PostActivity : AppCompatActivity() {
 
     lateinit var dbManager : dbHelper
     lateinit var sqlitedb : SQLiteDatabase
-    lateinit var Image : ByteArray
+    lateinit var image : ByteArray
 
     var imgArray = ArrayList<Bitmap>()
 
     private val REQUEST_IMAGE_CODE = 1
-    var imgArr : Array<Bitmap?> = arrayOfNulls<Bitmap>(1)
+    var imgArr : Array<Bitmap?> = arrayOfNulls<Bitmap?>(1)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,8 +70,8 @@ class PostActivity : AppCompatActivity() {
         var activityCo2 : String = ""
 
         while(cursor.moveToNext()){
-            Image = cursor.getBlob(cursor.getColumnIndexOrThrow("aGuide"))
-            val bitmap : Bitmap = BitmapFactory.decodeByteArray(Image, 0, Image.size)
+            image = cursor.getBlob(cursor.getColumnIndexOrThrow("aImg"))
+            val bitmap : Bitmap = BitmapFactory.decodeByteArray(image, 0, image.size)
             activityNum = cursor.getString(cursor.getColumnIndexOrThrow("aID")).toString()
 
             val co2 = cursor.getString(cursor.getColumnIndexOrThrow("aCo2")).toString() + "kg"
@@ -81,22 +83,28 @@ class PostActivity : AppCompatActivity() {
             if(limit != null && freq == "1") {
 
                 freqText.text = "$limit 일에 $freq 번"
+
             } else if(limit != null && freq == "2"){
 
                 freqText.text = "하루 " + limit + "번"
-            } else{
+
+            } else if(freq == "0"){
+
+                freqText.text = "단 한 번!"
+            }else{
 
                 freqText.text = "하루 " + freq + "번"
             }
 
             imgArray.add(bitmap)
 
-            var gallery = cursor.getInt(cursor.getColumnIndexOrThrow("aGallery")).toInt()
+            var gallery = cursor.getInt(cursor.getColumnIndexOrThrow("aGallery"))
 
             if(gallery == 1) {
                 val buttonAlbum : Button = binding.btnAlbum
                 buttonAlbum.visibility = View.VISIBLE
                 buttonAlbum.isEnabled = true
+
                 //색 바뀌게 코드
                 buttonAlbum.setTextColor(ContextCompat.getColor(applicationContext!!, R.color.Primary_blue))
                 buttonAlbum.setBackgroundResource(R.drawable.box_lineblue) // 배경 리소스 설정
@@ -112,34 +120,6 @@ class PostActivity : AppCompatActivity() {
         imageView.setImageBitmap(imgArray[0])
         cursor.close()
 
-        // ───────────────────────────── 오른쪽 왼쪽 사진 넘어가는 버튼 ─────────────────────────────
-//        var size : Int = imgArray.size
-//        var cursor_img : Int = 0
-//
-//        val leftButton : ImageButton = binding.btnLeft
-//        val rightButton : ImageButton = binding.btnRight
-//
-//        leftButton.isEnabled = false
-//        rightButton.isEnabled = false
-
-        // leftButton : 보여줄 사진 있을 때만 isEnabled = true 처리
-        // rightButton : 보여줄 사진 있을 때만 isEnabled = true 처리
-
-//        leftButton.setOnClickListener {
-//            cursor_img++
-//            if(cursor_img > size - 1) {
-//                cursor_img = 0
-//            }
-//            imageView.setImageBitmap(imgArray[cursor_img])
-//        }
-//
-//        rightButton.setOnClickListener {
-//            cursor_img--
-//            if(cursor_img < 0) {
-//                cursor_img = size -1
-//            }
-//            imageView.setImageBitmap(imgArray[cursor_img])
-
         // ─────────────────────────────────── 카메라 버튼 ───────────────────────────────────
         val buttonCamera : Button = binding.btnCamera
         buttonCamera.setOnClickListener{
@@ -149,7 +129,6 @@ class PostActivity : AppCompatActivity() {
             intent.putExtra("co2Activity", activityCo2)
             this.startActivity(intent)
             finish()
-
         }
 
         // ─────────────────────────────────── 갤러리 버튼 ───────────────────────────────────
@@ -175,6 +154,10 @@ class PostActivity : AppCompatActivity() {
             // -> 환경
             // -> 환경탭 스티커
             // -> 피드(2학기)
+            if(imgArr[0] != null){
+                image = Converters.fromBitmap(imgArr[0])
+                var addImage : SQLiteStatement = sqlitedb.compileStatement("INSERT INTO post VALUES (0, '');")
+            }
 
             val replyIntent = Intent()
             if(false) {
@@ -186,6 +169,9 @@ class PostActivity : AppCompatActivity() {
             }
             finish()
         }
+
+        sqlitedb.close()
+        dbManager.close()
     }
 
     private fun openGallery(){
@@ -208,7 +194,6 @@ class PostActivity : AppCompatActivity() {
                     e.printStackTrace()
                 }
                 binding.previewLayout.visibility = View.VISIBLE
-                //binding.imagePreview.setImageBitmap(bitmap)
                 binding.imagePreview.setImageBitmap(CameraActivity().rotateBitmap(bitmap))
 
                 imgArr[0] = bitmap
