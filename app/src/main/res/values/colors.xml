@@ -19,6 +19,7 @@
 
     <!-- ───────────────────────── 팝업 투명 ───────────────────────── -->
     <color name="transparent">#80000000</color>
+    <color name="real_transparent">#00FFFFFF</color>
 
     <!-- ───────────────────────── db 테스트용 ───────────────────────── -->
     <color name="colorPrimary">#FFFFFFFF</color>

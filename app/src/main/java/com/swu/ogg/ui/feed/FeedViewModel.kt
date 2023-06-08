@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class FeedViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "피드(구현 안함)"
+        value = "피드 : 2학기 공개"
     }
     val text: LiveData<String> = _text
 }

@@ -62,16 +62,15 @@ class MainActivity : AppCompatActivity() {
 
         // ─────────────────────────────────── DB 불러오기 ───────────────────────────────────
 
-        var checkDB : File = File(filePath + "oggDB.db")
-        if(checkDB.exists()){
-
-        } else {
-            setDB(this)
-            val oggHelper : dbHelper = dbHelper(this, "oggDB.db")
-            sqlDB = oggHelper.readableDatabase
-
-            // sqlDB.close()
-        }
+//        var checkDB : File = File(filePath + "oggDB.db")
+//        if(checkDB.exists()){
+//
+//        } else {
+//            // sqlDB.close()
+//        }
+        setDB(this)
+        val oggHelper : dbHelper = dbHelper(this, "oggDB.db")
+        sqlDB = oggHelper.readableDatabase
     }
 
     // ─────────────────────────────────── 툴바 함수 ───────────────────────────────────

@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.*
+import android.view.animation.TranslateAnimation
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -78,11 +79,10 @@ class EnvFragment : Fragment() {
 
         val beforeLayout : LinearLayout = binding.beforeLayout
         val afterLayout : LinearLayout = binding.afterLayout
-        val expandLayout : LinearLayout = binding.expandedLayout
-
 
         val startButton : Button = binding.btnStart
         val expandButton : ImageButton = binding.btnExpand
+        val stampLayout : GridView = binding.stampGrid
         val imageChange : ImageView = root.findViewById(R.id.start_env_image)
 
         // 프로젝트 시작 전 화면 트랜지션 구현할 곳
@@ -105,15 +105,17 @@ class EnvFragment : Fragment() {
 
         // ──────────────────────────────── 프로젝트 시작 레이아웃 ────────────────────────────────
 
+
         // 레이아웃 확장 버튼 정의
         expandButton.setOnClickListener {
 
-            if(expandLayout.visibility == View.GONE){
+            if(stampLayout.visibility == View.GONE){
                 expandButton.setImageResource(R.drawable.baseline_keyboard_arrow_up_24)
-                expandLayout.visibility = View.VISIBLE
+                stampLayout.visibility = View.VISIBLE
+
             } else {
                 expandButton.setImageResource(R.drawable.baseline_keyboard_arrow_down_24)
-                expandLayout.visibility = View.GONE
+                stampLayout.visibility = View.GONE
             }
         }
 
