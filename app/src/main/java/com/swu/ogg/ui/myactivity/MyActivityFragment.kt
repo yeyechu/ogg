@@ -121,16 +121,13 @@ class MyActivityFragment : Fragment() {
         // onlist : 일회성 활동에 대한 내용
 
 
-        dbManager = dbHelper(context, "oggDB.db")
+        dbManager = dbHelper(requireContext())
         sqlitedb = dbManager.readableDatabase
 
         // DB에서 불러온 데이터 연결
 
         var cursor_today : Cursor
         cursor_today = sqlitedb.rawQuery("SELECT aTitle, aCo2, aImg FROM TodayTBL; ", null)
-
-        var cursor_only : Cursor
-        cursor_only = sqlitedb.rawQuery("SELECT oTitle, oCo2, oImg FROM OnlyTBL; ", null)
 
         while(cursor_today.moveToNext()) {
             Image = cursor_today.getBlob(cursor_today.getColumnIndexOrThrow("aImg"))
@@ -141,6 +138,11 @@ class MyActivityFragment : Fragment() {
             todayList.add(CardItem(bitmap, title, co2))
         }
 
+        cursor_today.close()
+
+        var cursor_only : Cursor
+        cursor_only = sqlitedb.rawQuery("SELECT oTitle, oCo2, oImg FROM OnlyTBL; ", null)
+
         while(cursor_only.moveToNext()) {
             Image = cursor_only.getBlob(cursor_only.getColumnIndexOrThrow("oImg"))
             val bitmap : Bitmap = BitmapFactory.decodeByteArray(Image, 0, Image.size)
@@ -149,6 +151,9 @@ class MyActivityFragment : Fragment() {
 
             onlyList.add(CardItem(bitmap, title, co2))
         }
+        cursor_only.close()
+
+
         myActivityViewModel.tolist.observe(viewLifecycleOwner) {
 
             val tolist : ArrayList<CardItem> = todayList
@@ -161,19 +166,16 @@ class MyActivityFragment : Fragment() {
             val onlist : ArrayList<CardItem> = onlyList
             val onAdapter = MyActivity2Adapter(requireContext(), onlist)
             recyclerViewOnly.adapter = onAdapter
-
         }
-
-        cursor_today.close()
-        cursor_only.close()
-
-        sqlitedb.close()
-        dbManager.close()
 
         return root
     }
 
     override fun onDestroyView() {
+
+        sqlitedb.close()
+        dbManager.close()
+
         super.onDestroyView()
         _binding = null
     }

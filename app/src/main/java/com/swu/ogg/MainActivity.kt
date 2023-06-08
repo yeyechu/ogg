@@ -29,15 +29,16 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
 
-    val filePath : String = "/data/data/com.swu.ogg/databases/"
-    lateinit var  sqlDB : SQLiteDatabase
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // ─────────────────────────────────── layout 바인딩 ───────────────────────────────────
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
+
+        // ─────────────────────────────────── 하단내비 결합 ───────────────────────────────────
 
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
@@ -59,18 +60,6 @@ class MainActivity : AppCompatActivity() {
 //            val intent = Intent(this@MainActivity, NewRecordActivity::class.java)
 //            startActivityForResult(intent, newRecordActivityRequestCode)
         }
-
-        // ─────────────────────────────────── DB 불러오기 ───────────────────────────────────
-
-//        var checkDB : File = File(filePath + "oggDB.db")
-//        if(checkDB.exists()){
-//
-//        } else {
-//            // sqlDB.close()
-//        }
-        setDB(this)
-        val oggHelper : dbHelper = dbHelper(this, "oggDB.db")
-        sqlDB = oggHelper.readableDatabase
     }
 
     // ─────────────────────────────────── 툴바 함수 ───────────────────────────────────
@@ -84,59 +73,4 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return super.onOptionsItemSelected(item)
     }
-
-    // ─────────────────────────────────── assets 폴더의 기존 DB 불러오기 ───────────────────────────────────
-    private fun setDB(ctx: Context) {
-
-        var folder: File = File(filePath)
-
-        if (folder.exists()) {
-
-        } else {
-            folder.mkdirs();
-        }
-
-        var assetManager: AssetManager = ctx.resources.assets
-        var outfile: File = File(filePath + "oggDB.db")
-
-        var IStr: InputStream? = null
-        var fo: FileOutputStream? = null
-        var filesize: Int = 0
-
-        try {
-            IStr = assetManager.open("oggDB.db", AssetManager.ACCESS_BUFFER)
-            filesize = IStr.available()
-
-            if (outfile.length() <= 0) {
-
-                val buffer = ByteArray(filesize)
-
-                IStr.read(buffer)
-                IStr.close()
-                outfile.createNewFile()
-
-                fo = FileOutputStream(outfile)
-                fo.write(buffer)
-                fo.close()
-
-            } else {
-
-            }
-        } finally {
-
-        }
-    }
-
-    // ─────────────────────────────────── DB 리사이클러뷰 관찰자 ───────────────────────────────────
-
-//        val adapter = RecordListAdapter()
-//
-//        recyclerView.adapter = adapter
-//        recyclerView.layoutManager = LinearLayoutManager(this)
-//
-//        // 관찰자 추가 -> getAlphabetizedWords가 반환하는 LiveData에 대한
-//        // onChanged() : 관찰된 데이터가 변경되고 Activity가 foreground에 있을 때만 실행
-//        recordViewModel.allRecords.observe(this, Observer { records ->
-//            records.let { adapter.submitList(it) }
-//        })
 }

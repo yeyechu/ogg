@@ -48,7 +48,7 @@ class EnvFragment : Fragment() {
 
         // ────────────────────────────────── 데이터베이스 준비 ──────────────────────────────────
 
-        dbManager = dbHelper(context, "oggDB.db")
+        dbManager = dbHelper(requireContext())
         sqlitedb = dbManager.readableDatabase
 
         stampList.clear()
@@ -104,7 +104,6 @@ class EnvFragment : Fragment() {
         }
 
         // ──────────────────────────────── 프로젝트 시작 레이아웃 ────────────────────────────────
-
 
         // 레이아웃 확장 버튼 정의
         expandButton.setOnClickListener {

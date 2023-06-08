@@ -56,7 +56,7 @@ class PostActivity : AppCompatActivity() {
             finish()
         }
 
-        dbManager = dbHelper(this, "oggDB.db")
+        dbManager = dbHelper(this)
         sqlitedb = dbManager.readableDatabase
 
         val co2Text : TextView = binding.tvCo2

@@ -79,7 +79,7 @@ import androidx.fragment.app.Fragment
     - View에 표현할 데이터를 Observable 타입으로 관리
     - View는 ViewModel에 구독 요청을 하여 화면을 표현
     - View와 ViewModel은 1:N 관계
-    - Model에서 받은 데이터를 가공하여 Observable 타입 형태로 ViewModel에 저장장
+    - Model에서 받은 데이터를 가공하여 Observable 타입 형태로 ViewModel에 저장
 */
 
 class Guide : Fragment() {}

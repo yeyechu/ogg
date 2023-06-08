@@ -33,15 +33,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.myactivity.post.PostActivity" />
         </activity>
-        <activity
-            android:name=".ui.myactivity.post.AlbumActivity"
-            android:exported="false"
-            android:parentActivityName=".ui.myactivity.post.PostActivity"
-            android:theme="@style/Transparent">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.myactivity.post.PostActivity" />
-        </activity>
+
         <activity
             android:name=".ui.myactivity.post.PostActivity"
             android:exported="false"
