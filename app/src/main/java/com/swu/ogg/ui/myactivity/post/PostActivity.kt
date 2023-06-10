@@ -2,34 +2,31 @@ package com.swu.ogg.ui.myactivity.post
 
 import android.app.Activity
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteStatement
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider.NewInstanceFactory.Companion.instance
+import androidx.fragment.app.activityViewModels
 import com.swu.ogg.R
 import com.swu.ogg.database.Co2Today
-import com.swu.ogg.database.Converters
 import com.swu.ogg.databinding.ActivityPostBinding
 import com.swu.ogg.dbHelper
+import com.swu.ogg.ui.myactivity.MyActivityViewModel
 import java.io.IOException
 
 class PostActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityPostBinding
+    private val viewModel : MyActivityViewModel by viewModels()
 
     lateinit var dbManager : dbHelper
     lateinit var sqlitedb : SQLiteDatabase
@@ -80,6 +77,8 @@ class PostActivity : AppCompatActivity() {
             val freq = cursor.getString(cursor.getColumnIndexOrThrow("aFreq")).toString()
             val limit = cursor.getString(cursor.getColumnIndexOrThrow("aLimit")).toString()
             activityCo2 = cursor.getString(cursor.getColumnIndexOrThrow("aCo2")).toString()
+
+            Log.d("activityCo2 설정 : ", activityCo2)
 
             co2Text.text = co2
             if(limit != null && freq == "1") {
@@ -143,6 +142,9 @@ class PostActivity : AppCompatActivity() {
             binding.previewLayout.visibility = View.GONE
             openGallery()
         }
+
+        // ─────────────────────────────────── 포스팅 버튼 ───────────────────────────────────
+
         postButton.setOnClickListener {
 
             // db 처리
@@ -156,17 +158,8 @@ class PostActivity : AppCompatActivity() {
             // -> 환경
             // -> 환경탭 스티커
             // -> 피드(2학기)
-
-//            val replyIntent = Intent()
-//            if(false) {
-//                setResult(Activity.RESULT_CANCELED, replyIntent)
-//            } else {
-//                val result = "여기에 보낼 데이터를 저장하여 보냄"
-//                replyIntent.putExtra(CameraActivity.EXTRA_REPLY, result)
-//                setResult(Activity.RESULT_OK, replyIntent)
-//            }
-            Co2Today.setCo2Today(activityCo2.toFloat())
-            Log.d("인증버튼 클릭", Co2Today.getCo2Today().toString())
+            viewModel.increaseToday(activityCo2.toFloat())
+            viewModel.processSet((activityCo2.toFloat()/1.4f*100).toInt())
             finish()
         }
 

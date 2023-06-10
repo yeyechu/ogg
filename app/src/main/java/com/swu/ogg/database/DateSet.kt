@@ -1,5 +1,6 @@
 package com.swu.ogg.database
 
+// 날짜가 바뀌면 여기에 저장됨
 object DateSet {
 
     var date : Int = 0
@@ -10,9 +11,5 @@ object DateSet {
 
     fun getDateToday() : Int {
         return date
-    }
-
-    fun resetDateToday() {
-        date = 0
     }
 }

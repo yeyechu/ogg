@@ -58,7 +58,7 @@ class EnvFragment : Fragment() {
         dayButton = root.findViewById(R.id.btn_day)
 
         dayButton.setOnClickListener {
-            envViewModel.update(Action.UP)
+            envViewModel.update()
         }
 
         // ────────────────────────────────── 레이아웃 트랜지션 ──────────────────────────────────
@@ -89,8 +89,7 @@ class EnvFragment : Fragment() {
 
         startButton.setOnClickListener {
 
-            DateSet.setDateToday(1)
-            textDday.text = "21일 중 " + DateSet.getDateToday() + "일 째"
+            envViewModel.update()
 
             beforeLayout.visibility = View.GONE
             afterLayout.visibility = View.VISIBLE
@@ -107,8 +106,6 @@ class EnvFragment : Fragment() {
 
             textDday.text = "21일 중 " + it.toString() + "일 째"
             DateSet.setDateToday(it)
-            //stampList.set(it, )
-            //stampList.add(StampItem(it, 0f))
         }
 
         // ──────────────────────────────── 프로젝트 시작 레이아웃 ────────────────────────────────

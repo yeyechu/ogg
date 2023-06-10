@@ -8,7 +8,11 @@
     <fragment
         android:id="@+id/navigation_myactivity"
         android:name="com.swu.ogg.ui.myactivity.MyActivityFragment"
-        tools:layout="@layout/fragment_myactivity" />
+        tools:layout="@layout/fragment_myactivity" >
+        <action
+            android:id="@+id/action_navigation_myactivity_to_postActivity"
+            app:destination="@id/navigation" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_env"
@@ -26,5 +30,19 @@
         android:id="@+id/navigation_feed"
         android:name="com.swu.ogg.ui.feed.FeedFragment"
         tools:layout="@layout/fragment_feed" />
+
+    <navigation android:id="@+id/navigation"
+        app:startDestination="@id/postActivity">
+        <activity
+            android:id="@+id/postActivity"
+            android:name="com.swu.ogg.ui.myactivity.post.PostActivity"
+            android:label="activity_post"
+            tools:layout="@layout/activity_post" />
+        <activity
+            android:id="@+id/cameraActivity"
+            android:name="com.swu.ogg.ui.myactivity.post.CameraActivity"
+            android:label="activity_camera"
+            tools:layout="@layout/activity_camera" />
+    </navigation>
 
 </navigation>

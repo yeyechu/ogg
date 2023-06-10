@@ -10,22 +10,12 @@ import com.swu.ogg.database.DateSet
 // DB나 서버 통신으로 받아온 데이터 관리하는 곳
 // 데이터 변경이 감지되는 대로 UI 컴포넌트의 바인딩된 뷰에 나타냄
 // 서버에서 얻은 데이터는 내부 데이터베이스에 저장하여 불러옴
-
-enum class Action{
-    UP
-}
 class EnvViewModel : ViewModel() {
 
     private val _today = MutableLiveData<Int>().apply {
         value = DateSet.getDateToday()
     }
     val today: LiveData<Int> = _today
-
-    private val _allday = MutableLiveData<Float>().apply {
-        value = Co2All.getCo2All()
-    }
-    val allday: LiveData<Float> = _allday
-
 
     // ───────────────────────────── 스탬프 ─────────────────────────────
 
@@ -34,14 +24,7 @@ class EnvViewModel : ViewModel() {
     }
     var stamplist : LiveData<ArrayList<StampItem>> = _list2
 
-    fun update(action : Action) {
-        when(action) {
-            Action.UP -> _today.value = _today.value?.plus(1)
-        }
-    }
-    fun increase(action: Action) {
-        when(action) {
-            Action.UP -> _allday.value = _allday.value?.plus(Co2All.getCo2All())
-        }
+    fun update() {
+        _today.value = _today.value?.plus(1)
     }
 }

@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.RecyclerView
 import com.swu.ogg.R
 import com.swu.ogg.database.UserProject
@@ -49,6 +50,7 @@ class MyActivityAdapter (val context : Context, val toList : ArrayList<CardItem>
             fun create(parent: ViewGroup) : CardViewHolder {
 
                 val view : View = LayoutInflater.from(parent.context).inflate(R.layout.myactivity_card_item, parent, false)
+
                 return CardViewHolder(view)
             }
         }
@@ -56,6 +58,7 @@ class MyActivityAdapter (val context : Context, val toList : ArrayList<CardItem>
 
     // 뷰 생성
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
+
         return  CardViewHolder.create(parent)
     }
 
@@ -88,6 +91,7 @@ class MyActivityAdapter (val context : Context, val toList : ArrayList<CardItem>
                 var intent : Intent = Intent(context, PostActivity::class.java)
                 intent.putExtra("titleActivity", cardItem.title)
                 context.startActivity(intent)
+
             })
         }
     }

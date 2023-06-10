@@ -6,25 +6,22 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.swu.ogg.MainActivity
 import com.swu.ogg.R
 import com.swu.ogg.database.Co2Today
-import com.swu.ogg.database.OggApplication
 import com.swu.ogg.databinding.FragmentMyactivityBinding
 import com.swu.ogg.dbHelper
-import com.swu.ogg.ui.env.EnvViewModel
-import com.swu.ogg.ui.env.StampAdapter
 
 
 // 나의 활동 전체 레이아웃 구현부
@@ -34,12 +31,12 @@ class MyActivityFragment : Fragment() {
     private var _binding: FragmentMyactivityBinding? = null
     private val binding get() = _binding!!
 
-    lateinit var Image : ByteArray
-    var todayList = ArrayList<CardItem>()
-    var onlyList = ArrayList<CardItem>()
-
     lateinit var dbManager: dbHelper
     lateinit var sqlitedb: SQLiteDatabase
+    lateinit var Image : ByteArray
+
+    var todayList = ArrayList<CardItem>()
+    var onlyList = ArrayList<CardItem>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -50,48 +47,41 @@ class MyActivityFragment : Fragment() {
         val myActivityViewModel =
             ViewModelProvider(this).get(MyActivityViewModel::class.java)
 
-        //val envViewModel = ViewModelProvider(this).get(EnvViewModel::class.java)
-
         _binding = FragmentMyactivityBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        // ───────────────────────────────── 사용자 이름 초기화 ─────────────────────────────────
 
         val textView: TextView = binding.textNameMyactivity
 
         myActivityViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it + "님"
         }
-        // ─────────────────────────────────── 게이지바 ───────────────────────────────────
-
-        // 처리할 데이터 :
-        // - textView : tv_co2_alarm_gage : 0.74kg 남았어요!
-        // - Seekbar : determinateBar
-        // - textView : tv_co2_aim_gage : 1.4kg
+        // ───────────────────────────────── 시크바 초기화 ─────────────────────────────────
 
         val gageTextAlarm : TextView = root.findViewById(R.id.tv_co2_alarm_gage)
         val gageTextAim : TextView = root.findViewById(R.id.tv_co2_aim_gage)
         val seekbar : SeekBar = root.findViewById(R.id.determinateBar)
 
-        // DB에서 받아올 데이터
-        // 임시 초기화
-        val gageAim = 1.4f
-
-        gageTextAim.text = gageAim.toString() + "kg"
-
         // 시크바 노터치
         seekbar.setOnTouchListener { v, event -> true }
-        seekbar.progress = 0
 
-        // 시크바 움직임 정의
+        // 프로세스값 초기화
+        val gageAim = 1.4f                               // DB에서 받아올 데이터 임시 초기화
+        gageTextAim.text = gageAim.toString() + "kg"
+
+        var co2Converter = (Co2Today.getCo2Today() / gageAim) * 100
+
+        // ───────────────────────────────── 시크바 정의 ─────────────────────────────────
+
         seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar : SeekBar?, progress : Int, fromUser : Boolean) {
 
-//                var co2Left : Float = kotlin.math.round(gageAim*1000 - progress * gageAim*10)/1000
-//                gageTextAlarm.text = co2Left.toString() + "kg 남음"
                 var co2Left : Float = gageAim - Co2Today.getCo2Today()
+                Log.d("시크바 움직임 감지", Co2Today.getCo2Today().toString())
+
                 gageTextAlarm.text = co2Left.toString() + "kg 남음"
-                var co2Converter = (Co2Today.getCo2Today() / gageAim) * 100
-                seekbar.progress = co2Converter.toInt()
 
                 if(progress > 0){
                     gageTextAlarm.visibility = View.VISIBLE
@@ -116,6 +106,17 @@ class MyActivityFragment : Fragment() {
             }
         })
 
+        myActivityViewModel.float.observe(viewLifecycleOwner) {
+
+            Co2Today.setCo2Today(it)
+        }
+
+        myActivityViewModel.process.observe(viewLifecycleOwner) {
+
+            seekbar.progress = ((Co2Today.getCo2Today() / gageAim) * 100).toInt()
+            Log.d("시크바 뷰모델", seekbar.progress.toString())
+        }
+
 
         // ─────────────────────────────────── 리사이클러뷰 ───────────────────────────────────
 
@@ -124,12 +125,6 @@ class MyActivityFragment : Fragment() {
 
         todayList.clear()
         onlyList.clear()
-
-
-        // ViewModel에 변경을 알리는 observer 구현
-        // tolist : 오늘의 활동에 대한 내용
-        // onlist : 일회성 활동에 대한 내용
-
 
         dbManager = dbHelper(requireContext())
         sqlitedb = dbManager.readableDatabase
@@ -169,6 +164,8 @@ class MyActivityFragment : Fragment() {
             val tolist : ArrayList<CardItem> = todayList
             val toAdapter = MyActivityAdapter(requireContext(), tolist)
             recyclerViewToday.adapter = toAdapter
+            Log.d("활동 카드 co2",Co2Today.getCo2Today().toString())
+
         }
 
         myActivityViewModel.onlist.observe(viewLifecycleOwner) {

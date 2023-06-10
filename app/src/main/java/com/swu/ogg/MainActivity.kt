@@ -1,19 +1,12 @@
 package com.swu.ogg
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.content.res.AssetManager
-import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.activity.viewModels
-
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -21,13 +14,12 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.swu.ogg.database.*
 import com.swu.ogg.databinding.ActivityMainBinding
-import java.io.File
-import java.io.FileOutputStream
-import java.io.InputStream
+import com.swu.ogg.ui.myactivity.MyActivityViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
+    private val viewModel : MyActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +41,12 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        // ─────────────────────────────────── 뷰모델 ───────────────────────────────────
+
+        viewModel.float.observe(this, Observer {
+            Co2Today.setCo2Today(it)
+        })
 
         // ─────────────────────────────────── 플로팅 버튼 ───────────────────────────────────
 
