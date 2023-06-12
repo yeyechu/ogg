@@ -14,7 +14,9 @@ import com.swu.ogg.R
 import com.swu.ogg.database.DateSet
 import com.swu.ogg.databinding.FragmentEnvBinding
 import com.swu.ogg.dbHelper
-
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import androidx.core.content.ContextCompat
 class EnvFragment : Fragment() {
 
     // ─────────────────────────────────── 변수 ───────────────────────────────────
@@ -137,7 +139,8 @@ class EnvFragment : Fragment() {
         progressBar.progress = 0
 
         var co2Left : Float = kotlin.math.round(gageAllAim*1000 - progressBar.progress * gageAllAim*10)/1000
-        gageCo2Alarm.text = "목표 달성까지" + co2Left + "kg 남았어요"
+
+        gageCo2Alarm.text = "21일 목표 탄소량까지 ${co2Left}kg 남았어요"
 
         // ─────────────────────────────────── 스탬프 레이아웃 ───────────────────────────────────
 

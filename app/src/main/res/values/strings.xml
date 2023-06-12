@@ -24,14 +24,16 @@
     <!-- 인증 -->
     <string name="confirmation">인증하기</string>
 
+
     <!-- 통계 -->
 
     <!-- 피드 -->
 
     <!-- CameraX -->
     <string name="take_photo">사진 찍기</string>
-    <string name="retake_photo">다시 찍기</string>
-    <string name="use_photo">등록 하기</string>
+    <string name="retake_photo">다시 촬영</string>
+    <string name="use_photo">인증 올리기</string>
+
 
     <!-- 앨범 -->
 
@@ -41,5 +43,6 @@
     <string name="button_save">저장</string>
     <string name="empty_not_saved">비어있어서 안 저장</string>
     <string name="user_name">김하루</string>
+    <string name="activity_post_title">인증하기</string>
 
 </resources>

@@ -10,8 +10,8 @@
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="17dp"
+        app:cardBackgroundColor="@color/light_Blue"
         android:layout_gravity="center"
-        android:background="@drawable/button_white"
         android:layout_margin="@dimen/small_padding">
 
         <FrameLayout
@@ -63,7 +63,9 @@
                     android:fontFamily="@font/nanumsquare_b"
                     android:gravity="center"
                     android:maxLines="1"
-                    android:text="냉장고 관리하기" />
+                    android:text="냉장고 관리하기"
+                    android:textColor="@color/black"
+                    />
 
                 <TextView
                     android:id="@+id/tv_co2"
@@ -80,7 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="27dp"
                 android:layout_gravity="center"
-                android:background="@drawable/box_strokemainblue"
+                android:background="@drawable/box_mainblue"
                 android:enabled="true"
                 android:fontFamily="@font/nanumsquare_eb"
                 android:padding="@dimen/btn_padding"
