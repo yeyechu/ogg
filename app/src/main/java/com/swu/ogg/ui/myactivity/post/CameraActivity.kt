@@ -17,7 +17,10 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.core.*
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -134,11 +137,11 @@ class CameraActivity : AppCompatActivity() {
             }
 
 
-            // LiveData observe 구현 필요
-            // -> 오늘 게이지
+            // LiveData observe 구현 필요   // ...?
+            // -> 오늘 게이지               //사진올리고 나서 바로 안바뀜-> 새로고침이 안되는 문제
             // -> 전체 게이지
-            // -> 활동탭 리스트
-            // -> 환경
+            // -> 활동탭 리스트             //받은 이미지 넣기 완료
+            // -> 환경                     //인서님
             // -> 환경탭 스티커
             // -> 피드(2학기)
 

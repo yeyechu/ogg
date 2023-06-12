@@ -38,6 +38,10 @@ class MyActivityFragment : Fragment() {
     var todayList = ArrayList<CardItem>()
     var onlyList = ArrayList<CardItem>()
 
+    var gageAim = 0.0f
+    lateinit var pCo2Today :String
+    lateinit var pAim :String
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,10 +70,19 @@ class MyActivityFragment : Fragment() {
         // 시크바 노터치
         seekbar.setOnTouchListener { v, event -> true }
 
-        // 프로세스값 초기화
-        val gageAim = 1.4f                               // DB에서 받아올 데이터 임시 초기화
-        gageTextAim.text = gageAim.toString() + "kg"
+        // DB값 받아오기
+        dbManager = dbHelper(requireContext())
+        sqlitedb = dbManager.readableDatabase
 
+        var cursor: Cursor
+        cursor = sqlitedb.rawQuery("SELECT * FROM post WHERE pID = '1';", null)
+        while(cursor.moveToNext()) {
+            pCo2Today = cursor.getString(cursor.getColumnIndexOrThrow("pCo2Today"))
+            pAim = cursor.getString(cursor.getColumnIndexOrThrow("pAim"))
+        }
+        // 프로세스값 초기화
+        gageAim = pAim.toFloat()
+        gageTextAim.text = gageAim.toString() + "kg"
         var co2Converter = (Co2Today.getCo2Today() / gageAim) * 100
 
         // ───────────────────────────────── 시크바 정의 ─────────────────────────────────
@@ -108,7 +121,7 @@ class MyActivityFragment : Fragment() {
 
         myActivityViewModel.float.observe(viewLifecycleOwner) {
 
-            Co2Today.setCo2Today(it)
+            Co2Today.setCo2Today(pCo2Today.toFloat())
         }
 
         myActivityViewModel.process.observe(viewLifecycleOwner) {
@@ -126,8 +139,7 @@ class MyActivityFragment : Fragment() {
         todayList.clear()
         onlyList.clear()
 
-        dbManager = dbHelper(requireContext())
-        sqlitedb = dbManager.readableDatabase
+
 
         // DB에서 불러온 데이터 연결
 
@@ -178,6 +190,11 @@ class MyActivityFragment : Fragment() {
         return root
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        //새로고침 내용 여기에 넣는걸로 추정
+    }
     override fun onDestroyView() {
 
         sqlitedb.close()
