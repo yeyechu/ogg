@@ -41,12 +41,42 @@
 
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:orientation="vertical">
+            android:layout_width="317dp"
+            android:layout_height="560dp"
+            android:background="@drawable/box_white"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/big_padding"
+
+                >
+                <TextView
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
+
+                    />
+
+                <TextView
+                    android:id="@+id/post_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="인증하기"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/nanumsquare_eb"
+                    android:textSize="15sp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+
+                    />
 
             <ImageButton
                 android:id="@+id/btn_exit"
@@ -59,62 +89,84 @@
                 android:layout_gravity="right"
                 android:src="@drawable/baseline_close_24"/>
 
+
+            </LinearLayout>
+
+
+
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="12dp"
                 android:maxLines="1"
                 android:text="냉장고 적정용량 유지하기"
                 android:textSize="20sp"
-                android:fontFamily="@font/nanumsquare_eb" />
+                android:fontFamily="@font/nanumsquare_eb"
+                android:textColor="@color/black"
+                />
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="14dp"
-        android:layout_marginBottom="14dp"
-        android:background="@drawable/box_lightsky">
-
-            <TextView
-                android:id="@+id/tv_co2_title"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:text="탄소감축량"
-                android:textSize="15sp"
-                android:textColor="@color/Primary_blue"
-                android:fontFamily="@font/nanumsquare_eb" />
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginBottom="20dp"
+                >
 
-            <TextView
-                android:id="@+id/tv_co2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="3dp"
-                android:textColor="@color/Primary_blue"
-                android:fontFamily="@font/nanumsquare_b"
-                android:gravity="center"
-                android:text="0.38kg"
-                android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/tv_co2_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="탄소감축량"
+                    android:textSize="15sp"
+                    android:textColor="@color/Primary_blue"
+                    android:fontFamily="@font/nanumsquare_eb" />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_co2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="3dp"
+                    android:textColor="@color/Primary_blue"
+                    android:fontFamily="@font/nanumsquare_b"
+                    android:gravity="center"
+                    android:text="0.38kg"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginBottom="@dimen/small_padding"
+                >
 
             <ImageView
                 android:id="@+id/img_view"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/small_padding"
-                android:layout_marginBottom="@dimen/small_padding"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/app_name"
                 android:maxHeight="150dp"
-                android:src="@drawable/baseline_add_photo_alternate_24" />
+                android:src="@drawable/baseline_add_photo_alternate_24"
+                />
+
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:background="@drawable/corner_on"
+                    android:layout_gravity="center"
+                    />
+
+            </FrameLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -124,7 +176,7 @@
                 android:layout_marginBottom="@dimen/small_padding"
                 android:gravity="center"
                 android:maxLines="1"
-                android:text="등록 가능 횟수"
+                android:text="인증 가능 횟수"
                 android:textSize="17sp"
                 android:fontFamily="@font/nanumsquare_eb"
                 android:textColor="@color/black" />
@@ -134,7 +186,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_horizontal"
-                android:layout_marginBottom="21dp"
                 android:gravity="center"
                 android:text="하루에 한번"
                 android:textSize="12sp" />
@@ -143,11 +194,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_horizontal"
-                android:layout_marginTop="@dimen/small_padding"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="@dimen/small_padding"
                 android:gravity="center"
                 android:maxLines="1"
-                android:text="활동 방법"
+                android:text="인증 가능 미션"
                 android:textSize="17sp"
                 android:fontFamily="@font/nanumsquare_eb"
                 android:textColor="@color/black" />
@@ -166,7 +217,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:orientation="horizontal"
-                android:layout_marginTop="24dp">
+                android:layout_marginTop="20dp">
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_album"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/box_disabled"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:text="앨범 업로드"
+                    android:layout_marginRight="12dp"
+
+                    android:fontFamily="@font/nanumsquare_b"
+                    android:textColor="@color/lightgray"
+                    android:enabled="false"
+                    android:visibility="gone"/>
+
+
+
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_camera"
@@ -180,20 +251,6 @@
                     android:textColor="@color/white"
                     android:fontFamily="@font/nanumsquare_b" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_album"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/box_disabled"
-                    android:paddingTop="12dp"
-                    android:paddingBottom="12dp"
-                    android:layout_marginStart="12dp"
-                    android:text="앨범 업로드"
-                    android:fontFamily="@font/nanumsquare_b"
-                    android:textColor="@color/lightgray"
-                    android:enabled="false"
-                    android:visibility="gone"/>
 
             </LinearLayout>
 
@@ -208,20 +265,38 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="90dp"
                 android:orientation="vertical"
                 android:layout_gravity="center"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:background="@color/white">
 
-                <ImageView
-                    android:id="@+id/image_preview"
+                <androidx.cardview.widget.CardView
                     android:layout_width="250dp"
                     android:layout_height="320dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp" />
+                    android:layout_marginBottom="20dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="8dp">
+
+                    <ImageView
+                        android:id="@+id/image_preview"
+                        android:layout_width="230dp"
+                        android:layout_height="300dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/frame_post_corner" />
+
+                </androidx.cardview.widget.CardView>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -230,7 +305,7 @@
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_retake"
-                        android:layout_width="wrap_content"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/button_skyblue"
@@ -245,7 +320,7 @@
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_post"
-                        android:layout_width="wrap_content"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/box_lineblue"

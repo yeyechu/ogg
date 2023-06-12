@@ -5,22 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/lightgray"
     tools:context=".ui.env.EnvFragment">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/env_toolbar"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:title="@string/app_name" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/env_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:title="@string/app_name" />
+
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/before_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone"
+            android:visibility="visible"
             android:background="@drawable/top_rounded">
 
             <android.widget.Button
@@ -29,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="40dp"
                 android:layout_marginLeft="@dimen/big_padding"
                 android:layout_marginRight="@dimen/big_padding"
                 android:background="@drawable/box_mainblue"
@@ -37,16 +54,15 @@
                 android:gravity="center"
                 android:text="21일 프로젝트 시작"
                 android:textColor="@color/white"
-                android:textSize="16dp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/after_layout"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="150dp"
             android:orientation="vertical"
-            android:background="@color/white"
             android:visibility="gone">
 
             <LinearLayout
@@ -77,8 +93,9 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:text="@string/app_name"
-                        android:textStyle="bold"
-                        android:textSize="20dp" />
+                        android:fontFamily="@font/nanumsquare_eb"
+                        android:textColor="@color/black"
+                        android:textSize="25sp" />
 
                     <TextView
                         android:id="@+id/tv_co2_alarm_all"
@@ -89,7 +106,7 @@
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="@dimen/small_padding"
                         android:text="@string/app_name"
-                        android:textSize="15dp"/>
+                        android:textSize="15sp"/>
 
                 </LinearLayout>
 
@@ -119,6 +136,7 @@
                     android:layout_marginTop="5.3dp"
                     android:layout_weight="2"
                     android:text="0"
+                    android:textColor="@color/black"
                     android:textSize="12sp"
                     android:fontFamily="@font/nanumsquare_r" />
 
@@ -129,6 +147,7 @@
                     android:layout_marginRight="@dimen/big_padding"
                     android:layout_marginTop="5.3dp"
                     android:text="1kg"
+                    android:textColor="@color/black"
                     android:textSize="12sp"
                     android:fontFamily="@font/nanumsquare_r" />
 
@@ -136,43 +155,47 @@
 
         </LinearLayout>
 
-    <!-- ───────────────────────────── 펼쳐지는 부분 ───────────────────────────── -->
+    </LinearLayout>
 
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/expanded_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:padding="@dimen/big_padding"
+        android:visibility="gone">
 
-        <include layout="@layout/fragment_env_layout" />
-
-        <LinearLayout
+        <GridView
+            android:id="@+id/stamp_grid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/white">
+            android:horizontalSpacing="@dimen/small_padding"
+            android:verticalSpacing="@dimen/small_padding"
+            android:numColumns="7"/>
 
-            <GridView
-                android:id="@+id/stamp_grid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/big_padding"
-                android:horizontalSpacing="@dimen/small_padding"
-                android:verticalSpacing="@dimen/small_padding"
-                android:numColumns="7"
-                android:visibility="gone"/>
 
-            <ImageButton
-                android:id="@+id/btn_expand"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@android:color/transparent"
-                android:src="@drawable/baseline_keyboard_arrow_down_24"
-                android:padding="3dp"
-                android:visibility="gone" />
+    </LinearLayout>
 
-        </LinearLayout>
+    <LinearLayout
+        android:id="@+id/expandHelper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/top_rounded"
+        android:orientation="vertical">
 
-    </FrameLayout>
+        <ImageButton
+            android:id="@+id/btn_expand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:padding="@dimen/small_padding"
+            android:src="@drawable/baseline_keyboard_arrow_down_24"
+            android:visibility="gone" />
 
+    </LinearLayout>
+
+    <include layout="@layout/fragment_env_layout" />
 
 </LinearLayout>

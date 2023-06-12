@@ -11,7 +11,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:text="1"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:textColor="@color/lightgray"
         android:gravity="center"
         android:adjustViewBounds="true"
