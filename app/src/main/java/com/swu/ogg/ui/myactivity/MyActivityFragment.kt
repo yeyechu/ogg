@@ -22,6 +22,7 @@ import com.swu.ogg.R
 import com.swu.ogg.database.Co2Today
 import com.swu.ogg.databinding.FragmentMyactivityBinding
 import com.swu.ogg.dbHelper
+import kotlin.math.roundToInt
 
 
 // 나의 활동 전체 레이아웃 구현부
@@ -68,14 +69,16 @@ class MyActivityFragment : Fragment() {
         val seekbar : SeekBar = root.findViewById(R.id.determinateBar)
 
         // 시크바 노터치
-        seekbar.setOnTouchListener { v, event -> true }
+        //시크바 View / 변경된 값 / 사용자에 의한 변경인지(True), 코드에 의한 변경인지(False)
+        seekbar.setOnTouchListener { v, event -> false }
+        gageTextAlarm.setOnTouchListener { v, event -> false }
 
         // DB값 받아오기
         dbManager = dbHelper(requireContext())
         sqlitedb = dbManager.readableDatabase
 
         var cursor: Cursor
-        cursor = sqlitedb.rawQuery("SELECT * FROM post WHERE pID = '1';", null)
+        cursor = sqlitedb.rawQuery("SELECT * FROM post WHERE pDay = '1';", null)   // 나중에 몇 일차인지 받아오기
         while(cursor.moveToNext()) {
             pCo2Today = cursor.getString(cursor.getColumnIndexOrThrow("pCo2Today"))
             pAim = cursor.getString(cursor.getColumnIndexOrThrow("pAim"))
@@ -85,6 +88,9 @@ class MyActivityFragment : Fragment() {
         gageTextAim.text = gageAim.toString() + "kg"
         var co2Converter = (Co2Today.getCo2Today() / gageAim) * 100
 
+        seekbar.progress = Co2Today.getCo2Today().toInt()
+
+
         // ───────────────────────────────── 시크바 정의 ─────────────────────────────────
 
         seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -93,6 +99,7 @@ class MyActivityFragment : Fragment() {
 
                 myActivityViewModel.processSet(co2Converter.toInt())
                 var co2Left : Float = gageAim - Co2Today.getCo2Today()
+                Log.d("co2Left", co2Left.toString())
                 Log.d("시크바 움직임 감지", Co2Today.getCo2Today().toString())
 
                 gageTextAlarm.text = co2Left.toString() + "kg 남음"
@@ -104,6 +111,10 @@ class MyActivityFragment : Fragment() {
                 val sPos = seekBar!!.left + seekBar!!.paddingLeft
                 val xPos =
                     (seekBar!!.width - padding) * seekBar!!.progress / seekBar!!.max + sPos - gageTextAlarm.width/2
+
+                Log.d("padding", padding.toString())
+                Log.d("sPos", sPos.toString())
+                Log.d("xPos", xPos.toString())
 
                 gageTextAlarm.x = xPos.toFloat()
             }
