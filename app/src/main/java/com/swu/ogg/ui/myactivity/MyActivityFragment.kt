@@ -130,8 +130,7 @@ class MyActivityFragment : Fragment() {
         })
 
         myActivityViewModel.float.observe(viewLifecycleOwner) {
-
-            Co2Today.setCo2Today(it)
+            Co2Today.setCo2Today(pCo2Today.toFloat())
         }
 
         myActivityViewModel.process.observe(viewLifecycleOwner) {
