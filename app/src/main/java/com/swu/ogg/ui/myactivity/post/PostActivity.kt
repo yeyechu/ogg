@@ -16,6 +16,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import com.swu.ogg.MainActivity
 import com.swu.ogg.R
 import com.swu.ogg.database.Co2Today
 import com.swu.ogg.databinding.ActivityPostBinding
@@ -158,8 +159,12 @@ class PostActivity : AppCompatActivity() {
             // -> 환경
             // -> 환경탭 스티커
             // -> 피드(2학기)
-            viewModel.increaseToday(activityCo2.toFloat())
-            viewModel.processSet((activityCo2.toFloat()/1.4f*100).toInt())
+//            if(activityCo2 != null){
+//                val intent : Intent = Intent(this, MainActivity::class.java)
+//                intent.putExtra("co2_result", activityCo2)
+//                startActivity(intent)
+//            }
+
             finish()
         }
 

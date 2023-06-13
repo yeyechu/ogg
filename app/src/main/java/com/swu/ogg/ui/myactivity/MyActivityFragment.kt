@@ -91,6 +91,7 @@ class MyActivityFragment : Fragment() {
 
             override fun onProgressChanged(seekBar : SeekBar?, progress : Int, fromUser : Boolean) {
 
+                myActivityViewModel.processSet(co2Converter.toInt())
                 var co2Left : Float = gageAim - Co2Today.getCo2Today()
                 Log.d("시크바 움직임 감지", Co2Today.getCo2Today().toString())
 
@@ -176,8 +177,6 @@ class MyActivityFragment : Fragment() {
             val tolist : ArrayList<CardItem> = todayList
             val toAdapter = MyActivityAdapter(requireContext(), tolist)
             recyclerViewToday.adapter = toAdapter
-            Log.d("활동 카드 co2",Co2Today.getCo2Today().toString())
-
         }
 
         myActivityViewModel.onlist.observe(viewLifecycleOwner) {

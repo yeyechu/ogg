@@ -1,6 +1,7 @@
 package com.swu.ogg
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
@@ -19,7 +20,6 @@ import com.swu.ogg.ui.myactivity.MyActivityViewModel
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
-    private val viewModel : MyActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,12 +41,6 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        // ─────────────────────────────────── 뷰모델 ───────────────────────────────────
-
-        viewModel.float.observe(this, Observer {
-            Co2Today.setCo2Today(it)
-        })
 
         // ─────────────────────────────────── 플로팅 버튼 ───────────────────────────────────
 

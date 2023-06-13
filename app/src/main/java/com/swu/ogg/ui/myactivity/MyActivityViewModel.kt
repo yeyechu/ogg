@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.swu.ogg.database.Co2All
 import com.swu.ogg.database.Co2Today
+import kotlinx.coroutines.delay
 
 // https://developer.android.com/training/basics/fragments/communicating?hl=ko
 // <Fragment-Fragment 통신>
@@ -55,6 +56,7 @@ class MyActivityViewModel : ViewModel() {
     }
 
     fun processSet(result : Int){
+
         _progress.value = _progress.value?.plus(result)
     }
 
