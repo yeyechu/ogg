@@ -160,13 +160,17 @@ class EnvFragment : Fragment() {
 
         dayButton.setOnClickListener {
 
-            envViewModel.update()
-            actionDate = 1
+            if(DateSet.getDateToday() < 21) {
 
-            while(actionDate <= 21){
-                index = actionDate - 1
-                stampList.set(index, StampItem(actionDate++, Co2Today.getCo2Today(), DateSet.getDateToday()))
+                envViewModel.update()
+                actionDate = 1
 
+                while(actionDate <= 21){
+
+                    index = actionDate - 1
+                    stampList.set(index, StampItem(actionDate++, Co2Today.getCo2Today(), DateSet.getDateToday()))
+
+                }
                 val stampAdapter = StampAdapter(requireContext(), stampList)
                 gridView.adapter = stampAdapter
             }

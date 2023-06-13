@@ -44,7 +44,6 @@ class StampAdapter(val context : Context, val stamplist : ArrayList<StampItem>) 
             // 오늘 날짜 설정
             textDay.setTextColor(Color.parseColor("#6897F3"))
             textDay.setBackgroundResource(R.drawable.stamp_today_drawable)
-            Log.d("StampAdapter 오늘 날짜", stamps.today.toString())
 
         } else if(stamps.day > stamps.today) {
 
