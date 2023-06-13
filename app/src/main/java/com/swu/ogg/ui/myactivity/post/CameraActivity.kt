@@ -119,9 +119,9 @@ class CameraActivity : AppCompatActivity() {
                 }
 
                 //post 테이블에도 구현
-                //사용자 아이디는 일단 1으로 해놓고 함
+                //임의로 넣은 유저 아이디
                 var cursor: Cursor
-                cursor = sqlitedb.rawQuery("SELECT * FROM post WHERE pID = '1';", null)
+                cursor = sqlitedb.rawQuery("SELECT * FROM post WHERE pUserID = 'ogg';", null)
                 while(cursor.moveToNext()) {
                     val pCo2Today = cursor.getString(cursor.getColumnIndexOrThrow("pCo2Today"))
                     val pCo2All = cursor.getString(cursor.getColumnIndexOrThrow("pCo2All"))
@@ -129,7 +129,7 @@ class CameraActivity : AppCompatActivity() {
                     var newToday = pCo2Today.toFloat() + aCo2.toFloat()
                     var newAll = pCo2All.toFloat() + aCo2.toFloat()
 
-                    sqlitedb.execSQL("UPDATE post SET pCo2Today = '" + newToday + "', pCo2All = " + newAll + " WHERE pID = 1 ;")
+                    sqlitedb.execSQL("UPDATE post SET pCo2Today = '" + newToday + "', pCo2All = " + newAll + " WHERE pUserID = 'ogg';")
                 }
 
             }

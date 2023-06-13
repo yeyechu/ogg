@@ -78,7 +78,7 @@ class MyActivityFragment : Fragment() {
         sqlitedb = dbManager.readableDatabase
 
         var cursor: Cursor
-        cursor = sqlitedb.rawQuery("SELECT * FROM post WHERE pDay = '1';", null)   // 나중에 몇 일차인지 받아오기
+        cursor = sqlitedb.rawQuery("SELECT * FROM post WHERE pUserID = 'ogg';", null)   // 나중에 몇 일차인지 받아오기
         while(cursor.moveToNext()) {
             pCo2Today = cursor.getString(cursor.getColumnIndexOrThrow("pCo2Today"))
             pAim = cursor.getString(cursor.getColumnIndexOrThrow("pAim"))
