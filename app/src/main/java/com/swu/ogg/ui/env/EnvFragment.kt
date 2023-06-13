@@ -17,6 +17,7 @@ import com.swu.ogg.dbHelper
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import androidx.core.content.ContextCompat
+import com.swu.ogg.database.Co2History
 import com.swu.ogg.database.Co2Today
 
 class EnvFragment : Fragment() {
@@ -30,6 +31,7 @@ class EnvFragment : Fragment() {
     lateinit var sqlitedb : SQLiteDatabase
 
     var stampList = ArrayList<StampItem>()
+    var co2List = ArrayList<Co2History>()
 
     lateinit var stickerImage : ByteArray
     var stickerArray = ArrayList<Bitmap>()
@@ -58,6 +60,7 @@ class EnvFragment : Fragment() {
         sqlitedb = dbManager.readableDatabase
 
         stampList.clear()
+        co2List.clear()
 
         // ────────────────────────────────── 레이아웃 트랜지션 ──────────────────────────────────
 
@@ -144,7 +147,9 @@ class EnvFragment : Fragment() {
 
         var actionDate = 1
         while(actionDate <= 21){
-            stampList.add(StampItem(actionDate++, Co2Today.getCo2Today(), 1))
+            co2List.add(Co2History(0f))
+            stampList.add(StampItem(actionDate++, 0f, 1))
+            Log.d("초기화 co2List", co2List.toString())
         }
 
         envViewModel.stamplist.observe(viewLifecycleOwner) {
@@ -168,7 +173,8 @@ class EnvFragment : Fragment() {
                 while(actionDate <= 21){
 
                     index = actionDate - 1
-                    stampList.set(index, StampItem(actionDate++, Co2Today.getCo2Today(), DateSet.getDateToday()))
+                    var co2temp = co2List[index]
+                    stampList.set(index, StampItem(actionDate++, co2temp.co2, DateSet.getDateToday()))
 
                 }
                 val stampAdapter = StampAdapter(requireContext(), stampList)
