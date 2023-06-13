@@ -153,7 +153,7 @@ class CameraActivity : AppCompatActivity() {
 //                replyIntent.putExtra(EXTRA_REPLY, result)
 //                setResult(Activity.RESULT_OK, replyIntent)
 //            }
-            Co2Today.setCo2Today(extraCo2.toString().toFloat())
+            Co2Today.addCo2Today(extraCo2.toString().toFloat())
             Log.d("인증버튼 클릭", Co2Today.getCo2Today().toString())
             finish()
         }

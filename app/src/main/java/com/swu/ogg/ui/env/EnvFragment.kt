@@ -174,6 +174,7 @@ class EnvFragment : Fragment() {
                 val stampAdapter = StampAdapter(requireContext(), stampList)
                 gridView.adapter = stampAdapter
             }
+            Log.d("날짜버튼", stampList.toString())
         }
 
         return root

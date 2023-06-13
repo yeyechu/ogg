@@ -10,4 +10,8 @@ object Co2Today {
     fun getCo2Today() : Float {
         return co2
     }
+
+    fun addCo2Today(kg : Float) {
+        co2 += kg
+    }
 }
