@@ -21,6 +21,7 @@ data class CardItem(
     val image : Bitmap,
     val title : String,
     val co2 : String,
+    val limit : Int
 )
 
 class MyActivityAdapter (val context : Context, val toList : ArrayList<CardItem>)
@@ -37,7 +38,14 @@ class MyActivityAdapter (val context : Context, val toList : ArrayList<CardItem>
         val textDone = view?.findViewById<TextView>(R.id.tv_done)
 
         fun bind(room : CardItem, context: Context, onClickListener : View.OnClickListener){
-
+            if(room.limit == 0){
+                //button?.text = "인증완료"
+                button?.visibility = View.INVISIBLE
+                doneFrame?.visibility = View.VISIBLE
+                textDone?.visibility = View.VISIBLE
+                textTitle?.visibility = View.INVISIBLE
+                textCo2?.visibility = View.INVISIBLE
+            }
             textTitle?.text = room.title
             textCo2?.text = room.co2
             image?.setImageBitmap(room.image)
