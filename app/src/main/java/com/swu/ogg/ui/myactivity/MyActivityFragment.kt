@@ -130,7 +130,6 @@ class MyActivityFragment : Fragment() {
         })
 
         myActivityViewModel.float.observe(viewLifecycleOwner) {
-
             Co2Today.setCo2Today(pCo2Today.toFloat())
         }
 
@@ -154,29 +153,31 @@ class MyActivityFragment : Fragment() {
         // DB에서 불러온 데이터 연결
 
         var cursor_today : Cursor
-        cursor_today = sqlitedb.rawQuery("SELECT aTitle, aCo2, aImg FROM TodayTBL; ", null)
+        cursor_today = sqlitedb.rawQuery("SELECT aTitle, aCo2, aImg, aLImit FROM TodayTBL; ", null)
 
         while(cursor_today.moveToNext()) {
             Image = cursor_today.getBlob(cursor_today.getColumnIndexOrThrow("aImg"))
             val bitmap : Bitmap = BitmapFactory.decodeByteArray(Image, 0, Image.size)
             var title = cursor_today.getString((cursor_today.getColumnIndexOrThrow("aTitle"))).toString()
             var co2 = cursor_today.getString((cursor_today.getColumnIndexOrThrow("aCo2"))).toString() + "kg"
+            var limit = cursor_today.getString((cursor_today.getColumnIndexOrThrow("aLimit")))
 
-            todayList.add(CardItem(bitmap, title, co2))
+            todayList.add(CardItem(bitmap, title, co2, limit.toInt()))
         }
 
         cursor_today.close()
 
         var cursor_only : Cursor
-        cursor_only = sqlitedb.rawQuery("SELECT oTitle, oCo2, oImg FROM OnlyTBL; ", null)
+        cursor_only = sqlitedb.rawQuery("SELECT oTitle, oCo2, oImg, oLimit FROM OnlyTBL; ", null)
 
         while(cursor_only.moveToNext()) {
             Image = cursor_only.getBlob(cursor_only.getColumnIndexOrThrow("oImg"))
             val bitmap : Bitmap = BitmapFactory.decodeByteArray(Image, 0, Image.size)
             var title = cursor_only.getString((cursor_only.getColumnIndexOrThrow("oTitle"))).toString()
             var co2 = cursor_only.getString((cursor_only.getColumnIndexOrThrow("oCo2"))).toString() + "kg"
+            var limit = cursor_only.getString((cursor_only.getColumnIndexOrThrow("oLimit")))
 
-            onlyList.add(CardItem(bitmap, title, co2))
+            onlyList.add(CardItem(bitmap, title, co2, limit.toInt()))
         }
         cursor_only.close()
 
