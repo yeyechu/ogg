@@ -30,7 +30,8 @@ class dbHelper(context : Context) : SQLiteOpenHelper(context, FILE_NAME, null, 1
         Log.d(TAG, "onCreate()")
     }
 
-    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {}
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+    }
 
     override fun onConfigure(db: SQLiteDatabase) {
         super.onConfigure(db)

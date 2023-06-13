@@ -32,6 +32,7 @@ class EnvFragment : Fragment() {
 
     var stampList = ArrayList<StampItem>()
     var co2List = ArrayList<Co2History>()
+    var co2List2 = ArrayList<Float>(21)
 
     lateinit var stickerImage : ByteArray
     var stickerArray = ArrayList<Bitmap>()
@@ -74,6 +75,8 @@ class EnvFragment : Fragment() {
 
         val textDday: TextView = binding.tvDday
 
+        var actionDate = 1
+
         // 프로젝트 시작 전 화면 트랜지션 구현할 곳
         // DB 확인 -> 진행 중인 프로젝트가 없으면 visible
 
@@ -96,6 +99,7 @@ class EnvFragment : Fragment() {
             afterLayout.visibility = View.VISIBLE
             expandButton.visibility = View.VISIBLE
             imageChange.setImageResource(R.drawable.prototypebackground_bad)
+
 
         }
 
@@ -145,11 +149,15 @@ class EnvFragment : Fragment() {
 
         val gridView : GridView = binding.stampGrid
 
-        var actionDate = 1
         while(actionDate <= 21){
+
+            // co2List에 하루치 co2 21개 받아오기
+            // co2List에 하루치 co2 21개 받아오기
+            // co2List에 하루치 co2 21개 받아오기
+
             co2List.add(Co2History(0f))
-            stampList.add(StampItem(actionDate++, 0f, 1))
-            Log.d("초기화 co2List", co2List.toString())
+            stampList.add(StampItem(actionDate++, 0f, DateSet.getDateToday()))
+
         }
 
         envViewModel.stamplist.observe(viewLifecycleOwner) {
@@ -174,6 +182,11 @@ class EnvFragment : Fragment() {
 
                     index = actionDate - 1
                     var co2temp = co2List[index]
+
+                    if(actionDate == DateSet.getDateToday() - 1)
+                    {
+                        co2temp.co2 = Co2Today.getCo2Today()
+                    }
                     stampList.set(index, StampItem(actionDate++, co2temp.co2, DateSet.getDateToday()))
 
                 }
