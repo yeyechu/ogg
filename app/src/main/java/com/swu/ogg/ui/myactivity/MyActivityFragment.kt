@@ -100,7 +100,6 @@ class MyActivityFragment : Fragment() {
                 if(progress > 0){
                     gageTextAlarm.visibility = View.VISIBLE
                 }
-
                 val padding = seekBar!!.paddingLeft + seekBar!!.paddingRight
                 val sPos = seekBar!!.left + seekBar!!.paddingLeft
                 val xPos =
@@ -110,7 +109,6 @@ class MyActivityFragment : Fragment() {
             }
 
             override fun onStartTrackingTouch(seekBar : SeekBar?) {
-
             }
 
             override fun onStopTrackingTouch(seekBar : SeekBar?) {

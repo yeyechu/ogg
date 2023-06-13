@@ -132,8 +132,6 @@ class CameraActivity : AppCompatActivity() {
                     sqlitedb.execSQL("UPDATE post SET pCo2Today = '" + newToday + "', pCo2All = " + newAll + " WHERE pID = 1 ;")
                 }
 
-                sqlitedb.close()
-                dbManager.close()
             }
 
 
@@ -188,8 +186,6 @@ class CameraActivity : AppCompatActivity() {
 
         // imageCapture 사용 사례에 대한 참조 불러오기 -> null이면 함수 종료
         val imageCapture = imageCapture ?: return
-
-
 
         val name = SimpleDateFormat(FILENAME_FORMAT, Locale.KOREA).format(System.currentTimeMillis())
 
@@ -304,6 +300,10 @@ class CameraActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+
+        sqlitedb.close()
+        dbManager.close()
+
         super.onDestroy()
         cameraExecutor.shutdown()
     }

@@ -17,6 +17,8 @@ import com.swu.ogg.dbHelper
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import androidx.core.content.ContextCompat
+import com.swu.ogg.database.Co2Today
+
 class EnvFragment : Fragment() {
 
     // ─────────────────────────────────── 변수 ───────────────────────────────────
@@ -56,12 +58,6 @@ class EnvFragment : Fragment() {
         sqlitedb = dbManager.readableDatabase
 
         stampList.clear()
-
-        dayButton = root.findViewById(R.id.btn_day)
-
-        dayButton.setOnClickListener {
-            envViewModel.update()
-        }
 
         // ────────────────────────────────── 레이아웃 트랜지션 ──────────────────────────────────
 
@@ -148,14 +144,32 @@ class EnvFragment : Fragment() {
 
         var actionDate = 1
         while(actionDate <= 21){
-            stampList.add(StampItem(actionDate++, 0f))
+            stampList.add(StampItem(actionDate++, Co2Today.getCo2Today(), 1))
         }
 
         envViewModel.stamplist.observe(viewLifecycleOwner) {
 
-            //val stamp : ArrayList<StampItem> = stampList
             val stampAdapter = StampAdapter(requireContext(), stampList)
             gridView.adapter = stampAdapter
+        }
+
+        // ─────────────────────────────────── 날짜 버튼 ───────────────────────────────────
+
+        dayButton = root.findViewById(R.id.btn_day)
+        var index = 1
+
+        dayButton.setOnClickListener {
+
+            envViewModel.update()
+            actionDate = 1
+
+            while(actionDate <= 21){
+                index = actionDate - 1
+                stampList.set(index, StampItem(actionDate++, Co2Today.getCo2Today(), DateSet.getDateToday()))
+
+                val stampAdapter = StampAdapter(requireContext(), stampList)
+                gridView.adapter = stampAdapter
+            }
         }
 
         return root

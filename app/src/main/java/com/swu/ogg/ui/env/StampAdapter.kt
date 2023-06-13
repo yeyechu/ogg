@@ -3,6 +3,7 @@ package com.swu.ogg.ui.env
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +16,8 @@ import com.swu.ogg.database.DateSet
 // 스탬프에 대한 데이터 클래스
 data class StampItem(
     val day : Int,
-    val Co2Today : Float
+    val Co2Today : Float,
+    val today : Int
 )
 
 class StampAdapter(val context : Context, val stamplist : ArrayList<StampItem>) : BaseAdapter() {
@@ -37,33 +39,34 @@ class StampAdapter(val context : Context, val stamplist : ArrayList<StampItem>) 
 
         textDay.text = stamps.day.toString()
 
-        when(stamps.Co2Today) {
+        if(stamps.today == stamps.day)
+        {
+            // 오늘 날짜 설정
+            textDay.setTextColor(Color.parseColor("#6897F3"))
+            textDay.setBackgroundResource(R.drawable.stamp_today_drawable)
+            Log.d("StampAdapter 오늘 날짜", stamps.today.toString())
 
-            // 하나도 못했을 때 스탬프
-            0f -> textDay.setBackgroundResource(R.drawable.calendersticker_1)
-            // 50%일 때 스탬프
-            0.7f -> textDay.setBackgroundResource(R.drawable.calendersticker_2)
-            // 100% 이상일 때 스탬프
-            else -> textDay.setBackgroundResource(R.drawable.calendersticker_3)
+        } else if(stamps.day > stamps.today) {
+
+            textDay.setBackgroundResource(R.drawable.stamp_drawable)
+
+        } else if(stamps.day < stamps.today) {
+
+            textDay.text = ""
+
+            when(stamps.Co2Today) {
+
+                // 하나도 못했을 때 스탬프
+                0f -> textDay.setBackgroundResource(R.drawable.calendersticker_1)
+                // 50%일 때 스탬프
+                0.7f -> textDay.setBackgroundResource(R.drawable.calendersticker_2)
+                // 100% 이상일 때 스탬프
+                else -> textDay.setBackgroundResource(R.drawable.calendersticker_3)
 
 //            0f -> stampToday.setImageResource(R.drawable.calendersticker_1)
 //            0.7f -> stampToday.setImageResource(R.drawable.calendersticker_2)
 //            else -> stampToday.setImageResource(R.drawable.calendersticker_3)
-        }
-
-        if(stamps.day > DateSet.getDateToday()) {
-
-            textDay.setBackgroundResource(R.drawable.stamp_drawable)
-
-        } else if(stamps.day < DateSet.getDateToday()) {
-
-            textDay.text = ""
-
-        } else {
-
-            // 오늘 날짜 설정
-            textDay.setTextColor(Color.parseColor("#6897F3"))
-            textDay.setBackgroundResource(R.drawable.stamp_today_drawable)
+            }
         }
 
         return view
