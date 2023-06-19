@@ -16,6 +16,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
@@ -29,6 +30,7 @@ import com.swu.ogg.database.Co2Today
 import com.swu.ogg.databinding.ActivityCameraBinding
 import com.swu.ogg.dbHelper
 import com.swu.ogg.ui.env.EnvFragment
+import com.swu.ogg.ui.myactivity.MyActivityViewModel
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
@@ -95,8 +97,9 @@ class CameraActivity : AppCompatActivity() {
             // -> 환경탭 스티커
             // -> 피드(2학기)
 
-            Co2Today.addCo2Today(extraCo2.toString().toFloat())
-            Co2All.addCo2All(extraCo2.toString().toFloat())
+            //Co2Today.addCo2Today(extraCo2.toString().toFloat())
+            Co2Today.setCo2Today(extraCo2.toString().toFloat())
+            //Co2All.addCo2All(extraCo2.toString().toFloat())
 
             finish()
         }

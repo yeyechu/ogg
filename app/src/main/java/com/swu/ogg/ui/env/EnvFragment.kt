@@ -74,9 +74,15 @@ class EnvFragment : Fragment() {
 
         val textDday: TextView = binding.tvDday
 
+        val gageTextAim : TextView = binding.tvCo2AimAll
+        val gageCo2Alarm : TextView = binding.tvCo2AlarmAll
+        val progressBar : ProgressBar = binding.determinateBarAll
+
         var actionDate = 1
         var co2Left : Float
         val gageAllAim : Float = 1.4f*21
+
+        gageTextAim.text = gageAllAim.toString()
 
         // 프로젝트 시작 전 화면 트랜지션 구현할 곳
 
@@ -105,10 +111,8 @@ class EnvFragment : Fragment() {
                 setCo2(i, "0")
             }
             getCo2()
-            getGage()
-            setGage()
-            co2Left = gageAllAim - Co2All.getCo2All()
-            envViewModel.processSet((Co2All.getCo2All()/gageAllAim * 100).toInt())
+            //getGage()
+            //setGage()
         }
 
         envViewModel.today.observe(viewLifecycleOwner) {
@@ -116,19 +120,18 @@ class EnvFragment : Fragment() {
             textDday.text = "21일 중 " + it.toString() + "일 째"
             DateSet.setDateToday(it)
 
+            setSticker(todaySticker)
             getGage()
             setGage()
 
-            when(Co2Today.getCo2Today()){
+            envViewModel.addCo2(Co2Today.getCo2Today())
 
-                // 하나도 못했을 때 스탬프
-                0f -> todaySticker.setImageResource(R.drawable.calendersticker_1)
-                // 50%일 때 스탬프
-                in 0.001f..0.7f -> todaySticker.setImageResource(R.drawable.calendersticker_2)
-                // 100% 이상일 때 스탬프
-                else -> todaySticker.setImageResource(R.drawable.calendersticker_3)
-            }
-            Log.d("스티커", Co2Today.getCo2Today().toString())
+            co2Left = gageAllAim - Co2All.getCo2All()
+            co2Left = kotlin.math.round(co2Left*1000)/1000
+            gageCo2Alarm.text = "21일 목표 탄소량까지 " + co2Left.toString() +"kg 남았어요"
+            Log.d("co2Left", co2Left.toString())
+
+            envViewModel.processSet((Co2Today.getCo2Today()/gageAllAim * 100).toInt())
         }
 
         // ──────────────────────────────── 프로젝트 시작 레이아웃 ────────────────────────────────
@@ -148,25 +151,22 @@ class EnvFragment : Fragment() {
 
         // ─────────────────────────────────── 게이지바 ───────────────────────────────────
 
-        val gageTextAim : TextView = binding.tvCo2AimAll
-        val gageCo2Alarm : TextView = binding.tvCo2AlarmAll
-        val progressBar : ProgressBar = binding.determinateBarAll
-
-        gageTextAim.text = gageAllAim.toString()
-
         envViewModel.co2all.observe(viewLifecycleOwner) {
 
             co2Left = gageAllAim - it
+            co2Left = kotlin.math.round(co2Left*1000)/1000
             gageCo2Alarm.text = "21일 목표 탄소량까지 " + co2Left.toString() +"kg 남았어요"
+            Log.d("co2Left", co2Left.toString())
 
-            Co2All.setCo2All(it)
-            Log.d("co2all observer", it.toString())
+            Co2All.setCo2All(it/2)
+            Log.d("co2all observe", Co2All.getCo2All().toString())
+            Log.d("co2all observe it", (it/2).toString())
         }
 
         envViewModel.process.observe(viewLifecycleOwner) {
 
-            progressBar.progress = it
-            Log.d("process observer", it.toString())
+            progressBar.progress = it/2
+            Log.d("progress observe", (it/2).toString())
         }
 
         // ─────────────────────────────────── 스탬프 레이아웃 ───────────────────────────────────
@@ -217,7 +217,6 @@ class EnvFragment : Fragment() {
                 Co2Today.setCo2Today(0f)
                 todaySticker.setImageResource(R.drawable.calendersticker_1)
             }
-            Log.d("날짜버튼", stampList.toString())
         }
 
         return root
@@ -237,6 +236,21 @@ class EnvFragment : Fragment() {
         }
     }
 
+    fun setSticker(todaySticker : ImageView) {
+
+        when(Co2Today.getCo2Today()){
+
+            // 하나도 못했을 때 스탬프
+            0f -> todaySticker.setImageResource(R.drawable.calendersticker_1)
+
+            // 50%일 때 스탬프
+            in 0.001f..0.7f -> todaySticker.setImageResource(R.drawable.calendersticker_2)
+
+            // 100% 이상일 때 스탬프
+            else -> todaySticker.setImageResource(R.drawable.calendersticker_3)
+        }
+
+    }
     fun getCo2() {
         var cursor: Cursor
         cursor = sqlitedb.rawQuery("SELECT * FROM co2HistoryTBL;",null)
@@ -297,6 +311,7 @@ class EnvFragment : Fragment() {
 
         Co2All.setCo2All(summation)
         cursor.close()
+        Log.d("getGage()", Co2All.getCo2All().toString())
     }
 
     fun setGage() {
@@ -311,6 +326,7 @@ class EnvFragment : Fragment() {
                     + 1 + "';")
         }
 
+        Log.d("setGage()", Co2All.getCo2All().toString())
         cursor.close()
     }
 

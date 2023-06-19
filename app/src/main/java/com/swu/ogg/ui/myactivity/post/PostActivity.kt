@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import com.swu.ogg.MainActivity
 import com.swu.ogg.R
+import com.swu.ogg.database.Co2All
 import com.swu.ogg.database.Co2Today
 import com.swu.ogg.databinding.ActivityPostBinding
 import com.swu.ogg.dbHelper
@@ -27,7 +28,6 @@ import java.io.IOException
 class PostActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityPostBinding
-    private val viewModel : MyActivityViewModel by viewModels()
 
     lateinit var dbManager : dbHelper
     lateinit var sqlitedb : SQLiteDatabase
@@ -148,22 +148,9 @@ class PostActivity : AppCompatActivity() {
 
         postButton.setOnClickListener {
 
-            // db 처리
-            // 인증 등록 사진 db 저장 후
-            // 인증 완료 비활성화 처리 필요한 부분 구현 필요
-
-            // LiveData observe 구현 필요
-            // -> 오늘 게이지
-            // -> 전체 게이지
-            // -> 활동탭 리스트
-            // -> 환경
-            // -> 환경탭 스티커
-            // -> 피드(2학기)
-//            if(activityCo2 != null){
-//                val intent : Intent = Intent(this, MainActivity::class.java)
-//                intent.putExtra("co2_result", activityCo2)
-//                startActivity(intent)
-//            }
+            //Co2Today.addCo2Today(activityCo2.toFloat())
+            Co2Today.setCo2Today(activityCo2.toFloat())
+            //Co2All.addCo2All(activityCo2.toString().toFloat())
 
             finish()
         }

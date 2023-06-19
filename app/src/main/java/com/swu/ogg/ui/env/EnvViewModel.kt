@@ -42,7 +42,7 @@ class EnvViewModel : ViewModel() {
         _progress.value = _progress.value?.plus(result)
     }
 
-    // ───────────────────────────── Co2 ─────────────────────────────
+    // ───────────────────────────── Co2 All ─────────────────────────────
 
     private var _co2all = MutableLiveData<Float>().apply {
 
@@ -53,5 +53,22 @@ class EnvViewModel : ViewModel() {
     fun addCo2(result : Float) {
 
         _co2all.value = _co2all.value?.plus(result)
+    }
+
+    // ───────────────────────────── Co2 Today ─────────────────────────────
+
+    private var _co2to = MutableLiveData<Float>().apply {
+
+        value = Co2Today.getCo2Today()
+    }
+    val co2to : LiveData<Float> = _co2to
+
+    fun addCo2to(result : Float) {
+
+        _co2to.value = _co2to.value?.plus(result)
+    }
+
+    fun setCo2to(result: Float) {
+        _co2to.value = _co2to.value?.minus(result)
     }
 }

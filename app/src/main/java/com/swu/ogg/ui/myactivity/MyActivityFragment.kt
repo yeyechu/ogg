@@ -19,6 +19,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.swu.ogg.R
+import com.swu.ogg.database.Co2All
 import com.swu.ogg.database.Co2Today
 import com.swu.ogg.databinding.FragmentMyactivityBinding
 import com.swu.ogg.dbHelper
@@ -38,10 +39,9 @@ class MyActivityFragment : Fragment() {
 
     var todayList = ArrayList<CardItem>()
     var onlyList = ArrayList<CardItem>()
+    var co2Convert = Int
 
     var gageAim = 1.4f
-//    lateinit var pCo2Today :String
-//    lateinit var pAim :String
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -79,14 +79,31 @@ class MyActivityFragment : Fragment() {
 
         // 프로세스값 초기화
         gageTextAim.text = gageAim.toString() + "kg"
-        var co2Converter = (Co2Today.getCo2Today() / gageAim) * 100
+        var co2Converter = ((Co2Today.getCo2Today() / gageAim) * 100).toInt()
 
-        seekbar.progress = co2Converter.toInt()
+        var co2Left = gageAim - Co2Today.getCo2Today()
+        gageTextAlarm.text = co2Left.toString() + "kg 남음"
+        myActivityViewModel.processSet(co2Converter)
+
         myActivityViewModel.process.observe(viewLifecycleOwner){
 
+            co2Converter = it
+            seekbar.progress = co2Converter
+            Log.d("시크바 뷰모델 process", seekbar.progress.toString())
         }
 
-        myActivityViewModel.processSet(co2Converter.toInt())
+        myActivityViewModel.float.observe(viewLifecycleOwner) {
+
+            Co2Today.setCo2Today(0f)
+            Log.d("시크바 뷰모델 co2", Co2Today.getCo2Today().toString())
+            Log.d("시크바 뷰모델 float", seekbar.progress.toString())
+        }
+
+//        myActivityViewModel.allday.observe(viewLifecycleOwner) {
+//
+//            //Co2All.setCo2All(it)
+//            Log.d("시크바 뷰모델 co2All", Co2All.getCo2All().toString())
+//        }
 
         // ───────────────────────────────── 시크바 정의 ─────────────────────────────────
 
@@ -96,10 +113,6 @@ class MyActivityFragment : Fragment() {
             override fun onProgressChanged(seekBar : SeekBar?, progress : Int, fromUser : Boolean) {
 
                 seekbar.progress = co2Converter.toInt()
-
-                var co2Left : Float = gageAim - Co2Today.getCo2Today()
-
-                gageTextAlarm.text = co2Left.toString() + "kg 남음"
 
                 // 시크바 말풍선 위치 설정
                 if(progress > 0){
@@ -111,10 +124,6 @@ class MyActivityFragment : Fragment() {
                 val xPos =
                     (seekBar!!.width - padding) * seekBar!!.progress / seekBar!!.max + sPos - gageTextAlarm.width/2
 
-                Log.d("padding", padding.toString())
-                Log.d("sPos", sPos.toString())
-                Log.d("xPos", xPos.toString())
-
                 gageTextAlarm.x = xPos.toFloat()
 
             }
@@ -125,22 +134,12 @@ class MyActivityFragment : Fragment() {
 
             // 움직임 종료
             override fun onStopTrackingTouch(seekBar : SeekBar?) {
+
                 if(seekbar.progress > 98 || seekbar.progress < 2){
                     gageTextAlarm.visibility = View.INVISIBLE
                 }
             }
         })
-
-        myActivityViewModel.float.observe(viewLifecycleOwner) {
-            Co2Today.setCo2Today(it)
-        }
-
-        myActivityViewModel.process.observe(viewLifecycleOwner) {
-
-            seekbar.progress = ((Co2Today.getCo2Today() / gageAim) * 100f).toInt()
-            Log.d("시크바 뷰모델", seekbar.progress.toString())
-        }
-
 
         // ─────────────────────────────────── 리사이클러뷰 ───────────────────────────────────
 
@@ -149,8 +148,6 @@ class MyActivityFragment : Fragment() {
 
         todayList.clear()
         onlyList.clear()
-
-        // DB에서 불러온 데이터 연결
 
         var cursor_today : Cursor
         cursor_today = sqlitedb.rawQuery("SELECT aTitle, aCo2, aImg FROM TodayTBL; ", null)
