@@ -27,9 +27,18 @@ class dbHelper(context : Context) : SQLiteOpenHelper(context, FILE_NAME, null, 1
 
     override fun onCreate(db: SQLiteDatabase) {
 
+        db!!.execSQL("DROP TABLE IF EXISTS co2HistoryTBL")
+        db!!.execSQL("CREATE TABLE co2HistoryTBL (co2Index integer PRIMARY KEY, co2Mount text)")
+        var num = 1
+        while(num <= 21)
+        {
+            db!!.execSQL("INSERT INTO co2HistoryTBL VALUES ('" + num + "', '0');")
+            num++
+        }
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+
     }
 
     override fun onConfigure(db: SQLiteDatabase) {
@@ -38,6 +47,7 @@ class dbHelper(context : Context) : SQLiteOpenHelper(context, FILE_NAME, null, 1
     }
 
     override fun onOpen(db: SQLiteDatabase?) {
+
         super.onOpen(db)
     }
 
@@ -88,6 +98,7 @@ class dbHelper(context : Context) : SQLiteOpenHelper(context, FILE_NAME, null, 1
     }
 
     override fun close() {
+
         sqlite?.close()
         super.close()
     }

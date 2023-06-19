@@ -24,9 +24,11 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.swu.ogg.database.Co2All
 import com.swu.ogg.database.Co2Today
 import com.swu.ogg.databinding.ActivityCameraBinding
 import com.swu.ogg.dbHelper
+import com.swu.ogg.ui.env.EnvFragment
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
@@ -85,49 +87,6 @@ class CameraActivity : AppCompatActivity() {
 
         postButton.setOnClickListener {
 
-            var aCo2 : String
-
-            var cursor: Cursor
-            cursor = sqlitedb.rawQuery("SELECT * FROM TodayTBL WHERE aTitle = '" + extraTitle + "' ;", null)
-            while(cursor.moveToNext()) {
-                aCo2 = cursor.getString(cursor.getColumnIndexOrThrow("aCo2"))
-                val aCode = cursor.getString(cursor.getColumnIndexOrThrow("aCode")).toString()
-                val aNum = cursor.getString(cursor.getColumnIndexOrThrow("aNum"))
-                val aFreq = cursor.getString(cursor.getColumnIndexOrThrow("aFreq"))
-                val aLimit = cursor.getString(cursor.getColumnIndexOrThrow("aLimit"))
-                image = bitmapToByteArray(bitmap!!)
-                println(image)
-
-                if(aLimit.toInt() > 0){
-                    if(aFreq.toInt() == 1){
-                        // 인증 완료 비활성화 처리 필요한 부분 구현 필요(디자인 기다리는중)
-                    }
-                    else if(aFreq.toInt() == 2){
-                        // 인증 완료 비활성화 처리 필요한 부분 구현 필요(디자인 기다리는중)
-                    }
-                    val newLimit = aLimit.toInt() - 1
-                    sqlitedb.execSQL("UPDATE TodayTBL SET aGallery = '" + image + "', aLimit = " + newLimit + " WHERE aTitle = '" + extraTitle + "' ;")
-                }
-                else if(aLimit.toInt() == 10000){
-                    sqlitedb.execSQL("UPDATE TodayTBL SET aGallery = '" + image + "', aLimit = " + 0 + " WHERE aTitle = '" + extraTitle + "' ;")
-                }
-
-                //post 테이블에도 구현
-                //임의로 넣은 유저 아이디
-                var cursor: Cursor
-                cursor = sqlitedb.rawQuery("SELECT * FROM post WHERE pUserID = 'ogg';", null)
-                while(cursor.moveToNext()) {
-                    val pCo2Today = cursor.getString(cursor.getColumnIndexOrThrow("pCo2Today"))
-                    val pCo2All = cursor.getString(cursor.getColumnIndexOrThrow("pCo2All"))
-
-                    var newToday = pCo2Today.toFloat() + aCo2.toFloat()
-                    var newAll = pCo2All.toFloat() + aCo2.toFloat()
-
-                    sqlitedb.execSQL("UPDATE post SET pCo2Today = '" + newToday + "', pCo2All = " + newAll + " WHERE pUserID = 'ogg';")
-                }
-
-            }
-
             // LiveData observe 구현 필요
             // -> 오늘 게이지               //사진올리고 나서 바로 안바뀜-> 새로고침이 안되는 문제
             // -> 전체 게이지
@@ -137,7 +96,8 @@ class CameraActivity : AppCompatActivity() {
             // -> 피드(2학기)
 
             Co2Today.addCo2Today(extraCo2.toString().toFloat())
-            Log.d("인증버튼 클릭", Co2Today.getCo2Today().toString())
+            Co2All.addCo2All(extraCo2.toString().toFloat())
+
             finish()
         }
 
@@ -156,13 +116,6 @@ class CameraActivity : AppCompatActivity() {
         }
         cameraExecutor = Executors.newSingleThreadExecutor()
 
-    }
-
-    //비트맵 -> 바이트 변환
-    fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
-        var outputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 80, outputStream)
-        return outputStream.toByteArray()
     }
     // 사진 찍기
     private fun takePhoto() {

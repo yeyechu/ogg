@@ -1,9 +1,7 @@
 package com.swu.ogg.ui.env
 
-import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -14,9 +12,7 @@ import com.swu.ogg.R
 import com.swu.ogg.database.DateSet
 import com.swu.ogg.databinding.FragmentEnvBinding
 import com.swu.ogg.dbHelper
-import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
-import androidx.core.content.ContextCompat
+import com.swu.ogg.database.Co2All
 import com.swu.ogg.database.Co2History
 import com.swu.ogg.database.Co2Today
 
@@ -32,10 +28,6 @@ class EnvFragment : Fragment() {
 
     var stampList = ArrayList<StampItem>()
     var co2List = ArrayList<Co2History>()
-    var co2List2 = ArrayList<Float>(21)
-
-    lateinit var stickerImage : ByteArray
-    var stickerArray = ArrayList<Bitmap>()
 
     lateinit var dayButton : Button
 
@@ -59,9 +51,14 @@ class EnvFragment : Fragment() {
 
         dbManager = dbHelper(requireContext())
         sqlitedb = dbManager.readableDatabase
+        sqlitedb = dbManager.writableDatabase
 
         stampList.clear()
         co2List.clear()
+
+        getCo2()
+        getGage()
+        setGage()
 
         // ────────────────────────────────── 레이아웃 트랜지션 ──────────────────────────────────
 
@@ -71,18 +68,22 @@ class EnvFragment : Fragment() {
         val startButton : Button = binding.btnStart
         val expandButton : ImageButton = binding.btnExpand
         val stampLayout : GridView = binding.stampGrid
+
+        val todaySticker : ImageView = binding.imageTodaySticker
         val imageChange : ImageView = root.findViewById(R.id.start_env_image)
 
         val textDday: TextView = binding.tvDday
 
         var actionDate = 1
+        var co2Left : Float
+        val gageAllAim : Float = 1.4f*21
 
         // 프로젝트 시작 전 화면 트랜지션 구현할 곳
-        // DB 확인 -> 진행 중인 프로젝트가 없으면 visible
 
         if(DateSet.date == 0){
 
             beforeLayout.visibility = View.VISIBLE
+            DateSet.setDateToday(1)
 
         } else {
             beforeLayout.visibility = View.GONE
@@ -100,17 +101,34 @@ class EnvFragment : Fragment() {
             expandButton.visibility = View.VISIBLE
             imageChange.setImageResource(R.drawable.prototypebackground_bad)
 
-
+            for( i in 0..20) {
+                setCo2(i, "0")
+            }
+            getCo2()
+            getGage()
+            setGage()
+            co2Left = gageAllAim - Co2All.getCo2All()
+            envViewModel.processSet((Co2All.getCo2All()/gageAllAim * 100).toInt())
         }
-
-        // db 처리해서 연결
-        // 탄소량 얼마 남았는지
-        // 오늘 스티커 뭔지
 
         envViewModel.today.observe(viewLifecycleOwner) {
 
             textDday.text = "21일 중 " + it.toString() + "일 째"
             DateSet.setDateToday(it)
+
+            getGage()
+            setGage()
+
+            when(Co2Today.getCo2Today()){
+
+                // 하나도 못했을 때 스탬프
+                0f -> todaySticker.setImageResource(R.drawable.calendersticker_1)
+                // 50%일 때 스탬프
+                in 0.001f..0.7f -> todaySticker.setImageResource(R.drawable.calendersticker_2)
+                // 100% 이상일 때 스탬프
+                else -> todaySticker.setImageResource(R.drawable.calendersticker_3)
+            }
+            Log.d("스티커", Co2Today.getCo2Today().toString())
         }
 
         // ──────────────────────────────── 프로젝트 시작 레이아웃 ────────────────────────────────
@@ -134,30 +152,32 @@ class EnvFragment : Fragment() {
         val gageCo2Alarm : TextView = binding.tvCo2AlarmAll
         val progressBar : ProgressBar = binding.determinateBarAll
 
-        val gageAllAim : Float = 1.4f*21
         gageTextAim.text = gageAllAim.toString()
 
-        // 진행률 받아와서 초기화
-        // 임시 초기화 ↓
-        progressBar.progress = 0
+        envViewModel.co2all.observe(viewLifecycleOwner) {
 
-        var co2Left : Float = kotlin.math.round(gageAllAim*1000 - progressBar.progress * gageAllAim*10)/1000
+            co2Left = gageAllAim - it
+            gageCo2Alarm.text = "21일 목표 탄소량까지 " + co2Left.toString() +"kg 남았어요"
 
-        gageCo2Alarm.text = "21일 목표 탄소량까지 ${co2Left}kg 남았어요"
+            Co2All.setCo2All(it)
+            Log.d("co2all observer", it.toString())
+        }
+
+        envViewModel.process.observe(viewLifecycleOwner) {
+
+            progressBar.progress = it
+            Log.d("process observer", it.toString())
+        }
 
         // ─────────────────────────────────── 스탬프 레이아웃 ───────────────────────────────────
 
         val gridView : GridView = binding.stampGrid
 
+        actionDate = 1
         while(actionDate <= 21){
 
-            // co2List에 하루치 co2 21개 받아오기
-            // co2List에 하루치 co2 21개 받아오기
-            // co2List에 하루치 co2 21개 받아오기
-
-            co2List.add(Co2History(0f))
-            stampList.add(StampItem(actionDate++, 0f, DateSet.getDateToday()))
-
+            var temp = co2List[actionDate - 1].co2
+            stampList.add(StampItem(actionDate++, temp, DateSet.getDateToday()))
         }
 
         envViewModel.stamplist.observe(viewLifecycleOwner) {
@@ -175,23 +195,27 @@ class EnvFragment : Fragment() {
 
             if(DateSet.getDateToday() < 21) {
 
-                envViewModel.update()
                 actionDate = 1
+
+                var co2Temp = Co2Today.getCo2Today().toString()
+                setCo2(DateSet.getDateToday(), co2Temp)
+                resetCo2()
+
+                envViewModel.update()
 
                 while(actionDate <= 21){
 
                     index = actionDate - 1
-                    var co2temp = co2List[index]
 
-                    if(actionDate == DateSet.getDateToday() - 1)
-                    {
-                        co2temp.co2 = Co2Today.getCo2Today()
-                    }
-                    stampList.set(index, StampItem(actionDate++, co2temp.co2, DateSet.getDateToday()))
-
+                    var temp = co2List[index].co2
+                    stampList.set(index, StampItem(actionDate++, temp, DateSet.getDateToday()))
                 }
+
                 val stampAdapter = StampAdapter(requireContext(), stampList)
                 gridView.adapter = stampAdapter
+
+                Co2Today.setCo2Today(0f)
+                todaySticker.setImageResource(R.drawable.calendersticker_1)
             }
             Log.d("날짜버튼", stampList.toString())
         }
@@ -211,6 +235,83 @@ class EnvFragment : Fragment() {
         else -> {
             super.onOptionsItemSelected(item)
         }
+    }
+
+    fun getCo2() {
+        var cursor: Cursor
+        cursor = sqlitedb.rawQuery("SELECT * FROM co2HistoryTBL;",null)
+
+        while(cursor.moveToNext())
+        {
+            var co2mount = cursor.getString((cursor.getColumnIndexOrThrow("co2Mount")))
+
+            co2List.add(Co2History(co2mount))
+        }
+
+        cursor.close()
+    }
+
+    fun setCo2(index : Int, co2 : String) {
+
+        var cursor: Cursor
+        cursor = sqlitedb.rawQuery("SELECT * FROM co2HistoryTBL;",null)
+
+        while (cursor.moveToNext()){
+
+            sqlitedb.execSQL("UPDATE co2HistoryTBL SET co2Mount = '"
+                    + co2 + "' WHERE co2Index='"
+                    + index + "';")
+        }
+    }
+
+    fun resetCo2() {
+
+        var cursor: Cursor
+        cursor = sqlitedb.rawQuery("SELECT * FROM co2HistoryTBL;",null)
+
+        var index = 0
+        while(cursor.moveToNext())
+        {
+            var co2mount = cursor.getString((cursor.getColumnIndexOrThrow("co2Mount")))
+
+            co2List.set(index, Co2History(co2mount))
+            index++
+        }
+
+        cursor.close()
+
+    }
+
+    fun getGage() {
+
+        var summation = 0f
+        var cursor: Cursor
+        cursor = sqlitedb.rawQuery("SELECT * FROM co2HistoryTBL;", null)
+
+        while(cursor.moveToNext()){
+
+            var co2mount = cursor.getString((cursor.getColumnIndexOrThrow("co2Mount")))
+
+            summation += co2mount.toFloat()
+        }
+
+        Co2All.setCo2All(summation)
+        cursor.close()
+    }
+
+    fun setGage() {
+
+        var cursor: Cursor
+        cursor = sqlitedb.rawQuery("SELECT * FROM post;",null)
+
+        while (cursor.moveToNext()){
+
+            sqlitedb.execSQL("UPDATE post SET pCo2All = '"
+                    + Co2All.getCo2All() + "' WHERE pID='"
+                    + 1 + "';")
+        }
+
+        cursor.close()
     }
 
     override fun onDestroyView() {

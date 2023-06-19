@@ -16,7 +16,7 @@ import com.swu.ogg.database.DateSet
 // 스탬프에 대한 데이터 클래스
 data class StampItem(
     val day : Int,
-    val Co2Today : Float,
+    val Co2Today : String,
     val today : Int
 )
 
@@ -53,12 +53,12 @@ class StampAdapter(val context : Context, val stamplist : ArrayList<StampItem>) 
 
             textDay.text = ""
 
-            when(stamps.Co2Today) {
+            when(stamps.Co2Today.toFloat()) {
 
                 // 하나도 못했을 때 스탬프
                 0f -> textDay.setBackgroundResource(R.drawable.calendersticker_1)
                 // 50%일 때 스탬프
-                0.7f -> textDay.setBackgroundResource(R.drawable.calendersticker_2)
+                in 0.001f..0.7f -> textDay.setBackgroundResource(R.drawable.calendersticker_2)
                 // 100% 이상일 때 스탬프
                 else -> textDay.setBackgroundResource(R.drawable.calendersticker_3)
 

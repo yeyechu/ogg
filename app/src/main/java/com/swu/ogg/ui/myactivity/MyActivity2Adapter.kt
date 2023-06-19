@@ -27,10 +27,10 @@ class MyActivity2Adapter(val context : Context, val onList : ArrayList<CardItem>
             val button = view?.findViewById<Button>(R.id.btn)
 
             fun bind(room : CardItem, context: Context, onClickListener: OnClickListener) {
-                if(room.limit == 10000){
-                    //button?.text = "인증완료"          //이부분 0에서 시작해서 10000으로 바뀐뒤 줄어드는 형식으로 변경해야될듯
-                    //button?.isEnabled = false
-                }
+//                if(room.limit == 10000){
+//                    //button?.text = "인증완료"          //이부분 0에서 시작해서 10000으로 바뀐뒤 줄어드는 형식으로 변경해야될듯
+//                    //button?.isEnabled = false
+//                }
                 textTitle?.text = room.title
                 textCo2?.text = room.co2
                 image?.setImageBitmap(room.image)

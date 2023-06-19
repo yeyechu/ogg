@@ -39,9 +39,9 @@ class MyActivityFragment : Fragment() {
     var todayList = ArrayList<CardItem>()
     var onlyList = ArrayList<CardItem>()
 
-    var gageAim = 0.0f
-    lateinit var pCo2Today :String
-    lateinit var pAim :String
+    var gageAim = 1.4f
+//    lateinit var pCo2Today :String
+//    lateinit var pAim :String
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -77,19 +77,16 @@ class MyActivityFragment : Fragment() {
         dbManager = dbHelper(requireContext())
         sqlitedb = dbManager.readableDatabase
 
-        var cursor: Cursor
-        cursor = sqlitedb.rawQuery("SELECT * FROM post WHERE pUserID = 'ogg';", null)   // 나중에 몇 일차인지 받아오기
-        while(cursor.moveToNext()) {
-            pCo2Today = cursor.getString(cursor.getColumnIndexOrThrow("pCo2Today"))
-            pAim = cursor.getString(cursor.getColumnIndexOrThrow("pAim"))
-        }
         // 프로세스값 초기화
-        gageAim = pAim.toFloat()
         gageTextAim.text = gageAim.toString() + "kg"
         var co2Converter = (Co2Today.getCo2Today() / gageAim) * 100
 
-        seekbar.progress = Co2Today.getCo2Today().toInt()
+        seekbar.progress = co2Converter.toInt()
+        myActivityViewModel.process.observe(viewLifecycleOwner){
 
+        }
+
+        myActivityViewModel.processSet(co2Converter.toInt())
 
         // ───────────────────────────────── 시크바 정의 ─────────────────────────────────
 
@@ -98,7 +95,8 @@ class MyActivityFragment : Fragment() {
             // 움직임 진행 중
             override fun onProgressChanged(seekBar : SeekBar?, progress : Int, fromUser : Boolean) {
 
-                myActivityViewModel.processSet(co2Converter.toInt())
+                seekbar.progress = co2Converter.toInt()
+
                 var co2Left : Float = gageAim - Co2Today.getCo2Today()
 
                 gageTextAlarm.text = co2Left.toString() + "kg 남음"
@@ -118,6 +116,7 @@ class MyActivityFragment : Fragment() {
                 Log.d("xPos", xPos.toString())
 
                 gageTextAlarm.x = xPos.toFloat()
+
             }
 
             // 움직임 시작
@@ -133,12 +132,12 @@ class MyActivityFragment : Fragment() {
         })
 
         myActivityViewModel.float.observe(viewLifecycleOwner) {
-            Co2Today.setCo2Today(pCo2Today.toFloat())
+            Co2Today.setCo2Today(it)
         }
 
         myActivityViewModel.process.observe(viewLifecycleOwner) {
 
-            seekbar.progress = ((Co2Today.getCo2Today() / gageAim) * 100).toInt()
+            seekbar.progress = ((Co2Today.getCo2Today() / gageAim) * 100f).toInt()
             Log.d("시크바 뷰모델", seekbar.progress.toString())
         }
 
@@ -154,34 +153,31 @@ class MyActivityFragment : Fragment() {
         // DB에서 불러온 데이터 연결
 
         var cursor_today : Cursor
-        cursor_today = sqlitedb.rawQuery("SELECT aTitle, aCo2, aImg, aLImit FROM TodayTBL; ", null)
+        cursor_today = sqlitedb.rawQuery("SELECT aTitle, aCo2, aImg FROM TodayTBL; ", null)
 
         while(cursor_today.moveToNext()) {
             Image = cursor_today.getBlob(cursor_today.getColumnIndexOrThrow("aImg"))
             val bitmap : Bitmap = BitmapFactory.decodeByteArray(Image, 0, Image.size)
             var title = cursor_today.getString((cursor_today.getColumnIndexOrThrow("aTitle"))).toString()
             var co2 = cursor_today.getString((cursor_today.getColumnIndexOrThrow("aCo2"))).toString() + "kg"
-            var limit = cursor_today.getString((cursor_today.getColumnIndexOrThrow("aLimit")))
 
-            todayList.add(CardItem(bitmap, title, co2, limit.toInt()))
+            todayList.add(CardItem(bitmap, title, co2))
         }
 
         cursor_today.close()
 
         var cursor_only : Cursor
-        cursor_only = sqlitedb.rawQuery("SELECT oTitle, oCo2, oImg, oLimit FROM OnlyTBL; ", null)
+        cursor_only = sqlitedb.rawQuery("SELECT oTitle, oCo2, oImg FROM OnlyTBL; ", null)
 
         while(cursor_only.moveToNext()) {
             Image = cursor_only.getBlob(cursor_only.getColumnIndexOrThrow("oImg"))
             val bitmap : Bitmap = BitmapFactory.decodeByteArray(Image, 0, Image.size)
             var title = cursor_only.getString((cursor_only.getColumnIndexOrThrow("oTitle"))).toString()
             var co2 = cursor_only.getString((cursor_only.getColumnIndexOrThrow("oCo2"))).toString() + "kg"
-            var limit = cursor_only.getString((cursor_only.getColumnIndexOrThrow("oLimit")))
 
-            onlyList.add(CardItem(bitmap, title, co2, limit.toInt()))
+            onlyList.add(CardItem(bitmap, title, co2))
         }
         cursor_only.close()
-
 
         myActivityViewModel.tolist.observe(viewLifecycleOwner) {
 
@@ -198,12 +194,6 @@ class MyActivityFragment : Fragment() {
         }
 
         return root
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        //새로고침 내용 여기에 넣는걸로 추정
     }
     override fun onDestroyView() {
 
