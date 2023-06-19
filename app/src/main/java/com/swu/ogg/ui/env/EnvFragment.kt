@@ -213,7 +213,6 @@ class EnvFragment : Fragment() {
         }
     }
 
-
     override fun onDestroyView() {
 
         sqlitedb.close()

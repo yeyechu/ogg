@@ -69,8 +69,8 @@ class MyActivityFragment : Fragment() {
         val seekbar : SeekBar = root.findViewById(R.id.determinateBar)
 
         // 시크바 노터치
-        //시크바 View / 변경된 값 / 사용자에 의한 변경인지(True), 코드에 의한 변경인지(False)
         seekbar.setOnTouchListener { v, event -> false }
+        //시크바 View / 변경된 값 / 사용자에 의한 변경인지(True), 코드에 의한 변경인지(False)
         gageTextAlarm.setOnTouchListener { v, event -> false }
 
         // DB값 받아오기
@@ -95,18 +95,19 @@ class MyActivityFragment : Fragment() {
 
         seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
+            // 움직임 진행 중
             override fun onProgressChanged(seekBar : SeekBar?, progress : Int, fromUser : Boolean) {
 
                 myActivityViewModel.processSet(co2Converter.toInt())
                 var co2Left : Float = gageAim - Co2Today.getCo2Today()
-                Log.d("co2Left", co2Left.toString())
-                Log.d("시크바 움직임 감지", Co2Today.getCo2Today().toString())
 
                 gageTextAlarm.text = co2Left.toString() + "kg 남음"
 
+                // 시크바 말풍선 위치 설정
                 if(progress > 0){
                     gageTextAlarm.visibility = View.VISIBLE
                 }
+
                 val padding = seekBar!!.paddingLeft + seekBar!!.paddingRight
                 val sPos = seekBar!!.left + seekBar!!.paddingLeft
                 val xPos =
@@ -119,9 +120,11 @@ class MyActivityFragment : Fragment() {
                 gageTextAlarm.x = xPos.toFloat()
             }
 
+            // 움직임 시작
             override fun onStartTrackingTouch(seekBar : SeekBar?) {
             }
 
+            // 움직임 종료
             override fun onStopTrackingTouch(seekBar : SeekBar?) {
                 if(seekbar.progress > 98 || seekbar.progress < 2){
                     gageTextAlarm.visibility = View.INVISIBLE
@@ -147,8 +150,6 @@ class MyActivityFragment : Fragment() {
 
         todayList.clear()
         onlyList.clear()
-
-
 
         // DB에서 불러온 데이터 연결
 

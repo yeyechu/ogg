@@ -44,10 +44,7 @@ class CameraActivity : AppCompatActivity() {
     lateinit var sqlitedb : SQLiteDatabase
     lateinit var image : ByteArray
 
-
-
     var bitmap : Bitmap? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,8 +84,7 @@ class CameraActivity : AppCompatActivity() {
         sqlitedb = dbManager.readableDatabase
 
         postButton.setOnClickListener {
-            // db 처리
-            // 인증 등록 사진 db 저장 후
+
             var aCo2 : String
 
             var cursor: Cursor
@@ -101,8 +97,6 @@ class CameraActivity : AppCompatActivity() {
                 val aLimit = cursor.getString(cursor.getColumnIndexOrThrow("aLimit"))
                 image = bitmapToByteArray(bitmap!!)
                 println(image)
-                //alimit이 10000인경우 처리는? -> 한번에 0으로 만들고 10000일 뒤에 재등록 가능하도록
-                //aFreq(0) 일회성, aFreq(1) 하루 1회, aFreq(2) 하루 여러번
 
                 if(aLimit.toInt() > 0){
                     if(aFreq.toInt() == 1){
@@ -134,25 +128,14 @@ class CameraActivity : AppCompatActivity() {
 
             }
 
-
-            // LiveData observe 구현 필요   // ...?
+            // LiveData observe 구현 필요
             // -> 오늘 게이지               //사진올리고 나서 바로 안바뀜-> 새로고침이 안되는 문제
             // -> 전체 게이지
-            // -> 활동탭 리스트             //받은 이미지 넣기 완료
-            // -> 환경                     //인서님
+            // -> 활동탭 리스트
+            // -> 환경
             // -> 환경탭 스티커
             // -> 피드(2학기)
 
-//            val replyIntent = Intent()
-//
-//            // if문 조건에 값이 없으면 등록 취소
-//            if(true) {
-//                setResult(Activity.RESULT_CANCELED, replyIntent)
-//            } else {
-//                val result = "여기에 보낼 데이터를 저장하여 보냄"
-//                replyIntent.putExtra(EXTRA_REPLY, result)
-//                setResult(Activity.RESULT_OK, replyIntent)
-//            }
             Co2Today.addCo2Today(extraCo2.toString().toFloat())
             Log.d("인증버튼 클릭", Co2Today.getCo2Today().toString())
             finish()

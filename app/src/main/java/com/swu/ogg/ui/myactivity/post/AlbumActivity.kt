@@ -1,4 +1,4 @@
-//package com.swu.ogg.ui.myactivity.post
+package com.swu.ogg.ui.myactivity.post
 //
 //import android.Manifest
 //import android.app.Activity

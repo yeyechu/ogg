@@ -23,11 +23,10 @@ class dbHelper(context : Context) : SQLiteOpenHelper(context, FILE_NAME, null, 1
     init{
         oggContext = context
         checkDB()
-        Log.d(TAG, "init")
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        Log.d(TAG, "onCreate()")
+
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -40,17 +39,15 @@ class dbHelper(context : Context) : SQLiteOpenHelper(context, FILE_NAME, null, 1
 
     override fun onOpen(db: SQLiteDatabase?) {
         super.onOpen(db)
-        Log.d(TAG, "onOpen()")
     }
 
     // ─────────────────────────── db파일 존재 확인 ───────────────────────────
     private fun checkDB() {
-        Log.d(TAG, "checkDB()")
+
         val dbFile = File(filePath + FILE_NAME)
 
         if(!dbFile.exists()){
             dbCopy()
-            Log.d(TAG, "dbCopy()")
         }
     }
     // ─────────────────────────── 기존 DB 불러오기 ───────────────────────────
@@ -83,7 +80,6 @@ class dbHelper(context : Context) : SQLiteOpenHelper(context, FILE_NAME, null, 1
 
         } catch (e : IOException) {
             e.printStackTrace()
-            Log.d(TAG, "dbCopy(), 예외 발생")
         }
     }
     companion object {
@@ -92,7 +88,6 @@ class dbHelper(context : Context) : SQLiteOpenHelper(context, FILE_NAME, null, 1
     }
 
     override fun close() {
-        Log.d(TAG, "close()")
         sqlite?.close()
         super.close()
     }

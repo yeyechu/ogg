@@ -54,6 +54,7 @@ class MyActivityAdapter (val context : Context, val toList : ArrayList<CardItem>
             textDone?.text
         }
 
+        // 변수처럼 호출하기 위한 companion ocject 설정
         companion object {
             fun create(parent: ViewGroup) : CardViewHolder {
 
@@ -74,10 +75,6 @@ class MyActivityAdapter (val context : Context, val toList : ArrayList<CardItem>
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
 
         val cardItem = toList[position]
-
-        // 활동 카드 클릭 시 불러야 할 것 정의
-        // Intent : 화면(Activity)
-        // putExtra : 전달 해야할 내용
 
         holder.apply {
 
