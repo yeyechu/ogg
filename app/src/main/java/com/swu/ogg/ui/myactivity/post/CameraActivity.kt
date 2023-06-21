@@ -16,7 +16,6 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
@@ -25,13 +24,9 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.swu.ogg.database.Co2All
 import com.swu.ogg.database.Co2Today
 import com.swu.ogg.databinding.ActivityCameraBinding
 import com.swu.ogg.dbHelper
-import com.swu.ogg.ui.env.EnvFragment
-import com.swu.ogg.ui.myactivity.MyActivityViewModel
-import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
@@ -89,17 +84,28 @@ class CameraActivity : AppCompatActivity() {
 
         postButton.setOnClickListener {
 
-            // LiveData observe 구현 필요
-            // -> 오늘 게이지               //사진올리고 나서 바로 안바뀜-> 새로고침이 안되는 문제
-            // -> 전체 게이지
-            // -> 활동탭 리스트
-            // -> 환경
-            // -> 환경탭 스티커
-            // -> 피드(2학기)
+            //Co2Today.addCo2Today(activityCo2.toFloat())
+            Co2Today.addCo2Today(extraCo2.toString().toFloat())
+            //Co2All.addCo2All(activityCo2.toString().toFloat())
 
-            //Co2Today.addCo2Today(extraCo2.toString().toFloat())
-            Co2Today.setCo2Today(extraCo2.toString().toFloat())
-            //Co2All.addCo2All(extraCo2.toString().toFloat())
+            dbManager = dbHelper(this)
+            sqlitedb = dbManager.writableDatabase
+
+            var cursor: Cursor
+            cursor = sqlitedb.rawQuery("SELECT * FROM post;",null)
+
+            while (cursor.moveToNext()){
+
+                sqlitedb.execSQL("UPDATE post SET pCo2Today = '"
+                        + Co2Today.getCo2Today() + "' WHERE pID='"
+                        + 1 + "';")
+            }
+
+            Log.d("setCo2To()", Co2Today.getCo2Today().toString())
+
+            cursor.close()
+            sqlitedb.close()
+            dbManager.close()
 
             finish()
         }

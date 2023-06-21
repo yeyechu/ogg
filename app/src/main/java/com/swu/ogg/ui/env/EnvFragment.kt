@@ -59,6 +59,7 @@ class EnvFragment : Fragment() {
         getCo2()
         getGage()
         setGage()
+        getCo2To()
 
         // ────────────────────────────────── 레이아웃 트랜지션 ──────────────────────────────────
 
@@ -123,13 +124,14 @@ class EnvFragment : Fragment() {
             setSticker(todaySticker)
             getGage()
             setGage()
+            getCo2To()
 
             envViewModel.addCo2(Co2Today.getCo2Today())
 
             co2Left = gageAllAim - Co2All.getCo2All()
             co2Left = kotlin.math.round(co2Left*1000)/1000
             gageCo2Alarm.text = "21일 목표 탄소량까지 " + co2Left.toString() +"kg 남았어요"
-            Log.d("co2Left", co2Left.toString())
+            Log.d("co2Left 134", co2Left.toString())
 
             envViewModel.processSet((Co2Today.getCo2Today()/gageAllAim * 100).toInt())
         }
@@ -153,20 +155,20 @@ class EnvFragment : Fragment() {
 
         envViewModel.co2all.observe(viewLifecycleOwner) {
 
-            co2Left = gageAllAim - it
-            co2Left = kotlin.math.round(co2Left*1000)/1000
-            gageCo2Alarm.text = "21일 목표 탄소량까지 " + co2Left.toString() +"kg 남았어요"
-            Log.d("co2Left", co2Left.toString())
-
-            Co2All.setCo2All(it/2)
-            Log.d("co2all observe", Co2All.getCo2All().toString())
-            Log.d("co2all observe it", (it/2).toString())
+//            co2Left = gageAllAim - it
+//            co2Left = kotlin.math.round(co2Left*1000)/1000
+//            gageCo2Alarm.text = "21일 목표 탄소량까지 " + co2Left.toString() +"kg 남았어요"
+//            Log.d("co2Left 161", co2Left.toString())
+//
+//            //Co2All.setCo2All(it)
+//            Log.d("co2all observe 164", Co2All.getCo2All().toString())
+//            Log.d("co2all observe it 164", it.toString())
         }
 
         envViewModel.process.observe(viewLifecycleOwner) {
 
-            progressBar.progress = it/2
-            Log.d("progress observe", (it/2).toString())
+            progressBar.progress = it
+            Log.d("progress observe 171", it.toString())
         }
 
         // ─────────────────────────────────── 스탬프 레이아웃 ───────────────────────────────────
@@ -311,7 +313,7 @@ class EnvFragment : Fragment() {
 
         Co2All.setCo2All(summation)
         cursor.close()
-        Log.d("getGage()", Co2All.getCo2All().toString())
+        Log.d("getGage() 316", Co2All.getCo2All().toString())
     }
 
     fun setGage() {
@@ -326,14 +328,54 @@ class EnvFragment : Fragment() {
                     + 1 + "';")
         }
 
-        Log.d("setGage()", Co2All.getCo2All().toString())
+        Log.d("setGage() 331", Co2All.getCo2All().toString())
         cursor.close()
+    }
+
+    fun getCo2To() {
+
+        var cursor: Cursor
+        cursor = sqlitedb.rawQuery("SELECT * FROM post;", null)
+
+        while(cursor.moveToNext()){
+
+            var co2mount = cursor.getString((cursor.getColumnIndexOrThrow("pCo2Today")))
+
+            Co2Today.setCo2Today(co2mount.toFloat())
+        }
+
+        cursor.close()
+
+        Log.d("getCo2To() 349", Co2Today.getCo2Today().toString())
+    }
+
+    fun setCo2To() {
+
+        var cursor: Cursor
+        cursor = sqlitedb.rawQuery("SELECT * FROM post;",null)
+
+        while (cursor.moveToNext()){
+
+            sqlitedb.execSQL("UPDATE post SET pCo2Today = '"
+                    + Co2Today.getCo2Today() + "' WHERE pID='"
+                    + 1 + "';")
+        }
+
+        Log.d("setCo2To()", Co2Today.getCo2Today().toString())
+
+        cursor.close()
+    }
+
+    companion object {
+
     }
 
     override fun onDestroyView() {
 
+        setCo2To()
         sqlitedb.close()
         dbManager.close()
+        Log.d("destroy", Co2Today.getCo2Today().toString())
 
         super.onDestroyView()
         _binding = null

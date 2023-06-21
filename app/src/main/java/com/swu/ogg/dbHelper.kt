@@ -13,7 +13,7 @@ import java.io.OutputStream
 
 // oggDB.db를 위한 임시 사용
 
-class dbHelper(context : Context) : SQLiteOpenHelper(context, FILE_NAME, null, 1){
+class dbHelper(context: Context) : SQLiteOpenHelper(context, FILE_NAME, null, 1){
 
     private val sqlite : SQLiteDatabase? = null
     private val oggContext : Context

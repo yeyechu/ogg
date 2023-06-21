@@ -1,6 +1,5 @@
 package com.swu.ogg.ui.myactivity.post
 
-import android.app.Activity
 import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
@@ -12,17 +11,12 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.*
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.activityViewModels
-import com.swu.ogg.MainActivity
 import com.swu.ogg.R
-import com.swu.ogg.database.Co2All
 import com.swu.ogg.database.Co2Today
 import com.swu.ogg.databinding.ActivityPostBinding
 import com.swu.ogg.dbHelper
-import com.swu.ogg.ui.myactivity.MyActivityViewModel
 import java.io.IOException
 
 class PostActivity : AppCompatActivity() {
@@ -149,8 +143,27 @@ class PostActivity : AppCompatActivity() {
         postButton.setOnClickListener {
 
             //Co2Today.addCo2Today(activityCo2.toFloat())
-            Co2Today.setCo2Today(activityCo2.toFloat())
+            Co2Today.addCo2Today(activityCo2.toFloat())
             //Co2All.addCo2All(activityCo2.toString().toFloat())
+
+            dbManager = dbHelper(this)
+            sqlitedb = dbManager.writableDatabase
+
+            var cursor: Cursor
+            cursor = sqlitedb.rawQuery("SELECT * FROM post;",null)
+
+            while (cursor.moveToNext()){
+
+                sqlitedb.execSQL("UPDATE post SET pCo2Today = '"
+                        + Co2Today.getCo2Today() + "' WHERE pID='"
+                        + 1 + "';")
+            }
+
+            Log.d("setCo2To()", Co2Today.getCo2Today().toString())
+
+            cursor.close()
+            sqlitedb.close()
+            dbManager.close()
 
             finish()
         }
