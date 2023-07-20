@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--마이 페이지
+    1. 설정 레벨에 따라 캐릭터 이미지 바뀜
+    2. 사용자 정보 바뀜
+    3. lv.n 바뀜
+    4. 나의 피드 사용자화
+
+-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/big_padding">
+
+    <!-- 배지 타이틀 -->
+        <LinearLayout
+            android:id="@+id/my_content_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/big_padding">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btn_mypageback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/baseline_arrow_back_ios_24" />
+
+                <TextView
+                    android:id="@+id/badge_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nanumsquare_b"
+                    android:text="마이페이지"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title"
+                    android:layout_marginLeft="110dp"
+
+                    />
+
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/setting"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/baseline_settings_icon" />
+
+        </LinearLayout>
+
+
+        <!-- 사용자 정보창 -->
+
+        <LinearLayout
+            android:id="@+id/my_content_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/big_padding"
+            android:layout_marginTop="@dimen/big_padding"
+            android:background="@color/lightgray"
+            android:gravity="center_vertical"
+
+            >
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/icon_mypage"
+
+
+                />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/small_padding"
+            android:layout_marginLeft="@dimen/big_padding"
+
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="김하루"
+                android:fontFamily="@font/nanumsquare_eb"
+                android:textSize="18sp"
+
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="swu@gmail.com"
+                android:layout_marginBottom="@dimen/small_padding"
+
+            />
+
+            <Button
+                android:layout_width="60dp"
+                android:layout_height="25dp"
+                android:padding="@dimen/small_padding"
+                android:background="@drawable/button_skyblue"
+
+                />
+
+        </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+<!--로그인 관리창-->
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/my_content_2"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:padding="@dimen/small_padding"-->
+<!--            >-->
+
+
+<!--        <Button-->
+<!--            android:layout_width="110dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:text="비밀번호 변경"-->
+<!--            android:textSize="12sp"-->
+<!--            android:textAlignment="center"-->
+<!--            android:layout_margin="5dp"-->
+<!--            android:fontFamily="@font/nanumsquare_eb"-->
+
+
+
+<!--            />-->
+
+<!--        <Button-->
+<!--            android:layout_width="110dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:text="로그아웃"-->
+<!--            android:textAlignment="center"-->
+<!--            android:layout_margin="5dp"-->
+<!--            android:textSize="12sp"-->
+<!--            android:fontFamily="@font/nanumsquare_eb"-->
+
+
+
+<!--            />-->
+
+<!--            <Button-->
+<!--                android:layout_width="110dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:text="회원 탈퇴"-->
+<!--                android:textAlignment="center"-->
+<!--                android:layout_margin="5dp"-->
+<!--                android:textSize="12sp"-->
+<!--                android:fontFamily="@font/nanumsquare_eb"-->
+
+
+
+<!--                />-->
+
+<!--    </LinearLayout>-->
+
+
+<!--나의 피드-->
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+        <LinearLayout
+            android:id="@+id/my_content_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/big_padding">
+
+
+
+            <TextView
+                android:id="@+id/myfeed_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nanumsquare_b"
+                android:text="나의 피드"
+                android:textColor="@color/black"
+                android:textSize="@dimen/title" />
+
+
+
+            <!--스크롤해서 나의 피드를 볼 수 있게-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/badge_list1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                tools:listitem="@layout/myfeed"
+
+
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" >
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+
+
+
+        </LinearLayout>
+
+        </ScrollView>
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

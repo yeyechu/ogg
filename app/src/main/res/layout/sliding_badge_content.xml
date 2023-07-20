@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="560dp"
+        android:background="@drawable/box_white"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/big_padding">
+
+            <TextView
+                android:id="@+id/badge_edit_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="배지 모음"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/nanumsquare_eb"
+                android:textSize="25sp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                />
+
+            <TextView
+                android:id="@+id/badge_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="모은 배지들로 화면을 꾸밀 수 있어요"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/nanumsquare_r"
+                android:textSize="15sp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/big_padding"
+
+
+                >
+
+
+
+                <TableRow
+                    android:layout_margin="8dp"
+                    >
+
+                    <Button
+                        android:layout_width="20dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/camera_circle"
+
+                        />
+
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent"
+                        />
+
+                    <Button
+                        android:layout_width="20dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/camera_circle"
+
+                        />
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent"
+                        />
+
+                    <Button
+                        android:layout_width="20dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/camera_circle"
+                        />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_margin="8dp"
+                    >
+
+                    <Button
+                        android:layout_width="20dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/camera_circle"
+
+
+                        />
+
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent"
+                        />
+
+                    <Button
+                        android:layout_width="20dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/camera_circle"
+
+                        />
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent"
+                        />
+
+                    <Button
+                        android:layout_width="20dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/camera_circle"
+                        />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_margin="8dp"
+                    >
+
+                    <Button
+                        android:layout_width="20dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/camera_circle"
+
+
+                        />
+
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent"
+                        />
+
+                    <Button
+                        android:layout_width="20dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/camera_circle"
+
+                        />
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent"
+                        />
+
+                    <Button
+                        android:layout_width="20dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/camera_circle"
+                        />
+
+                </TableRow>
+
+
+
+
+
+            </TableLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+</ScrollView>
