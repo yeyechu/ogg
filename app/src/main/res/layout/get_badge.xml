@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/getBadgeLayout"
+    android:background="@android:color/transparent"
+    >
+<!--
+1. 얻은 배지: 이미지 활성화
+2. 얻지 못한 배지: 이미지 비활성화 (여기서 처리가능?)
+ -->
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="317dp"
+        android:layout_height="380dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="17dp"
+        android:padding="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="@dimen/big_padding"
+            >
+
+         <TextView
+             android:id="@+id/badge_id"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="사회적 활동가"
+             android:textColor="@color/black"
+             android:textSize="20sp"
+             android:fontFamily="@font/nanumsquare_eb"
+             android:layout_marginBottom="@dimen/big_padding"
+
+
+             />
+            <TextView
+                android:id="@+id/badge_id_ex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="타 사용자 피드에 10번 이상 반응"
+                android:layout_marginBottom="@dimen/big_padding"
+
+                />
+
+            <ImageView
+                android:id="@+id/badge_image"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginBottom="@dimen/big_padding"
+                android:background="@drawable/baseline_face_24"
+
+                />
+
+            <!--버튼 클릭시 해당 팝업삭제-->
+            <Button
+
+                android:id="@+id/view_done"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="확인 완료"
+                android:background="@drawable/box_lightsky"
+                />
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
