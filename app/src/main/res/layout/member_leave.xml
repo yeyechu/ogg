@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/big_padding">
+
+
+            <!-- 비번변경 타이틀 -->
+            <LinearLayout
+                android:id="@+id/my_content_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/big_padding">
+
+                <ImageButton
+                    android:id="@+id/btn_mypageback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/baseline_arrow_back_ios_24" />
+
+                <TextView
+                    android:id="@+id/badge_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nanumsquare_b"
+                    android:text="회원 탈퇴"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title"
+                    android:gravity="center"
+                    android:layout_marginRight="@dimen/big_padding" />
+
+            </LinearLayout>
+
+<!--회원탈퇴 문구 / 규정 / 체크박스(-> 버튼 활성화) / 버튼-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/big_padding"
+
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="김하루님, \n 정말 탈퇴하시겠어요?"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="@dimen/big_padding"
+
+                    />
+
+                <!--규정1-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/big_padding"
+
+
+                    >
+                   <ImageView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:background="@drawable/baseline_help_outline_24"
+                       android:layout_gravity="center"
+                       />
+                    <TextView
+                        android:layout_marginLeft="@dimen/small_padding"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="지금 탈퇴하시면 환경을 위해 노력한 모든 활동 기록이 사라져요."
+                        android:textSize="16sp"
+                        />
+
+                </LinearLayout>
+
+
+                <!--규정2-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/big_padding"
+
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/baseline_help_outline_24"
+                        android:layout_gravity="center"
+                        />
+                    <TextView
+                        android:layout_marginLeft="@dimen/small_padding"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="지금 탈퇴하시면 꾸민 환경과 모은 뱃지도 함께 사라져요. 추후 같은 계정으로 재가입하셔도 복구할 수 없어요!"
+                        android:textSize="16sp"
+                        />
+
+                </LinearLayout>
+
+                <!--규정3-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/big_padding"
+
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/baseline_help_outline_24"
+                        android:layout_gravity="center"
+                        />
+                    <TextView
+                        android:layout_marginLeft="@dimen/small_padding"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="탈퇴 후에는 피드를 삭제할 수 없어요. 탈퇴 신청 전에 꼭 확인해주세요."
+                        android:textSize="16sp"
+                        />
+
+
+                </LinearLayout>
+
+
+
+                <!--체크박스-->
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="안내사항을 확인했으며 이에 동의합니다."
+                    android:textSize="13sp"
+                    android:textColor="@color/gray"
+
+                    />
+
+
+                <!--버튼 (체크박스 체크시 활성화)-->
+                <Button
+                    android:id="@+id/btn_change_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/big_padding"
+                    android:text="탈퇴하기"
+                    android:background="@drawable/box_lightsky"
+
+                    />
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
